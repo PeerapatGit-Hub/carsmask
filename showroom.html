@@ -41,6 +41,8 @@ input[type=range]{accent-color:var(--accent)}
 .label{font-family:var(--f-display);font-weight:600;text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:var(--muted)}
 .presets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 @media (max-width:520px){.presets{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.presets.scroll{max-height:460px;overflow:auto;padding-right:4px;overscroll-behavior:contain}
+select{font:inherit;color:var(--fg);background:var(--raise);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0;width:100%}
 .preset{display:grid;gap:2px;align-content:start;text-align:left;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--raise);color:var(--fg);cursor:pointer;font:inherit}
 .preset b{font-family:var(--f-display);font-weight:600;font-size:15.5px}
 .preset small{color:var(--muted);font-size:12.5px;line-height:1.4}
@@ -108,30 +110,71 @@ button:focus-visible,label.btn:focus-within,input:focus-visible{outline:2px soli
     <section class="rack">
       <div class="group">
         <div class="label">สไตล์คลิป</div>
-        <div class="presets" role="group" aria-label="สไตล์คลิป">
-          <button class="preset" data-p="hype" aria-pressed="true"><b>Hype Cut</b><small>ซูมกระแทก แฟลชกับสั่นทุก 4 รูป</small></button>
-          <button class="preset" data-p="beat" aria-pressed="false"><b>Beat Sync</b><small>เด้งตามจังหวะเพลง BPM</small></button>
-          <button class="preset" data-p="cine" aria-pressed="false"><b>Cinematic</b><small>ช้า นุ่ม แถบดำแบบหนัง</small></button>
-          <button class="preset" data-p="swipe" aria-pressed="false"><b>Swipe</b><small>ปัดเปลี่ยนรูปซ้าย-ขวา</small></button>
-          <button class="preset" data-p="stack" aria-pressed="false"><b>Triple Stack</b><small>3 รูปเรียงในจอเดียว</small></button>
-          <button class="preset" data-p="glitch" aria-pressed="false"><b>Glitch</b><small>ภาพแตกสี RGB ตอนตัด</small></button>
-          <button class="preset" data-p="zoom" aria-pressed="false"><b>Zoom Through</b><small>พุ่งทะลุเข้ารูปถัดไป</small></button>
-          <button class="preset" data-p="sweep" aria-pressed="false"><b>Light Sweep</b><small>ไฟโชว์รูมกวาดผ่านตัวรถ</small></button>
-          <button class="preset" data-p="cards" aria-pressed="false"><b>Photo Drop</b><small>รูปแบบโพลารอยด์หล่นซ้อนกัน</small></button>
-          <button class="preset" data-p="doors" aria-pressed="false"><b>Split Doors</b><small>รูปเดิมแยกเป็นสองบานเปิดออก</small></button>
-          <button class="preset" data-p="diagonal" aria-pressed="false"><b>Diagonal Wipe</b><small>แถบเฉียงกวาดเปลี่ยนรูป</small></button>
-          <button class="preset" data-p="mosaic" aria-pressed="false"><b>Mosaic</b><small>รูปต่อขึ้นมาจากชิ้นเล็กๆ</small></button>
-          <button class="preset" data-p="flip" aria-pressed="false"><b>Flip</b><small>พลิกรูปแบบการ์ด</small></button>
-          <button class="preset" data-p="iris" aria-pressed="false"><b>Shutter</b><small>ม่านกล้องหุบแล้วเปิด</small></button>
-          <button class="preset" data-p="film" aria-pressed="false"><b>Film Strip</b><small>ฟิล์มเลื่อนทีละเฟรม</small></button>
-          <button class="preset" data-p="vhs" aria-pressed="false"><b>VHS</b><small>ภาพเทปเก่า เส้นสแกน วันที่มุมจอ</small></button>
-          <button class="preset" data-p="neon" aria-pressed="false"><b>Neon</b><small>กรอบไฟนีออน พื้นกริดแบบยุค 80</small></button>
-          <button class="preset" data-p="speed" aria-pressed="false"><b>Speed Lines</b><small>เส้นความเร็วแบบการ์ตูน</small></button>
+        <div class="presets scroll" role="group" aria-label="สไตล์คลิป">
+          <button class="preset" data-p="punch" aria-pressed="true"><b>Beat Punch</b><small>ซูมกระแทกทุกบีต แยกสี RGB</small></button>
+          <button class="preset" data-p="whip" aria-pressed="false"><b>Whip Pan</b><small>แพนกล้องเร็วจนเบลอ สลับแนวตั้ง-นอน</small></button>
+          <button class="preset" data-p="type" aria-pressed="false"><b>Type Mask</b><small>รถโผล่ในตัวอักษรยักษ์ แล้วทะลุเต็มจอ</small></button>
+          <button class="preset" data-p="grid" aria-pressed="false"><b>Grid Pop</b><small>แตก 4 ช่องเด้งตามบีต แบบปกอัลบั้ม</small></button>
+          <button class="preset" data-p="sticker" aria-pressed="false"><b>Sticker Bomb</b><small>รูปเป็นสติกเกอร์แปะซ้อน ป้ายแท็กฮิปฮอป</small></button>
+          <button class="preset" data-p="telemetry" aria-pressed="false"><b>Race HUD</b><small>หน้าปัด รอบเครื่อง เกียร์ แบบเกมแข่ง</small></button>
+          <button class="preset" data-p="lidar" aria-pressed="false"><b>LiDAR Scan</b><small>เลเซอร์สแกน รูปใหม่โผล่จากพอยต์คลาวด์</small></button>
+          <button class="preset" data-p="melt" aria-pressed="false"><b>Data Melt</b><small>พิกเซลละลายไหลลงแบบ datamosh</small></button>
+          <button class="preset" data-p="kaleido" aria-pressed="false"><b>Kaleido</b><small>กระจกสะท้อน 4 ทิศ หมุนแล้วคลาย</small></button>
+          <button class="preset" data-p="paparazzi" aria-pressed="false"><b>Paparazzi</b><small>ช่องมองกล้อง โฟกัส แฟลชตามบีต</small></button>
+          <button class="preset" data-p="carousel" aria-pressed="false"><b>3D Carousel</b><small>รูปเรียงวงล้อ 3 มิติ หมุนทีละคัน</small></button>
+          <button class="preset" data-p="glass" aria-pressed="false"><b>Liquid Glass</b><small>การ์ดกระจกใส เด้งหนึบ แสงวิ่ง</small></button>
+          <button class="preset" data-p="tunnel" aria-pressed="false"><b>Infinity Tunnel</b><small>บินทะลุกรอบซ้อนเข้ารูปถัดไป</small></button>
+          <button class="preset" data-p="slice" aria-pressed="false"><b>Slice Shift</b><small>หั่นเป็นแถบ สไลด์สวนกันเข้ามา</small></button>
+          <button class="preset" data-p="spray" aria-pressed="false"><b>Spray Tag</b><small>พ่นสีกราฟฟิตีเผยรูป + แท็กตัวใหญ่</small></button>
+          <button class="preset" data-p="stage" aria-pressed="false"><b>Spotlight</b><small>เวทีมืด ไฟสปอตติดตามบีต เงาสะท้อนพื้น</small></button>
+          <button class="preset" data-p="scratch" aria-pressed="false"><b>Scratch</b><small>สแครชแผ่นเสียง ภาพกระตุกเดินหน้าถอยหลัง</small></button>
+          <button class="preset" data-p="radial" aria-pressed="false"><b>Radial Burst</b><small>ซูมเบลอพุ่งออกจากกลางจอ</small></button>
+          <button class="preset" data-p="pixel" aria-pressed="false"><b>Pixel Snap</b><small>พิกเซลใหญ่ค่อยๆ คมทุก 16 ส่วน</small></button>
+          <button class="preset" data-p="peel" aria-pressed="false"><b>Page Peel</b><small>ลอกหน้ากระดาษจากมุมล่าง</small></button>
+          <button class="preset" data-p="shatter" aria-pressed="false"><b>Shatter</b><small>ภาพเก่าแตกเป็นเศษกระจกปลิวออก</small></button>
+          <button class="preset" data-p="cube" aria-pressed="false"><b>Cube Turn</b><small>หมุนลูกบาศก์ 3 มิติเปลี่ยนรูป</small></button>
+          <button class="preset" data-p="duo" aria-pressed="false"><b>Duo Split</b><small>จอแบ่งบน-ล่าง สไลด์สวนกัน</small></button>
+          <button class="preset" data-p="blob" aria-pressed="false"><b>Liquid Blob</b><small>หยดของเหลวขยายเผยรูปใหม่</small></button>
+          <button class="preset" data-p="burn" aria-pressed="false"><b>Film Burn</b><small>ฟิล์มไหม้ แสงรั่ว ภาพสั่นแบบ 16mm</small></button>
+          <button class="preset" data-p="mag" aria-pressed="false"><b>Mag Cover</b><small>ปกนิตยสาร หัวหนังสือ บาร์โค้ด</small></button>
+          <button class="preset" data-p="spec" aria-pressed="false"><b>Word Slam</b><small>คำตัวโตกระแทกทุกบีต</small></button>
+          <button class="preset" data-p="barcode" aria-pressed="false"><b>Barcode Wipe</b><small>แถบสุ่มความกว้างเปิดรูปขึ้น-ลง</small></button>
+          <button class="preset" data-p="wave" aria-pressed="false"><b>Wave Warp</b><small>ภาพบิดเป็นคลื่นตอนตัด</small></button>
+          <button class="preset" data-p="spin" aria-pressed="false"><b>Spin Twist</b><small>หมุนติ้วออกแล้วหมุนเข้า</small></button>
+          <button class="preset" data-p="echo" aria-pressed="false"><b>Echo Trail</b><small>รถสไลด์เข้าพร้อมเงาหลายสี</small></button>
+          <button class="preset" data-p="dashcam" aria-pressed="false"><b>Dashcam</b><small>มุมกล้องหน้ารถ เวลา REC ความเร็ว</small></button>
+          <button class="preset" data-p="fold" aria-pressed="false"><b>Fold Open</b><small>การ์ดกางออกจากรอยพับกลาง</small></button>
+          <button class="preset" data-p="puzzle" aria-pressed="false"><b>Puzzle Slide</b><small>ชิ้นจิ๊กซอว์เลื่อนเข้าที่</small></button>
+          <button class="preset" data-p="blinds" aria-pressed="false"><b>Blinds</b><small>มู่ลี่พลิกเปลี่ยนรูปทีละแผ่น</small></button>
+          <button class="preset" data-p="radar" aria-pressed="false"><b>Radar Sweep</b><small>เรดาร์กวาดวงกลมเปิดรูปใหม่</small></button>
+          <button class="preset" data-p="focus" aria-pressed="false"><b>Focus Pull</b><small>โฟกัสจากเบลอเป็นคม + โบเก้</small></button>
+          <button class="preset" data-p="comic" aria-pressed="false"><b>Comic Panel</b><small>ช่องการ์ตูน + คำ VROOM!</small></button>
+          <button class="preset" data-p="confetti" aria-pressed="false"><b>Confetti</b><small>พลุกระดาษพุ่งทุกช็อต</small></button>
+          <button class="preset" data-p="laser" aria-pressed="false"><b>Laser Show</b><small>เลเซอร์คลับกวาดตามบีต</small></button>
+          <button class="preset" data-p="gyro" aria-pressed="false"><b>Gyro Tilt</b><small>การ์ดรูปลอยเอียง 3 มิติแบบหมุนมือถือ</small></button>
+          <button class="preset" data-p="loupe" aria-pressed="false"><b>Detail Loupe</b><small>แว่นขยายเลื่อนส่องรายละเอียดรถ</small></button>
+          <button class="preset" data-p="feed" aria-pressed="false"><b>Feed Scroll</b><small>เลื่อนฟีดโซเชียล หัวใจเด้งตามบีต</small></button>
+          <button class="preset" data-p="multicam" aria-pressed="false"><b>Multi-Cam</b><small>ตัดสลับ 4 มุมกล้องทุกครึ่งบีต</small></button>
+          <button class="preset" data-p="bento" aria-pressed="false"><b>Bento Grid</b><small>เลย์เอาต์เบนโตะ รูปใหญ่ + ซูมจุดเด่น + ราคา</small></button>
+          <button class="preset" data-p="ripple" aria-pressed="false"><b>Tap Ripple</b><small>แตะจอแล้ววงคลื่นเปิดรูปใหม่</small></button>
+          <button class="preset" data-p="smoke" aria-pressed="false"><b>Drift Smoke</b><small>รถดริฟท์เข้าจอพร้อมควันล้อ</small></button>
+          <button class="preset" data-p="trails" aria-pressed="false"><b>Light Trails</b><small>เส้นไฟหน้า-ไฟท้ายลากยาวแบบถ่ายช้า</small></button>
+          <button class="preset" data-p="aperture" aria-pressed="false"><b>Aperture</b><small>ม่านรูรับแสง 6 ใบหุบแล้วเปิด</small></button>
+          <button class="preset" data-p="swipe" aria-pressed="false"><b>Swipe Stack</b><small>กองการ์ดปัดทิ้งทีละใบ</small></button>
         </div>
         <div class="actions"><button class="btn" id="randBtn">สุ่มสไตล์</button></div>
-        <div class="row" id="speedRow"><label for="speed">เวลาต่อรูป</label><input id="speed" type="range" min="0.4" max="2" step="0.05" value="0.8"><output id="speedOut" class="mono">0.80 วิ</output></div>
-        <div class="row" id="bpmRow" hidden><label for="bpm">BPM เพลง</label><input id="bpm" type="range" min="80" max="170" step="1" value="128"><output id="bpmOut" class="mono">128</output></div>
+        <div class="row" id="speedRow"><label for="speed">ความเร็วตัด</label><input id="speed" type="range" min="0.3" max="2" step="0.05" value="0.5"><output id="speedOut" class="mono">1 จังหวะ</output></div>
+        <div class="row" id="bpmRow" hidden><label for="bpm">BPM เพลง</label><input id="bpm" type="range" min="80" max="180" step="1" value="128"><output id="bpmOut" class="mono">128</output></div>
         <div class="stats mono" id="stats"></div>
+      </div>
+
+      <div class="group">
+        <div class="label">เพลงประกอบ</div>
+        <div class="row" style="grid-template-columns:auto minmax(0,1fr) auto"><label for="genre">เพลง</label><select id="genre"></select><button class="btn" id="randSong">สุ่มเพลง</button></div>
+        <p class="note" id="genreInfo"></p>
+        <div class="row"><label for="vol">ความดัง</label><input id="vol" type="range" min="0" max="1" step="0.05" value="0.8"><output id="volOut" class="mono">80%</output></div>
+        <div class="toggles"><label><input type="checkbox" id="sfx" checked> เสียงเครื่องยนต์ + วูชตอนตัดภาพ</label></div>
+        <p class="note">เพลงแต่งและเล่นสดในเบราว์เซอร์ ไม่ใช้ไฟล์เพลงของใคร ไม่ติดลิขสิทธิ์ และติดไปในไฟล์ตอนอัดวิดีโอ ทุกสไตล์ตัดภาพตรงจังหวะเพลงให้อัตโนมัติ (กดที่หน้าเว็บหนึ่งครั้งเพื่อเปิดเสียง)</p>
       </div>
 
       <div class="group">
@@ -152,11 +195,11 @@ button:focus-visible,label.btn:focus-within,input:focus-visible{outline:2px soli
       <div class="group">
         <div class="label">ส่งออกวิดีโอ</div>
         <div class="actions">
-          <button class="btn primary" id="recBtn">อัดเป็นวิดีโอ</button>
+          <button class="btn primary" id="recBtn">Export MP4</button>
           <button class="btn" id="cancelBtn" hidden>ยกเลิก</button>
         </div>
         <div class="progress" id="recProg" hidden><i></i></div>
-        <p class="note">อัดแบบเรียลไทม์ ใช้เวลาเท่าความยาวคลิป อย่าสลับแท็บระหว่างอัด (โซน TikTok จะไม่ติดไปในไฟล์)</p>
+        <p class="note">เรนเดอร์ทีละเฟรมแล้วเข้ารหัสเป็น MP4 (H.264 + AAC) เร็วกว่าความยาวคลิป ได้ไฟล์พร้อมลง TikTok (โซน TikTok ไม่ติดไปในไฟล์) ถ้าเบราว์เซอร์ไม่รองรับ จะอัดแบบเรียลไทม์แทน</p>
         <p class="err" id="err" hidden></p>
         <div class="result" id="result" hidden>
           <video id="out" controls playsinline muted loop></video>
@@ -191,7 +234,7 @@ button:focus-visible,label.btn:focus-within,input:focus-visible{outline:2px soli
       <li>โค้ดเรนเดอร์ในหน้านี้ (canvas + MediaRecorder) ย้ายไปรันใน offscreen document ของ extension ได้ตรงๆ ไม่ต้องใช้ server</li>
       <li>extension ส่งรูปของรถแต่ละคันพร้อมข้อมูลรุ่น ปี ราคา เข้ามา แล้วได้ไฟล์วิดีโอกลับไป จากนั้นส่งต่อให้ขั้นตอนโพสต์ TikTok</li>
       <li>สุ่มสไตล์ให้แต่ละคันได้ คลิปในหน้าโปรไฟล์จะได้ไม่ซ้ำกันหมด</li>
-      <li>คลิปไม่มีเสียง ให้เลือกเพลงจากคลัง TikTok ตอนโพสต์ จะไม่ติดลิขสิทธิ์ ถ้าใช้ Beat Sync ให้ตั้ง BPM ให้ตรงกับเพลงที่จะใช้</li>
+      <li>เพลงประกอบสังเคราะห์สดด้วย Web Audio เข้าคิวกับไทม์ไลน์ (บิลด์อัปช่วงปก ดรอปที่ช็อตแรก ฮิตปิดท้ายช่วง outro) แล้วมิกซ์เข้า MediaRecorder ไปพร้อมภาพ ถ้าอยากใช้เพลงจากคลัง TikTok ให้เลือก "ไม่มีเพลง"</li>
     </ul>
   </section>
 </div>
@@ -220,7 +263,7 @@ let frames = [];          // {blob, name, e:{b,bg}, thumb}
 let order = [], hero = 0, ready = false, loaded = 0, gen = 0;
 let TL = { segs: [], total: 0, cuts: 0 };
 let tCur = 0, t0 = 0, playing = false, recording = false, dirty = true;
-const S = { preset: 'hype', speed: 0.8, bpm: 128, model: '', year: '', price: '', dealer: '', fit: true, safe: true, grain: true };
+const S = { preset: 'punch', speed: 0.5, beats: 1, bpm: 128, model: '', year: '', price: '', dealer: '', fit: true, safe: true, grain: true };
 const E = i => frames[i] && frames[i].e;
 const z = x => 1 + (x - 1) * (S.fit ? 0.6 : 1);   // softer zoom when showing the full car
 
@@ -322,19 +365,18 @@ async function loadAll(g) {
 
 /* ---------- timeline ---------- */
 function build() {
-  const cuts = order.filter(i => i !== hero), segs = [], D = S.speed; let t = 0;
+  const cuts = order.filter(i => i !== hero), segs = [], beat = 60 / S.bpm; let t = 0;
   const push = (idx, dur, kind, k, extra) => { segs.push(Object.assign({ idx, start: t, dur, kind, k }, extra)); t += dur; };
-  const beat = 60 / S.bpm;
-  push(hero, S.preset === 'beat' ? beat * 4 : 1.8, 'intro', 0);
-  const per = { hype: D * 0.9, beat: beat * 2, cine: D * 1.6, swipe: D, glitch: D, zoom: D, sweep: D * 1.4, cards: D,
-    doors: D, diagonal: D, mosaic: D * 1.2, flip: D, iris: D, film: D * 1.1, vhs: D, neon: D * 1.1, speed: D * 0.9 }[S.preset];
-  if (S.preset === 'stack') {
-    for (let k = 0; k < cuts.length; k += 3) { const idxs = cuts.slice(k, k + 3); push(idxs[0], D * (0.9 + idxs.length * 0.55), 'cut', k, { idxs }); }
-  } else cuts.forEach((idx, k) => push(idx, per, 'cut', k));
-  push(hero, S.preset === 'beat' ? beat * 8 : 2.8, 'outro', 0);
-  TL = { segs, total: t, cuts: cuts.length, cutIdx: cuts };
+  S.beats = Math.max(1, Math.round(S.speed / beat)); const per = S.beats * beat, G = GROUP[S.preset];
+  push(hero, beat * 4, 'intro', 0);
+  if (G) { for (let k = 0; k < cuts.length; k += G) { const idxs = cuts.slice(k, k + G); push(idxs[0], per * (idxs.length + 1), 'cut', k, { idxs }); } }
+  else cuts.forEach((idx, k) => push(idx, per, 'cut', k));
+  push(hero, beat * 8, 'outro', 0);
+  TL = { segs, total: t, cuts: cuts.length, cutIdx: cuts, drop: segs.length > 1 ? segs[1].start : 0 };
+  scoreDirty = true; if (playing && B) audioSync();
   tCur = Math.min(tCur, t);
-  $('stats').textContent = `ยาว ${t.toFixed(1)} วิ · ${frames.length} รูป (ปก 1 + ${cuts.length} ช็อต)`;
+  $('speedOut').textContent = `${S.beats} จังหวะ`;
+  $('stats').textContent = `ยาว ${t.toFixed(1)} วิ · ${frames.length} รูป (ปก 1 + ${cuts.length} ช็อต) · ${per.toFixed(2)} วิ/ช็อต`;
   dirty = true;
 }
 function segIndex(t) {
@@ -375,239 +417,876 @@ function fitFont(text, weight, max, min, maxW, fam = FD) {
 }
 function shadow(on) { ctx.shadowColor = on ? 'rgba(0,0,0,.65)' : 'transparent'; ctx.shadowBlur = on ? 20 : 0; }
 
-/* ---------- styles: each draws the photo layer for one cut, returns flash amount ---------- */
+/* ---------- styles: 2026 set. Every cut lands on the beat grid; each style draws one cut and returns a flash amount ---------- */
+const BEAT = () => 60 / S.bpm;
+function bt(t) { const x = (t - (TL.drop || 0)) / BEAT(), i = Math.floor(x); return { i, f: x - i, sec: (x - i) * BEAT() }; }
+const hit = (b, len = 0.12) => clamp(1 - b.sec / len);
+const prevE = si => E(TL.segs[Math.max(0, si - 1)].idx);
+function grab() {
+  bctx.globalCompositeOperation = 'source-over'; bctx.globalAlpha = 1; bctx.filter = 'none';
+  bctx.clearRect(0, 0, W, H); bctx.drawImage(cv, 0, 0);
+}
+function rgbSplit(d, a = 0.55) {
+  if (d < 0.5) return; grab();
+  ctx.save(); ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = a;
+  ctx.filter = 'sepia(1) saturate(8) hue-rotate(-50deg)'; ctx.drawImage(buf, -d, 0);
+  ctx.filter = 'sepia(1) saturate(8) hue-rotate(150deg)'; ctx.drawImage(buf, d, 0);
+  ctx.restore();
+}
+// low-res luminance grid of the current frame (36 x 64 cells of 30 px) for halftone / point-cloud looks
+const SC = 30, SW = W / SC, SH = H / SC;
+const smc = document.createElement('canvas'); smc.width = SW; smc.height = SH;
+const smx = smc.getContext('2d', { willReadFrequently: true });
+function sample() {
+  smx.clearRect(0, 0, SW, SH); smx.drawImage(cv, 0, 0, SW, SH);
+  const d = smx.getImageData(0, 0, SW, SH).data, out = new Float32Array(SW * SH);
+  for (let i = 0; i < out.length; i++) out[i] = (d[i * 4] * 0.299 + d[i * 4 + 1] * 0.587 + d[i * 4 + 2] * 0.114) / 255;
+  return out;
+}
+function dots(g, col, dx, dy, k, inv) {
+  ctx.fillStyle = col; ctx.beginPath();
+  for (let y = 0; y < SH; y++) for (let x = 0; x < SW; x++) {
+    const l = g[y * SW + x], r = (inv ? 1 - l : l) * SC * k; if (r < 0.8) continue;
+    const cx = x * SC + SC / 2 + dx, cy = y * SC + SC / 2 + dy;
+    ctx.moveTo(cx + r, cy); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  }
+  ctx.fill();
+}
+const mk = document.createElement('canvas'); mk.width = W; mk.height = H;
+const mctx = mk.getContext('2d');
+function corners(c, x, y, w, h, L) {
+  c.beginPath();
+  for (const [px, py, dx, dy] of [[x, y, 1, 1], [x + w, y, -1, 1], [x, y + h, 1, -1], [x + w, y + h, -1, -1]]) {
+    c.moveTo(px + dx * L, py); c.lineTo(px, py); c.lineTo(px, py + dy * L);
+  }
+  c.stroke();
+}
+function tag(text, x, y, o = {}) {
+  const size = o.size || 40;
+  ctx.save(); ctx.font = `700 ${size}px ${o.fam || FD}`;
+  const w = ctx.measureText(text).width + size * 1.2, h = size * 1.6;
+  ctx.translate(x, y); if (o.rot) ctx.rotate(o.rot); if (o.scale) ctx.scale(o.scale, o.scale);
+  rrect(ctx, 0, -h / 2, w, h, h / 2); ctx.fillStyle = o.bg || '#111'; ctx.fill();
+  if (o.stroke) { ctx.lineWidth = 3; ctx.strokeStyle = o.stroke; ctx.stroke(); }
+  ctx.fillStyle = o.fg || ACC; ctx.textBaseline = 'middle'; ctx.fillText(text, size * 0.6, 2);
+  ctx.restore();
+}
+function stick(e, j, a) {
+  if (!e || a <= 0) return;
+  const r = rng(j * 7 + 1), rot = (r() - 0.5) * 0.24, ox = (r() - 0.5) * 120, oy = (r() - 0.5) * 160;
+  const k = Math.min(860 / e.b.width, 880 / e.b.height), w = e.b.width * k, h = e.b.height * k, sc = 1.35 - 0.35 * a;
+  ctx.save(); ctx.translate(W / 2 + ox, FIT_CY + oy); ctx.rotate(rot); ctx.scale(sc, sc); ctx.globalAlpha = clamp(a * 3);
+  ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowBlur = 30; ctx.shadowOffsetY = 14;
+  rrect(ctx, -w / 2 - 20, -h / 2 - 20, w + 40, h + 40, 34); ctx.fillStyle = '#fff'; ctx.fill();
+  ctx.shadowColor = 'transparent';
+  rrect(ctx, -w / 2, -h / 2, w, h, 20); ctx.clip(); ctx.drawImage(e.b, -w / 2, -h / 2, w, h);
+  ctx.restore();
+}
+
+// small canvas for pixel looks (max 108 x 192 cells)
+const pxc = document.createElement('canvas'); pxc.width = 108; pxc.height = 192;
+const pctx = pxc.getContext('2d');
+function pixelate(bs) {
+  const w = Math.ceil(W / bs), h = Math.ceil(H / bs);
+  pctx.clearRect(0, 0, pxc.width, pxc.height); pctx.drawImage(cv, 0, 0, w, h);
+  ctx.save(); ctx.imageSmoothingEnabled = false; ctx.drawImage(pxc, 0, 0, w, h, 0, 0, w * bs, h * bs); ctx.restore();
+}
+// whole car, contain-fit, no backdrop
+function carImg(e, o = {}) {
+  if (!e) return;
+  const k = Math.min((o.w || 1000) / e.b.width, (o.h || 1100) / e.b.height) * (o.scale || 1), w = e.b.width * k, h = e.b.height * k;
+  ctx.save();
+  if (o.alpha != null) ctx.globalAlpha = o.alpha;
+  if (o.filter) ctx.filter = o.filter;
+  ctx.translate(W / 2 + (o.ox || 0), (o.cy || FIT_CY) + (o.oy || 0)); if (o.rot) ctx.rotate(o.rot);
+  ctx.drawImage(e.b, -w / 2, -h / 2, w, h);
+  ctx.restore();
+}
+// white-on-black edge image of a photo, left in mk (cv is left dirty; caller repaints)
+const dotc = document.createElement('canvas'); dotc.width = dotc.height = 14;
+{ const g = dotc.getContext('2d'); g.fillStyle = '#000'; g.beginPath(); g.arc(7, 7, 3, 0, Math.PI * 2); g.fill(); }
+const dotPat = ctx.createPattern(dotc, 'repeat');
+function starPath(cx, cy, R, r, n) {
+  ctx.beginPath();
+  for (let i = 0; i < n * 2; i++) { const a = i / (n * 2) * Math.PI * 2 - Math.PI / 2, rr = i % 2 ? r : R; i ? ctx.lineTo(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr) : ctx.moveTo(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr); }
+  ctx.closePath();
+}
+
+function heartPath(x, y, s) {
+  ctx.beginPath(); ctx.moveTo(x, y + s * 0.3);
+  ctx.bezierCurveTo(x, y, x - s * 0.5, y, x - s * 0.5, y + s * 0.3); ctx.bezierCurveTo(x - s * 0.5, y + s * 0.6, x, y + s * 0.8, x, y + s);
+  ctx.bezierCurveTo(x, y + s * 0.8, x + s * 0.5, y + s * 0.6, x + s * 0.5, y + s * 0.3); ctx.bezierCurveTo(x + s * 0.5, y, x, y, x, y + s * 0.3);
+  ctx.closePath();
+}
+const GROUP = { grid: 4 };   // styles that show several photos per segment
 const STYLE = {
-  hype(s, lt, p) {
-    const e = easeOut(clamp(lt / 0.16)), big = s.k % 4 === 0;
-    let ox = (s.k % 2 ? 1 : -1) * 30 * (p - 0.5), oy = 0;
-    if (big) { const a = clamp(1 - lt / 0.25); ox += Math.sin(lt * 95) * 26 * a; oy += Math.cos(lt * 83) * 26 * a; }
-    full(E(s.idx), { scale: z(1.2 - 0.15 * e + 0.04 * p), ox, oy, filter: lt < 0.06 ? 'blur(10px)' : undefined });
-    return big ? clamp(1 - lt / 0.14) * 0.8 : 0;
+  punch(s, lt, p) {   // zoom punch on every beat + RGB split
+    const b = bt(s.start + lt), h = hit(b, 0.14), e = easeOut(clamp(lt / 0.12));
+    full(E(s.idx), { scale: z(1.18 - 0.12 * e + 0.06 * h), rot: (b.i % 2 ? 1 : -1) * 0.012 * h });
+    rgbSplit(28 * h);
+    return s.k % 4 === 0 ? clamp(1 - lt / 0.1) * 0.6 : 0;
   },
-  beat(s, lt, p) {
-    const bl = 60 / S.bpm, bi = Math.floor(lt / bl), ph = lt - bi * bl, pulse = easeOut(clamp(ph / 0.12)), first = bi === 0;
-    full(E(s.idx), { scale: z((first ? 1.2 : 1.1) - (first ? 0.15 : 0.07) * pulse + 0.03 * p), rot: first ? (s.k % 2 ? 1 : -1) * 0.012 * (1 - pulse) : 0 });
-    return first ? clamp(1 - ph / 0.1) * 0.6 : clamp(1 - ph / 0.08) * 0.2;
-  },
-  cine(s, lt, p, si) {
-    const o = { scale: z(1.03 + 0.07 * p), ox: (s.k % 2 ? 1 : -1) * 50 * (p - 0.5) };
-    if (lt < 0.4) { full(E(TL.segs[si - 1].idx), { scale: z(1.1) }); o.alpha = easeInOut(lt / 0.4); }
-    full(E(s.idx), o); return 0;
-  },
-  swipe(s, lt, p, si) {
-    const T = Math.min(0.3, s.dur * 0.6), dir = s.k % 2 ? -1 : 1;
+  whip(s, lt, p, si) {   // whip pan, alternating horizontal / vertical
+    const T = Math.min(0.2, s.dur * 0.5), dir = s.k % 2 ? -1 : 1, vert = s.k % 3 === 2, span = vert ? H : W;
     if (lt < T) {
-      const e = easeInOut(lt / T), blur = e > 0.1 && e < 0.9 ? 'blur(6px)' : undefined;
-      place(E(TL.segs[si - 1].idx), { x: -dir * W * e, y: 0, w: W, h: H }, { cy: S.fit ? FIT_CY : undefined, filter: blur });
-      place(E(s.idx), { x: dir * W * (1 - e), y: 0, w: W, h: H }, { cy: S.fit ? FIT_CY : undefined, filter: blur });
-    } else full(E(s.idx), { scale: z(1 + 0.05 * clamp((lt - T) / (s.dur - T))) });
+      const e = easeInOut(lt / T), off = e * span;
+      const mv = (img, d) => { ctx.save(); if (vert) ctx.translate(0, d); else ctx.translate(d, 0); full(img, { filter: 'blur(18px)' }); ctx.restore(); };
+      mv(prevE(si), -dir * off); mv(E(s.idx), dir * (span - off));
+      return 0;
+    }
+    const q = easeOut(clamp((lt - T) / 0.25));
+    full(E(s.idx), { scale: z(1.12 - 0.1 * q + 0.02 * p), ox: vert ? 0 : dir * 40 * (1 - q), oy: vert ? dir * 40 * (1 - q) : 0, rot: dir * 0.03 * (1 - q) });
     return 0;
   },
-  stack(s, lt) {
-    full(E(s.idx), { scale: 1, filter: 'blur(2px) brightness(.35)' });
-    const ph = 520, gap = 18, y0 = 150, step = S.speed * 0.55;
+  type(s, lt, p) {   // car seen through giant letters, then the letters blow past the camera
+    const T = Math.min(s.dur * 0.7, 0.5), e = easeInOut(clamp((lt - T * 0.35) / (T * 0.65)));
+    full(E(s.idx), { scale: z(1.1 - 0.06 * p) });
+    if (e >= 1) return 0;
+    grab();
+    const words = (S.model || 'NEW DROP').toUpperCase().split(/\s+/).filter(Boolean), word = words[s.k % words.length];
+    bctx.font = `700 100px ${FD}`;
+    const fs = clamp(960 * 100 / Math.max(1, bctx.measureText(word).width), 140, 520), sc = 1 + 7 * e * e;
+    const rows = (c, from, to, stroke) => {
+      c.font = `700 ${fs}px ${FD}`; c.textAlign = 'center'; c.textBaseline = 'middle';
+      for (let r = from; r <= to; r++) if (stroke) { if (Math.abs(r) > 1) c.strokeText(word, 0, r * fs * 0.92); } else c.fillText(word, 0, r * fs * 0.92);
+    };
+    ctx.fillStyle = '#0b0b0d'; ctx.fillRect(0, 0, W, H);
+    ctx.save(); ctx.translate(W / 2, FIT_CY); ctx.scale(sc, sc); ctx.strokeStyle = 'rgba(255,176,32,.45)'; ctx.lineWidth = 3 / sc; rows(ctx, -4, 4, true); ctx.restore();
+    bctx.save(); bctx.globalCompositeOperation = 'destination-in'; bctx.translate(W / 2, FIT_CY); bctx.scale(sc, sc); rows(bctx, -1, 1, false); bctx.restore();
+    ctx.drawImage(buf, 0, 0);
+    return 0;
+  },
+  grid(s, lt) {   // album-cover grid, one panel pops per beat unit
+    ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0, 0, W, H);
+    const u = s.dur / (s.idxs.length + 1), last = lt >= u * s.idxs.length, h = hit(bt(s.start + lt), 0.12);
     s.idxs.forEach((idx, i) => {
-      const a = clamp((lt - i * step) / 0.32); if (a <= 0) return;
-      const e = easeOut(a), dir = i % 2 ? 1 : -1;
-      place(E(idx), { x: 40 + dir * (1 - e) * W, y: y0 + i * (ph + gap), w: W - 80, h: ph, radius: 18 }, { alpha: e, scale: 1.08 - 0.08 * e });
+      const a = clamp((lt - i * u) / 0.18); if (a <= 0) return;
+      const e = easeBack(a), x = 30 + (i % 2) * 516, y = 200 + (i >> 1) * 726, w = 504, hh = 714;
+      ctx.save(); ctx.translate(x + w / 2, y + hh / 2); ctx.scale(e, e); ctx.translate(-(x + w / 2), -(y + hh / 2));
+      place(E(idx), { x, y, w, h: hh, radius: 22 });
+      if (lt - i * u < 0.09 || (last && h > 0)) {
+        rrect(ctx, x, y, w, hh, 22); ctx.lineWidth = 8; ctx.strokeStyle = ACC; ctx.globalAlpha = last ? h : 1; ctx.stroke();
+      }
+      ctx.restore();
+      ctx.save(); ctx.font = `700 34px ${FM}`; ctx.fillStyle = '#fff'; shadow(true);
+      ctx.fillText(String(s.k + i + 1).padStart(2, '0'), x + 24, y + 56); ctx.restore();
     });
     return 0;
   },
-  glitch(s, lt, p) {
-    full(E(s.idx), { scale: z(1.05 + 0.04 * p) });
-    if (lt < 0.24) glitchFx(1 - lt / 0.24, s.k * 131 + Math.floor(lt * 30));
-    return 0;
-  },
-  zoom(s, lt, p, si) {
-    const Tin = 0.2, Tout = 0.2, rem = s.dur - lt;
-    let sc = 1 + 0.04 * p, ghost = 0;
-    if (lt < Tin) { const e = easeOut(lt / Tin); sc *= 1.5 - 0.5 * e; ghost = 1 - e; }
-    if (rem < Tout) { const q = 1 - rem / Tout; sc *= 1 + 0.6 * q * q; ghost = Math.max(ghost, q); }
-    full(E(s.idx), { scale: sc });
-    if (ghost > 0.02) { full(E(s.idx), { scale: sc * 1.08, alpha: 0.28 * ghost }); full(E(s.idx), { scale: sc * 1.18, alpha: 0.18 * ghost }); }
-    return rem < 0.06 ? 0.35 * (1 - rem / 0.06) : 0;
-  },
-  sweep(s, lt, p) {
-    full(E(s.idx), { scale: z(1.02 + 0.05 * p) });
-    ctx.fillStyle = 'rgba(0,0,0,.32)'; ctx.fillRect(0, 0, W, H);
-    const x = -450 + (W + 900) * easeInOut(clamp((lt - 0.1) / (s.dur - 0.2)));
-    ctx.save(); ctx.translate(x, FIT_CY); ctx.rotate(-0.38);
-    const g = ctx.createLinearGradient(-200, 0, 200, 0);
-    g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.5, 'rgba(255,255,255,.85)'); g.addColorStop(1, 'rgba(255,255,255,0)');
-    ctx.globalCompositeOperation = 'overlay'; ctx.fillStyle = g; ctx.fillRect(-200, -H, 400, 2 * H);
-    ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = 0.22; ctx.fillRect(-200, -H, 400, 2 * H);
-    ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 0.9; ctx.fillStyle = ACC; ctx.fillRect(-2, -H, 4, 2 * H);
+  sticker(s, lt, p, si) {   // hip-hop zine: photos slapped on as die-cut stickers with tag badges
+    ctx.fillStyle = '#ece3d2'; ctx.fillRect(0, 0, W, H);
+    ctx.save(); ctx.globalAlpha = 0.07; ctx.fillStyle = '#111';
+    for (let x = -H; x < W; x += 64) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x + 30, 0); ctx.lineTo(x + 30 + H, H); ctx.lineTo(x + H, H); ctx.fill(); }
     ctx.restore();
-    if (lt < 0.15) { ctx.fillStyle = `rgba(0,0,0,${1 - lt / 0.15})`; ctx.fillRect(0, 0, W, H); }
+    for (const j of [si - 2, si - 1]) if (j >= 1 && TL.segs[j].kind === 'cut') stick(E(TL.segs[j].idx), j, 1);
+    stick(E(s.idx), si, easeBack(clamp(lt / 0.16)));
+    const tags = ['NEW DROP', 'FULL OPTION', 'CLEAN', 'พร้อมขับ', 'ไมล์น้อย', 'HOT DEAL'], b = bt(s.start + lt), a = easeBack(clamp((lt - 0.08) / 0.16));
+    if (a > 0) tag(tags[s.k % tags.length], 90, 1380, { size: 52, rot: -0.06, scale: a * (1 + 0.08 * hit(b)), bg: '#111', fg: ACC });
     return 0;
   },
-  cards(s, lt, p, si) {
-    full(E(s.idx), { scale: 1, filter: 'blur(3px) brightness(.4)' });
-    for (const j of [si - 2, si - 1]) if (j >= 0 && TL.segs[j].kind !== 'outro') card(E(TL.segs[j].idx), j, 0);
-    const e = clamp(lt / 0.38);
-    card(E(s.idx), si, 1 - easeBack(e), s.k + 1);
+  telemetry(s, lt, p) {   // racing-game HUD: speedo, rev LEDs, gear, lap timer
+    const h = hit(bt(s.start + lt), 0.1), tt = s.start + lt, sh = 4 * (1 + 3 * h);
+    full(E(s.idx), { scale: z(1.08 - 0.05 * easeOut(clamp(lt / 0.2)) + 0.02 * h), ox: Math.sin(tt * 47) * sh, oy: Math.cos(tt * 53) * sh });
+    ctx.fillStyle = 'rgba(0,0,0,.25)'; ctx.fillRect(0, 0, W, H);
+    const kmh = Math.max(0, Math.round(clamp((s.k + p) / Math.max(1, TL.cuts)) * 260 + 12 * Math.sin(tt * 3))), rpm = clamp(0.35 + 0.6 * ((p * 1.6) % 1));
+    const cx = W / 2, cy = 1240, R = 230;
+    ctx.save(); ctx.lineCap = 'round'; ctx.lineWidth = 26;
+    ctx.strokeStyle = 'rgba(255,255,255,.18)'; ctx.beginPath(); ctx.arc(cx, cy, R, Math.PI * 0.8, Math.PI * 2.2); ctx.stroke();
+    ctx.strokeStyle = rpm > 0.85 ? '#ff3b3b' : ACC; ctx.beginPath(); ctx.arc(cx, cy, R, Math.PI * 0.8, Math.PI * (0.8 + 1.4 * rpm)); ctx.stroke();
+    shadow(true); ctx.textAlign = 'center'; ctx.fillStyle = '#fff';
+    ctx.font = `700 150px ${FM}`; ctx.fillText(String(kmh).padStart(3, '0'), cx, cy + 50);
+    ctx.font = `600 34px ${FM}`; ctx.fillStyle = 'rgba(255,255,255,.75)'; ctx.fillText('KM/H', cx, cy + 100);
+    ctx.font = `700 64px ${FM}`; ctx.fillStyle = ACC; ctx.fillText(String(1 + s.k % 6), cx, cy - 110);
+    ctx.textAlign = 'left'; ctx.fillStyle = '#fff';
+    fitFont(S.model, 600, 44, 28, 560); ctx.fillText(S.model, 72, 260);
+    ctx.font = `600 36px ${FM}`; ctx.fillText(`LAP ${fmt(tt)}`, 72, 320);
+    ctx.textAlign = 'right'; ctx.fillStyle = ACC; ctx.fillText('P1', 880, 320); ctx.textAlign = 'left';
+    shadow(false);
+    const lit = Math.round(rpm * 15), redline = rpm > 0.85 && h > 0;
+    for (let i = 0; i < 15; i++) {
+      ctx.fillStyle = i < lit || redline ? (i < 8 ? '#3dff7a' : i < 12 ? '#ffd23a' : '#ff3b3b') : 'rgba(255,255,255,.15)';
+      rrect(ctx, 72 + i * 54, 360, 42, 20, 6); ctx.fill();
+    }
+    ctx.restore();
     return 0;
   },
-  doors(s, lt, p, si) {
-    const T = Math.min(0.38, s.dur * 0.6);
-    full(E(s.idx), { scale: z(1.06 - 0.04 * clamp(lt / T) + 0.03 * p) });
-    if (lt < T) {
-      const e = easeInOut(lt / T), prev = E(TL.segs[si - 1].idx), off = e * W / 2;
-      for (const side of [-1, 1]) {
-        ctx.save(); ctx.beginPath(); ctx.rect(side < 0 ? 0 : W / 2, 0, W / 2, H); ctx.clip();
-        ctx.translate(side * off, 0); full(prev); ctx.restore();
-      }
-      ctx.fillStyle = ACC; ctx.fillRect(W / 2 - off - 6, 0, 6, H); ctx.fillRect(W / 2 + off, 0, 6, H);
+  lidar(s, lt, p) {   // laser scan line; the incoming car is a point cloud until scanned
+    const T = Math.min(0.45, s.dur * 0.75);
+    full(E(s.idx), { scale: z(1.04 + 0.03 * p) });
+    if (lt >= T) {
+      const a = 1 - clamp((lt - T) / 0.25);
+      if (a > 0) { ctx.save(); ctx.strokeStyle = `rgba(56,242,255,${0.25 * a})`; ctx.lineWidth = 2; ctx.beginPath();
+        for (let x = 0; x <= W; x += 90) { ctx.moveTo(x, 0); ctx.lineTo(x, H); } for (let y = 0; y <= H; y += 90) { ctx.moveTo(0, y); ctx.lineTo(W, y); }
+        ctx.stroke(); ctx.restore(); }
+      return 0;
+    }
+    const g = sample(), y = easeInOut(lt / T) * H;
+    grab();
+    ctx.fillStyle = '#02070a'; ctx.fillRect(0, 0, W, H);
+    dots(g, '#38f2ff', 0, 0, 0.32, false);
+    ctx.drawImage(buf, 0, 0, W, y, 0, 0, W, y);
+    const sg = ctx.createLinearGradient(0, y - 140, 0, y);
+    sg.addColorStop(0, 'rgba(56,242,255,0)'); sg.addColorStop(1, 'rgba(56,242,255,.45)');
+    ctx.fillStyle = sg; ctx.fillRect(0, y - 140, W, 140); ctx.fillStyle = '#fff'; ctx.fillRect(0, y - 3, W, 6);
+    return 0;
+  },
+  melt(s, lt, p, si) {   // datamosh: new frame drips down over the old one, pixel streaks below
+    const T = Math.min(0.4, s.dur * 0.75);
+    full(E(s.idx), { scale: z(1.05 + 0.03 * p) });
+    if (lt >= T) { rgbSplit(14 * clamp(1 - (lt - T) / 0.2)); return 0; }
+    grab(); full(prevE(si), { scale: z(1.05) });
+    const e = lt / T, r = rng(s.k * 53 + 9), cw = 36;
+    for (let x = 0; x < W; x += cw) {
+      const h = Math.min(H, clamp(e * 1.7 - r() * 0.7) * H); if (h <= 0) continue;
+      ctx.drawImage(buf, x, 0, cw, h, x, 0, cw, h);
+      ctx.drawImage(buf, x, Math.max(0, h - 2), cw, 2, x, h, cw, 260 * (1 - e));
     }
     return 0;
   },
-  diagonal(s, lt, p, si) {
-    const T = Math.min(0.36, s.dur * 0.6);
-    if (lt >= T) { full(E(s.idx), { scale: z(1.08 - 0.04 * clamp((lt - T) / 0.3) + 0.02 * p) }); return 0; }
-    const e = easeInOut(lt / T), sl = 0.6 * H, m = (W + sl + 40) * e;
-    full(E(TL.segs[si - 1].idx));
-    ctx.save(); ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(m - sl, 0); ctx.lineTo(m, H); ctx.lineTo(0, H); ctx.closePath(); ctx.clip();
-    full(E(s.idx), { scale: z(1.08) }); ctx.restore();
-    ctx.beginPath(); ctx.moveTo(m - sl, 0); ctx.lineTo(m - sl + 28, 0); ctx.lineTo(m + 28, H); ctx.lineTo(m, H); ctx.closePath();
-    ctx.fillStyle = ACC; ctx.fill();
+  kaleido(s, lt, p) {   // four-way mirror that spins and resolves into the shot
+    const T = Math.min(0.5, s.dur * 0.8);
+    full(E(s.idx), { scale: z(1.04 + 0.03 * p) });
+    if (lt >= T) return 0;
+    const e = easeOut(lt / T); grab();
+    ctx.save(); ctx.globalAlpha = 1 - e * e; ctx.translate(W / 2, FIT_CY);
+    ctx.rotate((1 - e) * Math.PI * 0.5 * (s.k % 2 ? 1 : -1)); const sc = 1.6 - 0.6 * e; ctx.scale(sc, sc);
+    for (const [sx, sy] of [[1, 1], [-1, 1], [1, -1], [-1, -1]]) {
+      ctx.save(); ctx.scale(sx, sy); ctx.drawImage(buf, W / 2 - 540, FIT_CY - 880, 540, 880, -540, -880, 540, 880); ctx.restore();
+    }
+    ctx.restore();
     return 0;
   },
-  mosaic(s, lt, p, si) {
-    const cols = 4, rows = 7, tw = W / cols, th = H / rows, span = Math.min(0.45, s.dur * 0.45), td = 0.22;
-    full(E(s.idx), { scale: z(1 + 0.03 * p) });
-    if (lt >= span + td) return 0;
-    bctx.clearRect(0, 0, W, H); bctx.drawImage(cv, 0, 0);
+  paparazzi(s, lt, p) {   // camera viewfinder: autofocus brackets, burst shots on each beat
+    const b = bt(s.start + lt), bi = Math.max(0, Math.floor(lt / BEAT())), r = rng(s.k * 19 + bi);
+    full(E(s.idx), { scale: z(1.06 + 0.02 * bi + (r() - 0.5) * 0.02), ox: (r() - 0.5) * 50, oy: (r() - 0.5) * 30, rot: (r() - 0.5) * 0.02 });
+    const af = easeOut(clamp(lt / 0.18)), bw = 900 - 260 * af, bh = 700 - 240 * af;
+    ctx.save();
+    ctx.strokeStyle = 'rgba(255,255,255,.2)'; ctx.lineWidth = 2; ctx.beginPath();
+    for (const x of [W / 3, W * 2 / 3]) { ctx.moveTo(x, 0); ctx.lineTo(x, H); } for (const y of [H / 3, H * 2 / 3]) { ctx.moveTo(0, y); ctx.lineTo(W, y); } ctx.stroke();
+    ctx.strokeStyle = af >= 1 ? '#3dff7a' : '#fff'; ctx.lineWidth = 6; corners(ctx, W / 2 - bw / 2, FIT_CY - bh / 2, bw, bh, 56);
+    shadow(true); ctx.fillStyle = '#fff'; ctx.font = `600 32px ${FM}`;
+    ctx.fillText('4K  1/2000  f/2.8  ISO 100', 72, 300);
+    ctx.fillText(`SHOT ${String(s.k * 4 + bi + 1).padStart(3, '0')}`, 72, 1440);
+    ctx.restore();
+    return lt < 0.07 ? 0.85 : hit(b, 0.06) * 0.35;
+  },
+  carousel(s, lt) {   // 3D ring of photos, rotates one slot per cut
+    const list = TL.cutIdx, u = easeInOut(clamp(lt / Math.min(0.3, s.dur * 0.6))), pos = s.k - 1 + u;
+    const bg = ctx.createRadialGradient(W / 2, FIT_CY, 100, W / 2, FIT_CY, 1200);
+    bg.addColorStop(0, '#1d212a'); bg.addColorStop(1, '#050506'); ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+    const items = [];
+    for (let i = Math.floor(pos) - 2; i <= Math.ceil(pos) + 2; i++) if (i >= 0 && i < list.length) {
+      const th = (i - pos) * 0.62, zc = Math.cos(th); if (zc <= 0.05) continue;
+      const sc = 0.55 + 0.45 * zc, w = 820 * sc * (0.4 + 0.6 * zc), h = 600 * sc;
+      items.push({ i, zc, r: { x: W / 2 + Math.sin(th) * 620 - w / 2, y: FIT_CY - h / 2, w, h, radius: 24 * sc } });
+    }
+    items.sort((a, b) => a.zc - b.zc);
+    for (const it of items) { ctx.save(); ctx.globalAlpha = 0.2 * it.zc; ctx.translate(0, 2 * (it.r.y + it.r.h)); ctx.scale(1, -1); place(E(list[it.i]), it.r); ctx.restore(); }
+    const fg = ctx.createLinearGradient(0, FIT_CY + 300, 0, FIT_CY + 760);
+    fg.addColorStop(0, 'rgba(5,5,6,0)'); fg.addColorStop(1, '#050506'); ctx.fillStyle = fg; ctx.fillRect(0, FIT_CY + 300, W, H);
+    for (const it of items) {
+      place(E(list[it.i]), it.r);
+      const r = it.r; rrect(ctx, r.x, r.y, r.w, r.h, r.radius); ctx.fillStyle = `rgba(0,0,0,${0.65 * (1 - it.zc)})`; ctx.fill();
+    }
+    const h = hit(bt(s.start + lt), 0.15); ctx.fillStyle = ACC; ctx.globalAlpha = 0.5 + 0.5 * h; ctx.fillRect(W / 2 - 200, FIT_CY + 330, 400, 6); ctx.globalAlpha = 1;
+    return 0;
+  },
+  glass(s, lt, p) {   // liquid-glass card over a blurred backdrop, squishes on the beat
+    const h = hit(bt(s.start + lt), 0.18), e = easeBack(clamp(lt / 0.24));
+    full(E(s.idx), { scale: 1.35, filter: 'blur(36px) saturate(1.7) brightness(.75)' });
+    const w = 960, hh = 760, x = (W - w) / 2, y = FIT_CY - hh / 2 - 40, k = 0.86 + 0.14 * e, sq = 0.03 * h;
+    ctx.save(); ctx.translate(W / 2, y + hh / 2); ctx.scale(k * (1 + sq), k * (1 - sq)); ctx.translate(-W / 2, -(y + hh / 2));
+    ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 60; ctx.shadowOffsetY = 24;
+    rrect(ctx, x, y, w, hh, 64); ctx.fillStyle = 'rgba(255,255,255,.1)'; ctx.fill(); ctx.shadowColor = 'transparent';
+    place(E(s.idx), { x: x + 14, y: y + 14, w: w - 28, h: hh - 28, radius: 52 });
+    rrect(ctx, x, y, w, hh, 64); ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,.6)'; ctx.stroke();
+    ctx.save(); rrect(ctx, x, y, w, hh, 64); ctx.clip(); ctx.globalCompositeOperation = 'screen';
+    const sx = x - 300 + (w + 600) * clamp((lt - 0.05) / 0.5);
+    const sg = ctx.createLinearGradient(sx - 160, y, sx + 160, y + hh);
+    sg.addColorStop(0, 'rgba(255,255,255,0)'); sg.addColorStop(0.5, 'rgba(255,255,255,.35)'); sg.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = sg; ctx.fillRect(x, y, w, hh); ctx.restore();
+    ctx.restore();
+    const g = { bg: 'rgba(255,255,255,.16)', fg: '#fff', stroke: 'rgba(255,255,255,.5)', size: 38, scale: e };
+    tag(S.model || 'NEW', x, y + hh + 80, g);
+    if (S.year) tag(S.year, x, y + hh + 180, Object.assign({}, g, { fam: FM }));
+    return 0;
+  },
+  tunnel(s, lt) {   // nested frames; the camera flies into the next photo
+    const list = TL.cutIdx, K = 0.6, mv = Math.min(0.32, s.dur * 0.6), u = easeInOut(clamp((lt - (s.dur - mv)) / mv)), zm = Math.pow(1 / K, u);
+    const at = j => (s.k + j < list.length ? list[s.k + j] : hero);
     ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
-    full(E(TL.segs[si - 1].idx));
-    ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.fillRect(0, 0, W, H);
-    const r = rng(s.k * 977 + 3);
+    for (let j = 0; j < 5; j++) {
+      const k = Math.pow(K, j) * zm, w = W * k, h = H * k; if (w < 40) break;
+      const r = { x: W / 2 - w / 2, y: FIT_CY - h * FIT_CY / H, w, h, radius: j ? 22 * k : 0 };
+      place(E(at(j)), r);
+      if (j) { rrect(ctx, r.x, r.y, r.w, r.h, r.radius); ctx.lineWidth = Math.max(2, 10 * k); ctx.strokeStyle = ACC; ctx.stroke(); }
+    }
+    return 0;
+  },
+  slice(s, lt, p, si) {   // horizontal bands slide in from alternating sides
+    const T = Math.min(0.32, s.dur * 0.7), n = 8, bh = H / n;
+    full(E(s.idx), { scale: z(1.06 - 0.03 * clamp((lt - T) / 0.3) + 0.02 * p) });
+    if (lt >= T) return 0;
+    grab(); full(prevE(si), { scale: z(1.06) });
+    for (let i = 0; i < n; i++) {
+      const a = easeOut(clamp((lt - i * T * 0.06) / (T * 0.55))); if (a <= 0) continue;
+      const dir = i % 2 ? 1 : -1, x = dir * (1 - a) * W;
+      ctx.drawImage(buf, 0, i * bh, W, bh, x, i * bh, W, bh);
+      if (a < 1) { ctx.fillStyle = ACC; ctx.fillRect(dir > 0 ? x - 10 : x + W, i * bh, 10, bh); }
+    }
+    return 0;
+  },
+  spray(s, lt, p, si) {   // graffiti spray reveal + a big tag
+    const T = Math.min(0.5, s.dur * 0.8);
+    full(E(s.idx), { scale: z(1.05 + 0.03 * p) });
+    if (lt < T) {
+      grab();
+      const r = rng(s.k * 401 + 7), e = lt / T;
+      mctx.globalAlpha = 1; mctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < 46; i++) {
+        const d = r() * 0.7, cx = r() * W, cy = 150 + r() * (H - 300), R0 = 170 + r() * 160, a = clamp((e - d) / 0.3);
+        if (a <= 0) continue;
+        const R = R0 * easeOut(a), g = mctx.createRadialGradient(cx, cy, 0, cx, cy, R);
+        g.addColorStop(0, '#000'); g.addColorStop(0.7, 'rgba(0,0,0,.9)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+        mctx.fillStyle = g; mctx.fillRect(cx - R, cy - R, 2 * R, 2 * R);
+        if (i % 4 === 0) { mctx.fillStyle = '#000'; mctx.fillRect(cx - 6, cy, 12, R * 1.4 * a); }
+      }
+      if (e > 0.8) { mctx.globalAlpha = (e - 0.8) / 0.2; mctx.fillStyle = '#000'; mctx.fillRect(0, 0, W, H); mctx.globalAlpha = 1; }
+      bctx.save(); bctx.globalCompositeOperation = 'destination-in'; bctx.drawImage(mk, 0, 0); bctx.restore();
+      full(prevE(si), { scale: z(1.05), filter: 'brightness(.45) saturate(.6)' });
+      ctx.drawImage(buf, 0, 0);
+    }
+    const word = ['FRESH', 'CLEAN', 'NO.1', 'HOT', 'DRIP', 'BOSS'][s.k % 6], a = easeBack(clamp((lt - T * 0.6) / 0.18));
+    if (a > 0) {
+      const k = a * (1 + 0.05 * hit(bt(s.start + lt)));
+      ctx.save(); ctx.translate(540, 1330); ctx.rotate(-0.12); ctx.scale(k, k);
+      ctx.font = `italic 700 190px ${FD}`; ctx.textAlign = 'center'; ctx.lineJoin = 'round';
+      ctx.lineWidth = 26; ctx.strokeStyle = '#111'; ctx.strokeText(word, 0, 0);
+      ctx.fillStyle = ACC; ctx.fillText(word, 0, 0);
+      ctx.restore();
+    }
+    return 0;
+  },
+  stage(s, lt, p) {   // dark showroom stage, spotlight snaps on, floor reflection
+    const h = hit(bt(s.start + lt), 0.2), e = E(s.idx);
+    ctx.fillStyle = '#050506'; ctx.fillRect(0, 0, W, H);
+    if (!e) return 0;
+    const on = lt < 0.06 ? 0 : easeOut(clamp((lt - 0.06) / 0.12));
+    const a = e.b.width / e.b.height; let w = 1000, hh = w / a; if (hh > 760) { hh = 760; w = hh * a; }
+    const cy = 820, x = (W - w) / 2, y = cy - hh / 2, sc = 1.04 - 0.04 * easeOut(clamp(lt / 0.4)) + 0.015 * p;
+    ctx.save(); ctx.translate(W / 2, cy); ctx.scale(sc, sc); ctx.translate(-W / 2, -cy);
+    ctx.globalAlpha = on; ctx.drawImage(e.b, x, y, w, hh);
+    ctx.globalAlpha = on * 0.28; ctx.translate(0, 2 * (y + hh)); ctx.scale(1, -1); ctx.drawImage(e.b, x, y, w, hh);
+    ctx.restore();
+    const fy = y + hh, fg = ctx.createLinearGradient(0, fy, 0, fy + 420);
+    fg.addColorStop(0, 'rgba(5,5,6,.2)'); fg.addColorStop(1, '#050506'); ctx.fillStyle = fg; ctx.fillRect(0, fy, W, H - fy);
+    const rg = ctx.createRadialGradient(W / 2, cy, 200, W / 2, cy, 900);
+    rg.addColorStop(0, 'rgba(0,0,0,0)'); rg.addColorStop(1, 'rgba(0,0,0,.85)'); ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H);
+    ctx.save(); ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = on * (0.1 + 0.18 * h);
+    const cg = ctx.createLinearGradient(0, 0, 0, fy + 60); cg.addColorStop(0, '#fff'); cg.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = cg; ctx.beginPath(); ctx.moveTo(W / 2 - 60, 0); ctx.lineTo(W / 2 + 60, 0); ctx.lineTo(W / 2 + 620, fy + 60); ctx.lineTo(W / 2 - 620, fy + 60); ctx.closePath(); ctx.fill();
+    ctx.restore();
+    const r = rng(77), tt = s.start + lt; ctx.fillStyle = '#fff';
+    for (let i = 0; i < 40; i++) { const px = W / 2 + (r() - 0.5) * 900, py = (r() * cy + tt * 30 * (0.5 + r())) % (cy + 200); ctx.globalAlpha = on * 0.4 * r(); ctx.fillRect(px, py, 3, 3); }
+    ctx.globalAlpha = on * (0.5 + 0.5 * h); ctx.fillStyle = ACC; ctx.fillRect(W / 2 - 300 * on, fy + 8, 600 * on, 4); ctx.globalAlpha = 1;
+    return 0;
+  },
+  scratch(s, lt, p, si) {   // vinyl scratch: back-and-forth stutter between shots, then lock in
+    const SL = Math.min(BEAT(), s.dur * 0.6), qd = SL / 4;
+    if (lt < SL) {
+      const q = Math.floor(lt / qd), back = q % 2 === 0, sp = (lt - q * qd) / qd;
+      full(back ? prevE(si) : E(s.idx), { scale: z(1.12), rot: (back ? -1 : 1) * 0.06 * (1 - sp), ox: (back ? -1 : 1) * 80 * (1 - sp), filter: 'blur(3px)' });
+      glitchFx(0.6, s.k * 17 + q);
+      ctx.save(); ctx.strokeStyle = 'rgba(255,255,255,.55)'; ctx.lineWidth = 4;
+      for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.arc(W / 2, FIT_CY, 300 + i * 90, -0.6 + sp + i * 0.3, 0.2 + sp + i * 0.3); ctx.stroke(); }
+      ctx.restore();
+      return 0;
+    }
+    const u = clamp((lt - SL) / 0.3);
+    full(E(s.idx), { scale: z(1.12 - 0.08 * easeOut(u) + 0.02 * p), rot: Math.sin(lt * 30) * 0.02 * (1 - u) });
+    return 0;
+  },
+  radial(s, lt, p) {   // radial zoom-blur burst on each cut
+    const T = Math.min(0.3, s.dur * 0.6), a = clamp(1 - lt / T);
+    full(E(s.idx), { scale: z(1.08 - 0.06 * easeOut(clamp(lt / T)) + 0.02 * p) });
+    if (a <= 0) return 0;
+    grab(); ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    for (let i = 1; i <= 6; i++) { const k = 1 + i * 0.05 * a; ctx.globalAlpha = 0.12 * a; ctx.setTransform(k, 0, 0, k, W / 2 * (1 - k), FIT_CY * (1 - k)); ctx.drawImage(buf, 0, 0); }
+    ctx.restore();
+    return a * 0.25;
+  },
+  pixel(s, lt, p) {   // big pixels resolve every 16th note
+    full(E(s.idx), { scale: z(1.04 + 0.02 * p) });
+    const q = Math.floor(lt / (BEAT() / 4)); if (q < 4) pixelate([90, 45, 24, 12][q]);
+    return 0;
+  },
+  peel(s, lt, p, si) {   // page peel from the bottom-right corner
+    const T = Math.min(0.42, s.dur * 0.75);
+    full(E(s.idx), { scale: z(1.04 + 0.02 * p) });
+    if (lt >= T) return 0;
+    const e = easeInOut(lt / T), c = (W + H) * (1 - e), f = Math.min(260, (W + H - c) * 0.5);
+    grab(); full(prevE(si), { scale: z(1.04) });
+    ctx.save(); ctx.beginPath(); ctx.moveTo(c + 20000, -20000); ctx.lineTo(20000, 20000); ctx.lineTo(-20000, c + 20000); ctx.closePath(); ctx.clip();
+    ctx.drawImage(buf, 0, 0);
+    const sg = ctx.createLinearGradient(c / 2, c / 2, c / 2 + 120, c / 2 + 120); sg.addColorStop(0, 'rgba(0,0,0,.55)'); sg.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = sg; ctx.fillRect(0, 0, W, H); ctx.restore();
+    if (f > 1) {
+      ctx.save(); ctx.beginPath(); ctx.moveTo(c + 20000, -20000); ctx.lineTo(-20000, c + 20000); ctx.lineTo(-20000, c - f + 20000); ctx.lineTo(c - f + 20000, -20000); ctx.closePath(); ctx.clip();
+      const fg = ctx.createLinearGradient((c - f) / 2, (c - f) / 2, c / 2, c / 2);
+      fg.addColorStop(0, '#8f959e'); fg.addColorStop(0.7, '#f4f4f2'); fg.addColorStop(1, '#cfd2d6');
+      ctx.fillStyle = fg; ctx.fillRect(0, 0, W, H); ctx.restore();
+    }
+    return 0;
+  },
+  shatter(s, lt, p, si) {   // previous shot breaks into glass shards that fly off
+    const T = Math.min(0.45, s.dur * 0.8);
+    if (lt >= T) { full(E(s.idx), { scale: z(1.04 + 0.02 * p) }); return 0; }
+    full(prevE(si), { scale: z(1.04) }); grab();
+    full(E(s.idx), { scale: z(1.1 - 0.06 * lt / T) });
+    const e = lt / T, cols = 5, rows = 9, cw = W / cols, rh = H / rows, r = rng(s.k * 131 + 5), P = [];
+    for (let y = 0; y <= rows; y++) for (let x = 0; x <= cols; x++) {
+      const edge = x === 0 || y === 0 || x === cols || y === rows, jx = (r() - 0.5) * cw * 0.7, jy = (r() - 0.5) * rh * 0.7;
+      P.push([x * cw + (edge ? 0 : jx), y * rh + (edge ? 0 : jy)]);
+    }
     for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
-      const d = r() * span, a = clamp((lt - d) / td); if (a <= 0) continue;
-      const e = easeBack(a);
-      ctx.save(); ctx.translate(x * tw + tw / 2, y * th + th / 2); ctx.scale(e, e);
-      ctx.drawImage(buf, x * tw, y * th, tw, th, -tw / 2, -th / 2, tw, th); ctx.restore();
+      const a = P[y * (cols + 1) + x], b = P[y * (cols + 1) + x + 1], c = P[(y + 1) * (cols + 1) + x + 1], d = P[(y + 1) * (cols + 1) + x];
+      for (const tri of [[a, b, c], [a, c, d]]) {
+        const mx = (tri[0][0] + tri[1][0] + tri[2][0]) / 3, my = (tri[0][1] + tri[1][1] + tri[2][1]) / 3, dx = mx - W / 2, dy = my - FIT_CY, dl = Math.hypot(dx, dy) + 1, rr = r();
+        const delay = dl / 1600 * 0.5, q = clamp((e - delay) / (1 - delay));
+        const ox = dx / dl * q * q * 1500 * (0.6 + rr), oy = dy / dl * q * q * 1500 * (0.6 + rr) + q * q * 600;
+        const bx = Math.min(tri[0][0], tri[1][0], tri[2][0]), by = Math.min(tri[0][1], tri[1][1], tri[2][1]);
+        const bw = Math.max(tri[0][0], tri[1][0], tri[2][0]) - bx + 2, bh = Math.max(tri[0][1], tri[1][1], tri[2][1]) - by + 2;
+        ctx.save(); ctx.globalAlpha = 1 - q * q; ctx.translate(mx + ox, my + oy); ctx.rotate((rr - 0.5) * 3 * q); ctx.translate(-mx, -my);
+        ctx.beginPath(); ctx.moveTo(tri[0][0], tri[0][1]); ctx.lineTo(tri[1][0], tri[1][1]); ctx.lineTo(tri[2][0], tri[2][1]); ctx.closePath(); ctx.clip();
+        ctx.drawImage(buf, bx, by, bw, bh, bx, by, bw, bh);
+        ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,.6)'; ctx.stroke();
+        ctx.restore();
+      }
     }
+    return e < 0.05 ? 0.5 : 0;
+  },
+  cube(s, lt, p, si) {   // 3D cube turn
+    const T = Math.min(0.36, s.dur * 0.7);
+    if (lt >= T) { full(E(s.idx), { scale: z(1.04 + 0.02 * p) }); return 0; }
+    const e = easeInOut(lt / T), dir = s.k % 2 ? 1 : -1, wA = W * (1 - e), wB = W * e, sy = 1 - 0.12 * Math.sin(e * Math.PI);
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+    const face = (img, x, w, dark) => {
+      if (w < 1) return;
+      ctx.save(); ctx.beginPath(); ctx.rect(x, 0, w, H); ctx.clip(); ctx.translate(x, H / 2); ctx.scale(w / W, sy); ctx.translate(0, -H / 2);
+      full(img); ctx.fillStyle = `rgba(0,0,0,${dark})`; ctx.fillRect(0, 0, W, H); ctx.restore();
+    };
+    if (dir > 0) { face(prevE(si), 0, wA, 0.5 * e); face(E(s.idx), wA, wB, 0.5 * (1 - e)); }
+    else { face(E(s.idx), 0, wB, 0.5 * (1 - e)); face(prevE(si), wB, wA, 0.5 * e); }
     return 0;
   },
-  flip(s, lt, p, si) {
-    const T = Math.min(0.42, s.dur * 0.6);
-    if (lt >= T) { full(E(s.idx), { scale: 0.92 + 0.08 * easeOut(clamp((lt - T) / 0.2)) + 0.03 * p }); return 0; }
-    full(E(s.idx), { filter: 'blur(4px) brightness(.25)' });
-    const half = lt < T / 2, e = easeInOut(half ? lt / (T / 2) : (lt - T / 2) / (T / 2)), sx = Math.max(0.001, half ? 1 - e : e);
-    ctx.save(); ctx.translate(W / 2, 0); ctx.scale(sx, 1); ctx.translate(-W / 2, 0);
-    full(half ? E(TL.segs[si - 1].idx) : E(s.idx), { scale: 0.92 });
-    ctx.fillStyle = `rgba(0,0,0,${0.5 * (1 - sx)})`; ctx.fillRect(0, 0, W, H);
+  duo(s, lt, p, si) {   // split screen: top half updates first, bottom follows half a beat later
+    const T = Math.min(0.3, s.dur * 0.6), half = H / 2, g = 8;
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+    const pane = (r, a, dir, ox) => {
+      place(prevE(si), r, { ox });
+      if (a > 0) { ctx.save(); ctx.translate(dir * W * (1 - a), 0); place(E(s.idx), r, { scale: 1 + 0.03 * p, ox }); ctx.restore(); }
+    };
+    pane({ x: 0, y: 0, w: W, h: half - g }, easeOut(clamp(lt / T)), -1, 0);
+    pane({ x: 0, y: half + g, w: W, h: half - g }, easeOut(clamp((lt - T * 0.5) / T)), 1, 0);
+    ctx.fillStyle = ACC; ctx.fillRect(0, half - 3, W * easeOut(clamp(lt / T)), 6);
+    return 0;
+  },
+  blob(s, lt, p, si) {   // liquid blob reveal
+    const T = Math.min(0.42, s.dur * 0.75);
+    full(E(s.idx), { scale: z(1.04 + 0.02 * p) });
+    if (lt >= T) return 0;
+    grab(); full(prevE(si), { scale: z(1.04) });
+    const R = easeInOut(lt / T) * 1250, tt = s.start + lt;
+    ctx.save(); ctx.beginPath();
+    for (let i = 0; i <= 64; i++) {
+      const a = i / 64 * Math.PI * 2, r = R * (1 + 0.14 * Math.sin(a * 5 + tt * 9) + 0.08 * Math.sin(a * 3 - tt * 6));
+      const x = W / 2 + Math.cos(a) * r, y = FIT_CY + Math.sin(a) * r; if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y);
+    }
+    ctx.closePath(); ctx.save(); ctx.clip(); ctx.drawImage(buf, 0, 0); ctx.restore();
+    ctx.lineWidth = 14; ctx.strokeStyle = ACC; ctx.stroke(); ctx.restore();
+    return 0;
+  },
+  burn(s, lt, p, si) {   // 16mm film burn + gate weave + light leak
+    const T = Math.min(0.35, s.dur * 0.7), tt = s.start + lt, r = rng(s.k * 29 + 3), jit = (rng(Math.floor(tt * 24))() - 0.5) * 8;
+    full(lt < T * 0.5 ? prevE(si) : E(s.idx), { scale: z(1.05 + 0.02 * p), oy: jit, filter: 'sepia(.3) saturate(1.25) contrast(1.05)' });
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    if (lt < T) {
+      const e = lt / T, cx = 200 + r() * 680, cy = 400 + r() * 1100, R = 100 + 1600 * e * e, g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R);
+      g.addColorStop(0, 'rgba(255,255,230,.95)'); g.addColorStop(0.4, 'rgba(255,140,30,.8)'); g.addColorStop(1, 'rgba(255,60,0,0)');
+      ctx.globalAlpha = Math.sin(e * Math.PI); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    }
+    const lg = ctx.createLinearGradient(0, 0, 420, 0); lg.addColorStop(0, 'rgba(255,90,40,.45)'); lg.addColorStop(1, 'rgba(255,90,40,0)');
+    ctx.globalAlpha = 0.5 + 0.5 * Math.sin(tt * 2.3); ctx.fillStyle = lg; ctx.fillRect(0, 0, 420, H);
     ctx.restore();
     return 0;
   },
-  iris(s, lt, p, si) {
-    const T = Math.min(0.42, s.dur * 0.6), R = Math.hypot(W, H) / 2;
-    if (lt >= T) { full(E(s.idx), { scale: z(1 + 0.04 * p) }); return 0; }
-    const half = lt < T / 2, e = easeInOut(half ? lt / (T / 2) : (lt - T / 2) / (T / 2)), r = Math.max(1, half ? R * (1 - e) : R * e);
-    full(half ? E(TL.segs[si - 1].idx) : E(s.idx));
-    ctx.beginPath(); ctx.rect(0, 0, W, H); ctx.moveTo(W / 2 + r, FIT_CY); ctx.arc(W / 2, FIT_CY, r, 0, Math.PI * 2, true);
-    ctx.fillStyle = '#000'; ctx.fill('evenodd');
-    ctx.beginPath(); ctx.arc(W / 2, FIT_CY, r, 0, Math.PI * 2); ctx.lineWidth = 10; ctx.strokeStyle = ACC; ctx.stroke();
+  mag(s, lt, p) {   // magazine cover: masthead, cover lines, barcode
+    const e = easeOut(clamp(lt / 0.2));
+    full(E(s.idx), { scale: z(1.1 - 0.06 * e + 0.02 * p) });
+    ctx.save(); shadow(true);
+    const mast = ['DRIVE', 'TORQUE', 'MOTOR', 'APEX'][s.k % 4];
+    ctx.font = `700 230px ${FD}`; ctx.textAlign = 'center'; ctx.fillStyle = '#fff'; ctx.globalAlpha = e;
+    ctx.save(); ctx.translate(W / 2 + (1 - e) * -200, 470); ctx.scale(Math.min(1, 940 / ctx.measureText(mast).width), 1); ctx.fillText(mast, 0, 0); ctx.restore();
+    ctx.textAlign = 'left'; ctx.font = `600 30px ${FM}`; ctx.fillStyle = ACC; ctx.fillText(`ISSUE ${String(s.k + 1).padStart(2, '0')} · ${vhsDate}`, 72, 270);
+    const lines = [S.model, S.year && `ปี ${S.year}`, S.price && `${S.price} บาท`, 'SHOWROOM PICK'].filter(Boolean);
+    lines.forEach((t, i) => { const a = clamp((lt - 0.06 * i) / 0.15); ctx.globalAlpha = a; ctx.fillStyle = i === 0 ? ACC : '#fff'; fitFont(t, 700, i ? 44 : 64, 28, 560); ctx.fillText(t, 72 - (1 - a) * 60, 1080 + i * 78); });
+    shadow(false); ctx.globalAlpha = 1;
+    ctx.fillStyle = '#fff'; ctx.fillRect(700, 1330, 180, 120);
+    const r = rng(s.k + 41); ctx.fillStyle = '#111'; for (let x = 712; x < 868;) { const w = 2 + (r() * 5 | 0); if (r() > 0.4) ctx.fillRect(x, 1342, w, 76); x += w + 2; }
+    ctx.restore();
     return 0;
   },
-  film(s, lt) {
-    const list = TL.cutIdx, pitch = 640, fw = 820, fh = 547, mv = 0.32;
-    const pos = s.k + (s.k < list.length - 1 ? easeInOut(clamp((lt - (s.dur - mv)) / mv)) : 0);
-    ctx.fillStyle = '#16120d'; ctx.fillRect(0, 0, W, H);
-    ctx.fillStyle = '#050505'; ctx.fillRect(70, 0, 940, H);
-    const off = ((pos * pitch) % 80 + 80) % 80;
-    ctx.fillStyle = '#d9d2c3';
-    for (let y = -80; y < H + 80; y += 80) { rrect(ctx, 82, y - off, 34, 46, 6); ctx.fill(); rrect(ctx, 964, y - off, 34, 46, 6); ctx.fill(); }
-    const f = Math.floor(pos);
-    for (let i = f - 2; i <= f + 3; i++) {
+  spec(s, lt, p) {   // bold words slam in on every beat
+    const h = hit(bt(s.start + lt), 0.12), bi = Math.max(0, Math.floor(lt / BEAT()));
+    full(E(s.idx), { scale: z(1.08 + 0.04 * h + 0.02 * p), filter: 'brightness(.8)' });
+    const words = [...(S.model || 'NEW').toUpperCase().split(/\s+/), S.year, S.price && S.price + '฿'].filter(Boolean);
+    const w = words[(s.k * 2 + bi) % words.length], a = easeOut(clamp((lt - bi * BEAT()) / 0.1)), sc = 1.6 - 0.6 * a;
+    ctx.save(); ctx.translate(W / 2 + (1 - a) * 30 * (bi % 2 ? 1 : -1), 1250); ctx.scale(sc, sc);
+    ctx.font = `700 100px ${FD}`; const fs = clamp(920 * 100 / Math.max(1, ctx.measureText(w).width), 90, 300);
+    ctx.font = `italic 700 ${fs}px ${FD}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = ACC; ctx.fillText(w, 10, 10); ctx.fillStyle = '#fff'; ctx.fillText(w, 0, 0);
+    ctx.restore();
+    return 0;
+  },
+  barcode(s, lt, p, si) {   // random-width bars reveal, alternating from top and bottom
+    const T = Math.min(0.38, s.dur * 0.7);
+    full(E(s.idx), { scale: z(1.04 + 0.02 * p) });
+    if (lt >= T) return 0;
+    grab(); full(prevE(si), { scale: z(1.04) });
+    const r = rng(s.k * 61 + 2); let x = 0, i = 0;
+    while (x < W) {
+      const w = 12 + r() * 70, d = r() * 0.5, a = easeOut(clamp((lt / T - d) / 0.5));
+      if (a > 0) { const h = a * H, y = i % 2 ? H - h : 0; ctx.drawImage(buf, x, y, w, h, x, y, w, h); }
+      x += w; i++;
+    }
+    return 0;
+  },
+  wave(s, lt, p, si) {   // sine ripple warp through the cut
+    const T = Math.min(0.4, s.dur * 0.75);
+    full(lt >= T / 2 ? E(s.idx) : prevE(si), { scale: z(1.04 + 0.02 * p) });
+    if (lt >= T) return 0;
+    const amp = Math.sin(lt / T * Math.PI) * 90, tt = s.start + lt; grab();
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+    for (let y = 0; y < H; y += 8) ctx.drawImage(buf, 0, y, W, 8, Math.sin(y * 0.012 + tt * 25) * amp, y, W, 8);
+    rgbSplit(amp * 0.12);
+    return 0;
+  },
+  spin(s, lt, p, si) {   // spin-out / spin-in twist
+    const T = Math.min(0.36, s.dur * 0.7);
+    if (lt >= T) { full(E(s.idx), { scale: z(1.04 + 0.02 * p) }); return 0; }
+    const e = lt / T, dir = s.k % 2 ? 1 : -1;
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+    if (e < 0.5) { const q = e * 2; full(prevE(si), { scale: z(1 + 1.2 * q * q), rot: dir * q * q * Math.PI, filter: q > 0.2 ? 'blur(8px)' : undefined }); }
+    else { const q = easeOut((e - 0.5) * 2); full(E(s.idx), { scale: z(2.2 - 1.2 * q), rot: -dir * (1 - q) * Math.PI, filter: q < 0.8 ? 'blur(8px)' : undefined }); }
+    return 0;
+  },
+  echo(s, lt, p) {   // the car slides in leaving hue-shifted afterimages
+    const T = Math.min(0.3, s.dur * 0.6), dir = s.k % 2 ? 1 : -1, e = easeOut(clamp(lt / T)), sp = (1 - e) * W * 0.9;
+    full(E(s.idx), { scale: 1.2, filter: 'blur(20px) brightness(.4)' });
+    for (let i = 5; i >= 1; i--) carImg(E(s.idx), { ox: dir * (sp + i * 90 * (1 - e) + i * 6), alpha: 0.2 * (6 - i) / 5, filter: `hue-rotate(${i * 50}deg) saturate(2)` });
+    carImg(E(s.idx), { ox: dir * sp, scale: 1 + 0.02 * p });
+    return 0;
+  },
+  dashcam(s, lt, p) {   // dash-cam POV: wide vignette, timestamp, REC, GPS speed
+    const tt = s.start + lt, r = rng(Math.floor(tt * 30));
+    full(E(s.idx), { scale: z(1.12 + 0.02 * p), ox: (r() - 0.5) * 6, oy: (r() - 0.5) * 6, filter: 'saturate(.85) contrast(1.12) brightness(1.05)' });
+    const g = ctx.createRadialGradient(W / 2, H / 2, H * 0.35, W / 2, H / 2, H * 0.62);
+    g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,.75)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    const d = new Date(), sec = 21 * 3600 + 4 * 60 + Math.floor(tt), hh = String(Math.floor(sec / 3600)).padStart(2, '0'), mm = String(Math.floor(sec / 60) % 60).padStart(2, '0'), ss = String(sec % 60).padStart(2, '0');
+    ctx.save(); shadow(true); ctx.fillStyle = '#fff'; ctx.font = `600 34px ${FM}`;
+    ctx.fillText(`${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')} ${hh}:${mm}:${ss}`, 72, 290);
+    if (Math.floor(tt * 2) % 2 === 0) { ctx.fillStyle = '#ff3b3b'; ctx.beginPath(); ctx.arc(866, 278, 14, 0, Math.PI * 2); ctx.fill(); }
+    ctx.fillStyle = '#fff'; ctx.textAlign = 'right'; ctx.fillText('REC', 840, 290); ctx.textAlign = 'left';
+    ctx.fillText('FRONT CAM 1080P', 72, 1390);
+    ctx.fillText(`${Math.round(48 + (s.k * 7 + lt * 9) % 50)} km/h  GPS ●`, 72, 1440);
+    ctx.restore();
+    if (lt < 0.05) glitchFx(0.4, s.k);
+    return 0;
+  },
+  fold(s, lt, p, si) {   // card unfolds from the centre crease: bottom flap first, then top
+    const T = Math.min(0.4, s.dur * 0.75);
+    if (lt >= T) { full(E(s.idx), { scale: z(1.04 + 0.02 * p) }); return 0; }
+    full(E(s.idx)); grab(); full(prevE(si), { scale: z(1.04), filter: 'brightness(.5)' });
+    const e = lt / T, cy = H / 2, flaps = [[1, easeOut(clamp(e * 2))], [-1, easeOut(clamp(e * 2 - 1))]];
+    for (const [side, k] of flaps) {
+      if (k <= 0.001) continue;
+      ctx.save(); ctx.translate(0, cy); ctx.scale(1, k); ctx.translate(0, -cy);
+      ctx.drawImage(buf, 0, side < 0 ? 0 : cy, W, cy, 0, side < 0 ? 0 : cy, W, cy);
+      ctx.fillStyle = `rgba(0,0,0,${0.6 * (1 - k)})`; ctx.fillRect(0, side < 0 ? 0 : cy, W, cy); ctx.restore();
+    }
+    ctx.fillStyle = ACC; ctx.fillRect(0, cy - 3, W, 6 * (1 - e));
+    return 0;
+  },
+  puzzle(s, lt, p, si) {   // tiles slide into place
+    const T = Math.min(0.45, s.dur * 0.8), cols = 3, rows = 5, tw = W / cols, th = H / rows;
+    full(E(s.idx), { scale: z(1.04 + 0.02 * p) });
+    if (lt >= T) return 0;
+    grab(); full(prevE(si), { scale: z(1.04), filter: 'brightness(.6)' });
+    const r = rng(s.k * 37 + 11);
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      const d = r() * 0.45, dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]][r() * 4 | 0], a = easeOut(clamp((lt / T - d) / 0.45));
+      if (a <= 0) continue;
+      const ox = dirs[0] * tw * (1 - a), oy = dirs[1] * th * (1 - a);
+      ctx.drawImage(buf, x * tw, y * th, tw, th, x * tw + ox, y * th + oy, tw, th);
+      ctx.strokeStyle = 'rgba(0,0,0,.6)'; ctx.lineWidth = 3; ctx.strokeRect(x * tw + ox, y * th + oy, tw, th);
+    }
+    return 0;
+  },
+  blinds(s, lt, p, si) {   // venetian blinds flip
+    const T = Math.min(0.4, s.dur * 0.75), n = 12, sh = H / n;
+    full(E(s.idx), { scale: z(1.04 + 0.02 * p) });
+    if (lt >= T) return 0;
+    grab(); full(prevE(si), { scale: z(1.04) });
+    mctx.globalAlpha = 1; mctx.globalCompositeOperation = 'source-over'; mctx.clearRect(0, 0, W, H); mctx.drawImage(cv, 0, 0);
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+    for (let i = 0; i < n; i++) {
+      const q = clamp((lt / T - i * 0.04) / 0.5), y = i * sh, first = q < 0.5, k = first ? 1 - q * 2 : q * 2 - 1;
+      if (k <= 0.001) continue;
+      ctx.save(); ctx.translate(0, y + sh / 2); ctx.scale(1, k);
+      ctx.drawImage(first ? mk : buf, 0, y, W, sh, 0, -sh / 2, W, sh);
+      ctx.fillStyle = `rgba(0,0,0,${0.5 * (1 - k)})`; ctx.fillRect(0, -sh / 2, W, sh); ctx.restore();
+    }
+    return 0;
+  },
+  radar(s, lt, p, si) {   // radar sweep reveals the new shot
+    const T = Math.min(0.45, s.dur * 0.8), cx = W / 2, cy = FIT_CY;
+    full(E(s.idx), { scale: z(1.04 + 0.02 * p) });
+    if (lt < T) {
+      const a = easeInOut(lt / T) * Math.PI * 2, st = -Math.PI / 2;
+      grab(); full(prevE(si), { scale: z(1.04), filter: 'brightness(.55) saturate(.4)' });
+      ctx.save(); ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, 2400, st, st + a); ctx.closePath(); ctx.clip(); ctx.drawImage(buf, 0, 0); ctx.restore();
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(st + a); ctx.strokeStyle = '#3dff7a'; ctx.lineWidth = 6; ctx.shadowColor = '#3dff7a'; ctx.shadowBlur = 20;
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(2400, 0); ctx.stroke(); ctx.restore();
+    }
+    const fade = lt < T ? 1 : 1 - clamp((lt - T) / 0.2);
+    if (fade > 0) {
+      ctx.save(); ctx.globalAlpha = fade * 0.6; ctx.strokeStyle = '#3dff7a'; ctx.lineWidth = 2; ctx.beginPath();
+      for (let r = 150; r < 1100; r += 190) { ctx.moveTo(cx + r, cy); ctx.arc(cx, cy, r, 0, Math.PI * 2); }
+      ctx.moveTo(0, cy); ctx.lineTo(W, cy); ctx.moveTo(cx, 0); ctx.lineTo(cx, H); ctx.stroke(); ctx.restore();
+    }
+    return 0;
+  },
+  focus(s, lt, p) {   // rack focus with bokeh
+    const T = Math.min(0.35, s.dur * 0.7), e = easeInOut(clamp(lt / T)), bl = (1 - e) * 28;
+    full(E(s.idx), { scale: z(1.06 - 0.03 * e + 0.02 * p), filter: bl > 0.5 ? `blur(${bl.toFixed(1)}px)` : undefined });
+    if (e < 1) {
+      const r = rng(s.k * 23 + 1); ctx.save(); ctx.globalCompositeOperation = 'screen';
+      for (let i = 0; i < 26; i++) {
+        const x = r() * W, y = r() * H, R = 40 + r() * 110, al = 0.15 + r() * 0.25, g = ctx.createRadialGradient(x, y, R * 0.6, x, y, R);
+        g.addColorStop(0, ['#ffd27a', '#ff7ad1', '#7ad6ff'][i % 3]); g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.globalAlpha = (1 - e) * al; ctx.fillStyle = g; ctx.fillRect(x - R, y - R, 2 * R, 2 * R);
+      }
+      ctx.restore();
+    }
+    return 0;
+  },
+  comic(s, lt, p, si) {   // comic page: two slanted panels + onomatopoeia burst
+    ctx.fillStyle = '#fff8e6'; ctx.fillRect(0, 0, W, H);
+    const e = easeBack(clamp(lt / 0.18)), cut = 980 + Math.sin(s.k) * 80;
+    const panel = (pts, img, k) => {
+      ctx.save(); ctx.beginPath(); pts.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y))); ctx.closePath();
+      ctx.save(); ctx.clip(); full(img, { filter: 'saturate(1.6) contrast(1.3)', scale: z(k) }); ctx.globalAlpha = 0.18; ctx.fillStyle = dotPat; ctx.fillRect(0, 0, W, H); ctx.restore();
+      ctx.lineWidth = 10; ctx.strokeStyle = '#111'; ctx.stroke(); ctx.restore();
+    };
+    panel([[40, 220], [1040, 220], [1040, cut - 140], [40, cut + 40]], prevE(si), 1.05);
+    ctx.save(); ctx.translate((1 - Math.min(1, e)) * W, 0);
+    panel([[40, cut + 80], [1040, cut - 100], [1040, 1480], [40, 1480]], E(s.idx), 1.04 + 0.02 * p); ctx.restore();
+    const word = ['VROOM!', 'ZOOM!', 'BRRAP!', 'WOW!', 'BOOM!'][s.k % 5], a = easeBack(clamp((lt - 0.1) / 0.16));
+    if (a > 0) {
+      ctx.save(); ctx.translate(640, cut - 20); ctx.scale(a, a); ctx.rotate(-0.08);
+      starPath(0, 0, 230, 150, 14); ctx.fillStyle = ACC; ctx.fill(); ctx.lineWidth = 8; ctx.strokeStyle = '#111'; ctx.stroke();
+      ctx.font = `italic 700 88px ${FD}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = '#111'; ctx.fillText(word, 0, 6);
+      ctx.restore();
+    }
+    return 0;
+  },
+  confetti(s, lt, p) {   // confetti cannon from below on every cut
+    const e = easeBack(clamp(lt / 0.2));
+    full(E(s.idx), { scale: z(1.1 - 0.06 * Math.min(1, e) + 0.02 * p) });
+    const r = rng(s.k * 7 + 3), cols = ['#ffb020', '#ff3cc8', '#22e6ff', '#3dff7a', '#ffffff', '#ff4d4d'];
+    for (let i = 0; i < 110; i++) {
+      const ang = -Math.PI / 2 + (r() - 0.5) * 1.9, sp = 1400 + r() * 1500, x0 = W / 2 + (r() - 0.5) * 200, rot = r() * 6 + lt * (r() * 20 - 10), w = 14 + r() * 14;
+      const x = x0 + Math.cos(ang) * sp * lt * 0.9, y = 1500 + Math.sin(ang) * sp * lt + 2600 * lt * lt;
+      if (y > H + 50) continue;
+      ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(1, Math.cos(lt * 12 + i)); ctx.fillStyle = cols[i % 6]; ctx.fillRect(-w / 2, -w / 4, w, w / 2); ctx.restore();
+    }
+    return 0;
+  },
+  laser(s, lt, p) {   // club laser fans that move with the beat
+    const b = bt(s.start + lt), h = hit(b, 0.15), tt = s.start + lt;
+    full(E(s.idx), { scale: z(1.05 + 0.02 * p), filter: 'brightness(.55) saturate(1.2)' });
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.lineWidth = 3; ctx.shadowBlur = 24;
+    const cols = ['#3dff7a', '#ff3cc8', '#22e6ff'];
+    [[160, H], [W / 2, H], [W - 160, H]].forEach(([x, y], j) => {
+      ctx.strokeStyle = ctx.shadowColor = cols[(j + Math.max(0, b.i)) % 3]; ctx.globalAlpha = 0.35 + 0.5 * h;
+      for (let i = 0; i < 6; i++) {
+        const a = -Math.PI / 2 + Math.sin(tt * (1.5 + j * 0.4) + i * 0.7 + b.i) * 0.7 + (i - 2.5) * 0.12;
+        ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + Math.cos(a) * 2600, y + Math.sin(a) * 2600); ctx.stroke();
+      }
+    });
+    ctx.restore();
+    const hz = ctx.createLinearGradient(0, H * 0.55, 0, H); hz.addColorStop(0, 'rgba(120,80,255,0)'); hz.addColorStop(1, 'rgba(120,80,255,.22)');
+    ctx.fillStyle = hz; ctx.fillRect(0, H * 0.55, W, H * 0.45);
+    return 0;
+  },
+  gyro(s, lt, p) {   // floating card that tilts in 3D like a phone gyro, real colours
+    const e = E(s.idx); full(e, { scale: 1.3, filter: 'blur(30px) brightness(.45)' }); if (!e) return 0;
+    const k = Math.min(920 / e.b.width, 700 / e.b.height), cw = e.b.width * k, ch = e.b.height * k;
+    bctx.globalCompositeOperation = 'source-over'; bctx.globalAlpha = 1; bctx.filter = 'none'; bctx.clearRect(0, 0, W, H); bctx.drawImage(e.b, 0, 0, cw, ch);
+    const tt = s.start + lt, dir = s.k % 2 ? 1 : -1, en = easeOut(clamp(lt / 0.3)), th = Math.sin(tt * 2.4) * 0.28 + dir * (1 - en) * 1.1, f = 1700, n = 36, cy = FIT_CY - 40;
+    const pr = u => { const sc = f / (f + u * cw * Math.sin(th)); return [W / 2 + u * cw * Math.cos(th) * sc, sc]; };
+    const [lx, ls] = pr(-0.5), [rx, rs] = pr(0.5);
+    ctx.save(); ctx.fillStyle = 'rgba(0,0,0,.45)'; ctx.filter = 'blur(30px)'; ctx.beginPath(); ctx.ellipse(W / 2, cy + ch / 2 + 60, cw * 0.45, 40, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    for (let i = 0; i < n; i++) {
+      const [x0, s0] = pr(i / n - 0.5), [x1] = pr((i + 1) / n - 0.5), hh = ch * s0;
+      ctx.drawImage(buf, i * cw / n, 0, cw / n + 1, ch, Math.min(x0, x1), cy - hh / 2, Math.abs(x1 - x0) + 1, hh);
+    }
+    ctx.save(); ctx.beginPath(); ctx.moveTo(lx, cy - ch * ls / 2); ctx.lineTo(rx, cy - ch * rs / 2); ctx.lineTo(rx, cy + ch * rs / 2); ctx.lineTo(lx, cy + ch * ls / 2); ctx.closePath();
+    const sx = W / 2 - th * 900, g = ctx.createLinearGradient(sx - 220, 0, sx + 220, 0);
+    g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.5, 'rgba(255,255,255,.28)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.globalCompositeOperation = 'screen'; ctx.fillStyle = g; ctx.fill();
+    ctx.globalCompositeOperation = 'source-over'; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,.5)'; ctx.stroke(); ctx.restore();
+    return 0;
+  },
+  loupe(s, lt, p) {   // magnifier glides over the car showing details at 2.2x
+    full(E(s.idx), { scale: z(1.04 + 0.02 * p) }); grab();
+    const r = rng(s.k * 13 + 5), x0 = 250 + r() * 580, y0 = FIT_CY - 200 + r() * 400, x1 = 250 + r() * 580, y1 = FIT_CY - 200 + r() * 400;
+    const e = easeInOut(clamp(lt / s.dur)), a = easeBack(clamp(lt / 0.2)), cx = x0 + (x1 - x0) * e, cy = y0 + (y1 - y0) * e, R = 230 * a;
+    if (R < 2) return 0;
+    ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.clip(); ctx.translate(cx, cy); ctx.scale(2.2, 2.2); ctx.translate(-cx, -cy); ctx.drawImage(buf, 0, 0); ctx.restore();
+    ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.6)'; ctx.shadowBlur = 30;
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.lineWidth = 12; ctx.strokeStyle = '#fff'; ctx.stroke();
+    ctx.shadowColor = 'transparent'; ctx.beginPath(); ctx.arc(cx, cy, R - 10, 0, Math.PI * 2); ctx.lineWidth = 3; ctx.strokeStyle = ACC; ctx.stroke();
+    ctx.font = `600 30px ${FM}`; ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.fillText('DETAIL ×2.2', cx, cy + R + 50);
+    ctx.restore();
+    return 0;
+  },
+  feed(s, lt) {   // social feed: posts scroll up one per cut, heart pops on the beat
+    const list = TL.cutIdx, pitch = 1180, pos = s.k - 1 + easeInOut(clamp(lt / Math.min(0.3, s.dur * 0.6))), h = hit(bt(s.start + lt), 0.25);
+    ctx.fillStyle = '#0b0b0d'; ctx.fillRect(0, 0, W, H);
+    for (let i = Math.floor(pos) - 1; i <= Math.floor(pos) + 2; i++) {
       if (i < 0 || i >= list.length) continue;
-      const cy = FIT_CY + (i - pos) * pitch;
-      place(E(list[i]), { x: 130, y: cy - fh / 2, w: fw, h: fh, radius: 6 });
-      ctx.fillStyle = 'rgba(255,176,32,.85)'; ctx.font = `600 24px ${FM}`;
-      ctx.fillText(`SR-400  ${String(i + 1).padStart(2, '0')}A`, 140, cy + fh / 2 + 40);
+      const top = FIT_CY + (i - pos) * pitch - 560, cur = i === s.k;
+      ctx.save(); rrect(ctx, 40, top, 1000, 1120, 36); ctx.fillStyle = '#17181c'; ctx.fill(); ctx.clip();
+      ctx.beginPath(); ctx.arc(110, top + 60, 34, 0, Math.PI * 2); ctx.fillStyle = ACC; ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.font = `600 34px ${FD}`; ctx.fillText(S.dealer || 'showroom', 165, top + 72);
+      place(E(list[i]), { x: 40, y: top + 120, w: 1000, h: 820 });
+      heartPath(100, top + 965, 56); ctx.fillStyle = cur ? '#ff3b5c' : 'rgba(255,255,255,.8)'; ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.font = `600 32px ${FM}`; ctx.fillText(`${(120 + i * 37 + (cur ? Math.floor(lt * 40) : 0)).toLocaleString()} likes`, 160, top + 1005);
+      fitFont(S.model, 600, 32, 22, 900); ctx.fillText(S.model, 72, top + 1070);
+      if (cur && h > 0) { const k = 0.6 + 0.4 * easeBack(clamp((1 - h) * 3)); ctx.globalAlpha = h; heartPath(W / 2, top + 400 - 130 * k, 260 * k); ctx.fillStyle = '#fff'; ctx.fill(); }
+      ctx.restore();
     }
     return 0;
   },
-  vhs(s, lt, p) {
-    full(E(s.idx), { scale: z(1.04 + 0.03 * p), filter: 'saturate(1.35) contrast(1.1)' });
-    bctx.clearRect(0, 0, W, H); bctx.drawImage(cv, 0, 0);
-    ctx.save(); ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = 0.28;
-    ctx.filter = 'sepia(1) saturate(8) hue-rotate(-50deg)'; ctx.drawImage(buf, -7, 0);
-    ctx.filter = 'sepia(1) saturate(8) hue-rotate(150deg)'; ctx.drawImage(buf, 7, 0);
-    ctx.restore();
-    const tt = s.start + lt, by = (tt * 260) % (H + 200) - 100;
-    ctx.drawImage(buf, 0, Math.max(0, by), W, 70, 18, Math.max(0, by), W, 70);
-    ctx.fillStyle = 'rgba(255,255,255,.08)'; ctx.fillRect(0, by, W, 70);
-    if (lt < 0.12) glitchFx(0.5 * (1 - lt / 0.12), s.k * 71 + Math.floor(lt * 30));
-    ctx.fillStyle = scanPat; ctx.fillRect(0, 0, W, H);
-    ctx.save(); ctx.fillStyle = '#fff'; ctx.shadowColor = 'rgba(0,0,0,.8)'; ctx.shadowBlur = 6;
-    ctx.font = `600 46px ${FM}`; ctx.fillText('▶ PLAY', 72, 300);
-    ctx.textAlign = 'right'; ctx.fillText('SP', 880, 300); ctx.textAlign = 'left';
-    fitFont(S.model.toUpperCase(), 600, 40, 26, 800, FM); ctx.fillText(S.model.toUpperCase(), 72, 1380);
-    ctx.font = `600 40px ${FM}`; ctx.fillText(vhsDate + '  ' + fmt(tt), 72, 1440);
-    ctx.restore();
+  multicam(s, lt, p) {   // multi-camera edit: wide / detail / detail / mid, switching every half beat
+    const hb = BEAT() / 2, bi = Math.max(0, Math.floor(lt / hb)), ph = (lt - bi * hb) / hb, cam = (s.k + bi) % 4;
+    const [sc, ox, oy] = [[1, 0, 0], [2, 320, 60], [2, -320, 60], [1.6, 0, -120]][cam];
+    full(E(s.idx), { scale: sc * (1 + 0.03 * ph), ox: ox * (S.fit ? 0.6 : 1), oy });
+    ctx.save(); ctx.strokeStyle = 'rgba(255,255,255,.8)'; ctx.lineWidth = 4; corners(ctx, 60, 250, W - 120, 1260, 50);
+    shadow(true); ctx.fillStyle = '#fff'; ctx.font = `600 34px ${FM}`; ctx.fillText(`CAM ${cam + 1}`, 72, 1440);
+    ctx.fillStyle = '#ff3b3b'; ctx.beginPath(); ctx.arc(250, 1428, 10, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    return ph < 0.12 && bi > 0 ? 0.15 : 0;
+  },
+  bento(s, lt) {   // bento-grid layout: hero shot, two detail crops, info tiles
+    ctx.fillStyle = '#0d0e11'; ctx.fillRect(0, 0, W, H);
+    const tiles = [[30, 220, 1020, 640, 'photo', 1, 0], [30, 880, 500, 300, 'photo', 2.2, 260], [550, 880, 500, 300, 'info'], [30, 1200, 320, 280, 'year'], [370, 1200, 680, 280, 'photo', 2.4, -280]];
+    tiles.forEach(([x, y, w, h, kind, sc, ox], i) => {
+      const a = easeBack(clamp((lt - i * 0.05) / 0.22)); if (a <= 0) return;
+      const cx = x + w / 2, cy = y + h / 2;
+      ctx.save(); ctx.translate(cx, cy); ctx.scale(a, a); ctx.translate(-cx, -cy);
+      if (kind === 'photo') place(E(s.idx), { x, y, w, h, radius: 28 }, { scale: sc, ox: S.fit ? ox : ox * 0.5 });
+      else {
+        rrect(ctx, x, y, w, h, 28); ctx.fillStyle = kind === 'info' ? ACC : '#1c1e24'; ctx.fill();
+        ctx.fillStyle = kind === 'info' ? '#1c1300' : '#fff';
+        if (kind === 'info') { fitFont(S.model, 700, 44, 26, w - 60); ctx.fillText(S.model, x + 30, y + 90); ctx.font = `700 64px ${FD}`; fitFont(S.price || '-', 700, 64, 30, w - 60); ctx.fillText(S.price || '-', x + 30, y + 200); ctx.font = `600 30px ${FD}`; ctx.fillText('บาท', x + 30, y + 250); }
+        else { ctx.font = `600 30px ${FM}`; ctx.fillText('YEAR', x + 30, y + 70); ctx.font = `700 96px ${FM}`; ctx.fillText(S.year || '-', x + 30, y + 190); }
+      }
+      ctx.restore();
+    });
     return 0;
   },
-  neon(s, lt, p) {
-    ctx.fillStyle = '#07060d'; ctx.fillRect(0, 0, W, H);
-    const hz = 1420, tt = s.start + lt;
-    ctx.save(); ctx.strokeStyle = 'rgba(255,60,200,.45)'; ctx.lineWidth = 3;
-    for (let k = -10; k <= 10; k++) { ctx.beginPath(); ctx.moveTo(W / 2, hz); ctx.lineTo(W / 2 + k * 220, H); ctx.stroke(); }
-    const sc = (tt * 0.8) % 1;
-    for (let k = 0; k < 8; k++) { const f = (k + sc) / 8, y = hz + (H - hz) * f * f; ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
-    const g = ctx.createLinearGradient(0, hz - 220, 0, hz);
-    g.addColorStop(0, 'rgba(255,60,200,0)'); g.addColorStop(1, 'rgba(255,60,200,.35)');
-    ctx.fillStyle = g; ctx.fillRect(0, hz - 220, W, 220);
-    ctx.restore();
-    const e = E(s.idx); if (!e) return 0;
-    const a = e.b.width / e.b.height; let pw = 900, ph = 900 / a; if (ph > 1000) { ph = 1000; pw = ph * a; }
-    const ent = easeOut(clamp(lt / 0.25)), col = s.k % 2 ? '#22e6ff' : '#ff3cc8';
-    const flick = lt < 0.25 ? (rng(s.k * 13 + Math.floor(lt * 40))() > 0.4 ? 1 : 0.15) : 0.75 + 0.25 * Math.sin(tt * Math.PI * 4);
-    ctx.save(); ctx.translate(W / 2, FIT_CY - 60); const k2 = 0.9 + 0.1 * ent + 0.02 * p; ctx.scale(k2, k2);
-    ctx.globalAlpha = ent; ctx.drawImage(e.b, -pw / 2, -ph / 2, pw, ph);
-    ctx.globalAlpha = ent * flick; ctx.shadowColor = col; ctx.shadowBlur = 50; ctx.strokeStyle = col; ctx.lineWidth = 10;
-    ctx.strokeRect(-pw / 2 - 16, -ph / 2 - 16, pw + 32, ph + 32);
-    ctx.shadowBlur = 18; ctx.lineWidth = 3; ctx.strokeStyle = '#fff'; ctx.strokeRect(-pw / 2 - 16, -ph / 2 - 16, pw + 32, ph + 32);
-    ctx.restore();
+  ripple(s, lt, p, si) {   // tap-to-open: ring expands from a touch point with a refracting edge
+    const T = Math.min(0.42, s.dur * 0.75), r = rng(s.k * 17 + 3), tx = 220 + r() * 640, ty = 500 + r() * 800;
+    full(E(s.idx), { scale: z(1.04 + 0.02 * p) });
+    if (lt < T) {
+      const e = easeOut(lt / T), R = e * 2200;
+      grab(); full(prevE(si), { scale: z(1.04) });
+      ctx.save(); ctx.beginPath(); ctx.arc(tx, ty, R, 0, Math.PI * 2); ctx.clip(); ctx.drawImage(buf, 0, 0); ctx.restore();
+      ctx.save(); ctx.beginPath(); ctx.arc(tx, ty, R + 70, 0, Math.PI * 2); ctx.arc(tx, ty, R, 0, Math.PI * 2, true); ctx.clip();
+      ctx.translate(tx, ty); ctx.scale(1.08, 1.08); ctx.translate(-tx, -ty); ctx.drawImage(buf, 0, 0); ctx.restore();
+      ctx.save(); ctx.strokeStyle = `rgba(255,255,255,${0.6 * (1 - e)})`; ctx.lineWidth = 4;
+      for (const rr of [R, R + 70]) { ctx.beginPath(); ctx.arc(tx, ty, rr, 0, Math.PI * 2); ctx.stroke(); }
+      ctx.restore();
+    }
+    const a = clamp(1 - lt / 0.35);
+    if (a > 0) { ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = 'rgba(255,255,255,.85)'; ctx.beginPath(); ctx.arc(tx, ty, 22, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(tx, ty, 40 + 50 * (1 - a), 0, Math.PI * 2); ctx.stroke(); ctx.restore(); }
     return 0;
   },
-  speed(s, lt, p) {
-    const e = easeOut(clamp(lt / 0.14));
-    full(E(s.idx), { scale: z(1.25 - 0.18 * e + 0.04 * p) });
-    const inten = 0.35 + 0.65 * clamp(1 - lt / 0.3), r = rng(s.k * 31 + Math.floor((s.start + lt) * 24));
-    ctx.save(); ctx.translate(W / 2, FIT_CY); ctx.fillStyle = `rgba(255,255,255,${0.55 * inten})`;
-    for (let i = 0; i < 80; i++) {
-      const a = r() * Math.PI * 2, r0 = 560 + r() * 200, len = 600 + r() * 900, w = 0.004 + r() * 0.01;
-      ctx.beginPath(); ctx.moveTo(Math.cos(a) * r0, Math.sin(a) * r0);
-      ctx.lineTo(Math.cos(a - w) * (r0 + len), Math.sin(a - w) * (r0 + len));
-      ctx.lineTo(Math.cos(a + w) * (r0 + len), Math.sin(a + w) * (r0 + len)); ctx.closePath(); ctx.fill();
+  smoke(s, lt, p) {   // the car drifts in sideways trailing tyre smoke
+    const dir = s.k % 2 ? 1 : -1, T = Math.min(0.35, s.dur * 0.7), e = easeOut(clamp(lt / T));
+    full(E(s.idx), { scale: z(1.06 + 0.02 * p), ox: dir * (1 - e) * W * 0.8, rot: dir * (1 - e) * 0.08 });
+    const r = rng(s.k * 9 + 1);
+    for (let i = 0; i < 28; i++) {
+      const b = r() * 0.6 * s.dur, x = W / 2 + dir * (r() * 900 - 200), y = FIT_CY + 200 + r() * 260, a0 = 0.35 + r() * 0.3, age = lt - b;
+      if (age <= 0) continue;
+      const R = 60 + age * 420, al = a0 * clamp(1 - age / 1.1); if (al <= 0) continue;
+      const yy = y - age * 80, g = ctx.createRadialGradient(x, yy, 0, x, yy, R);
+      g.addColorStop(0, `rgba(235,235,240,${al})`); g.addColorStop(1, 'rgba(235,235,240,0)'); ctx.fillStyle = g; ctx.fillRect(x - R, yy - R, 2 * R, 2 * R);
+    }
+    return 0;
+  },
+  trails(s, lt, p) {   // long-exposure head/tail-light streaks flow past
+    const tt = s.start + lt, h = hit(bt(tt), 0.15);
+    full(E(s.idx), { scale: z(1.05 + 0.02 * p) });
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.lineCap = 'round'; ctx.shadowBlur = 18;
+    for (let i = 0; i < 8; i++) {
+      const red = i % 2, y = 1180 + i * 34, ph = (tt * (0.9 + i * 0.13) + i * 0.37) % 1, len = 500 + 300 * h;
+      const hx = red ? W + len - ph * (W + 2 * len) : -len + ph * (W + 2 * len), tx = red ? hx + len : hx - len, c = red ? '255,60,40' : '255,240,210';
+      const g = ctx.createLinearGradient(tx, y, hx, y); g.addColorStop(0, `rgba(${c},0)`); g.addColorStop(1, `rgba(${c},.9)`);
+      ctx.strokeStyle = g; ctx.shadowColor = `rgb(${c})`; ctx.lineWidth = 6 + (i % 3) * 3;
+      ctx.beginPath(); ctx.moveTo(tx, y + 40); ctx.quadraticCurveTo((tx + hx) / 2, y - 30, hx, y); ctx.stroke();
     }
     ctx.restore();
-    return s.k % 4 === 0 ? clamp(1 - lt / 0.1) * 0.6 : 0;
+    return 0;
+  },
+  aperture(s, lt, p, si) {   // six-blade camera aperture closes on one shot and opens on the next
+    const T = Math.min(0.42, s.dur * 0.75), R = Math.hypot(W, H) / 1.6;
+    if (lt >= T) { full(E(s.idx), { scale: z(1.04 + 0.02 * p) }); return 0; }
+    const half = lt < T / 2, q = easeInOut(half ? lt / (T / 2) : (lt - T / 2) / (T / 2)), r = Math.max(2, half ? R * (1 - q) : R * q), rot = (half ? q : 1 - q) * 1.2;
+    full(half ? prevE(si) : E(s.idx), { scale: z(1.04) });
+    const pts = []; for (let i = 0; i < 6; i++) { const a = rot + i * Math.PI / 3; pts.push([W / 2 + Math.cos(a) * r, FIT_CY + Math.sin(a) * r]); }
+    ctx.save(); ctx.beginPath(); ctx.rect(0, 0, W, H); ctx.moveTo(pts[0][0], pts[0][1]); for (let i = 5; i >= 1; i--) ctx.lineTo(pts[i][0], pts[i][1]); ctx.closePath();
+    ctx.fillStyle = '#141417'; ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,.2)'; ctx.lineWidth = 3; ctx.beginPath();
+    for (let i = 0; i < 6; i++) { const [x, y] = pts[i], [px, py] = pts[(i + 5) % 6], dl = Math.hypot(x - px, y - py) || 1; ctx.moveTo(x, y); ctx.lineTo(x + (x - px) / dl * 2400, y + (y - py) / dl * 2400); }
+    ctx.stroke();
+    ctx.beginPath(); pts.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y))); ctx.closePath(); ctx.lineWidth = 6; ctx.strokeStyle = ACC; ctx.stroke();
+    ctx.restore();
+    return 0;
+  },
+  swipe(s, lt, p, si) {   // card stack: the last card swipes away, the next rises up
+    const list = TL.cutIdx, T = Math.min(0.3, s.dur * 0.6), e = easeInOut(clamp(lt / T)), dir = s.k % 2 ? 1 : -1;
+    full(E(s.idx), { scale: 1.3, filter: 'blur(30px) brightness(.4)' });
+    const card = (img, k, y, x = 0, rot = 0) => {
+      const w = 940 * k, h = 1100 * k, cx = W / 2 + x, cy = 850 + y;
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot); ctx.translate(-cx, -cy);
+      ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 40; ctx.shadowOffsetY = 20; rrect(ctx, cx - w / 2, cy - h / 2, w, h, 40); ctx.fillStyle = '#222'; ctx.fill(); ctx.shadowColor = 'transparent';
+      place(img, { x: cx - w / 2, y: cy - h / 2, w, h, radius: 40 }); ctx.restore();
+    };
+    for (let j = 2; j >= 1; j--) { const idx = list[s.k + j]; if (idx != null) card(E(idx), 1 - 0.05 * j, 45 * j); }
+    card(E(s.idx), 0.95 + 0.05 * e, 45 * (1 - e));
+    if (lt < T) card(prevE(si), 1, -60 * e, dir * W * 1.3 * e, dir * 0.4 * e);
+    const a = clamp(1 - Math.abs(lt - T) / 0.25);
+    if (a > 0) { ctx.save(); ctx.globalAlpha = a; heartPath(W / 2, 1440 - 40 * a, 90); ctx.fillStyle = '#ff3b5c'; ctx.fill(); ctx.restore(); }
+    return 0;
   },
 };
-function card(e, j, drop, num) {
-  if (!e) return;
-  const b = e.b, a = b.width / b.height;
-  let pw = 900, ph = 900 / a; if (ph > 1050) { ph = 1050; pw = ph * a; }
-  const pad = 22, cw = pw + pad * 2, ch = ph + pad + 110;
-  const rot = ((j * 37) % 9 - 4) * 0.014, ox = ((j * 53) % 7 - 3) * 12;
-  ctx.save();
-  ctx.translate(W / 2 + ox, FIT_CY - drop * 1500); ctx.rotate(rot + drop * 0.25);
-  ctx.shadowColor = 'rgba(0,0,0,.55)'; ctx.shadowBlur = 40; ctx.shadowOffsetY = 16;
-  ctx.fillStyle = '#f7f5f0'; ctx.fillRect(-cw / 2, -ch / 2, cw, ch);
-  ctx.shadowColor = 'transparent';
-  ctx.drawImage(b, -pw / 2, -ch / 2 + pad, pw, ph);
-  if (num) {
-    ctx.fillStyle = '#1b1b1b'; fitFont(S.model, 600, 40, 26, pw - 140); ctx.fillText(S.model, -pw / 2, ch / 2 - 42);
-    ctx.font = `600 34px ${FM}`; ctx.textAlign = 'right'; ctx.fillStyle = '#b07400';
-    ctx.fillText(`#${String(num).padStart(2, '0')}`, pw / 2, ch / 2 - 42); ctx.textAlign = 'left';
-  }
-  ctx.restore();
-}
+const OWN_HUD = ['grid', 'sticker', 'telemetry', 'glass', 'carousel', 'paparazzi', 'mag', 'spec', 'dashcam', 'duo', 'comic', 'feed', 'bento', 'swipe'];
 function glitchFx(g, seed) {
   const r = rng(seed);
-  bctx.clearRect(0, 0, W, H); bctx.drawImage(cv, 0, 0);
+  grab();
   ctx.save(); ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = 0.5 * g;
   ctx.filter = 'sepia(1) saturate(8) hue-rotate(-50deg)'; ctx.drawImage(buf, -20 * g, 0);
   ctx.filter = 'sepia(1) saturate(8) hue-rotate(150deg)'; ctx.drawImage(buf, 20 * g, 0);
@@ -635,8 +1314,8 @@ function render(t) {
     const f = clamp(lt / 0.3); if (f < 1) { ctx.fillStyle = `rgba(0,0,0,${1 - f})`; ctx.fillRect(0, 0, W, H); }
   } else if (s.kind === 'outro') {
     full(E(s.idx), { scale: z(1 + 0.06 * p) });
-    if (P !== 'cine') flash = clamp(1 - lt / 0.15) * 0.8;
-  } else flash = STYLE[P](s, lt, p, si) || 0;
+    flash = clamp(1 - lt / 0.15) * 0.8;
+  } else flash = (STYLE[P] || STYLE.punch)(s, lt, p, si) || 0;
 
   ctx.drawImage(vig, 0, 0);
   if (S.grain) {
@@ -644,15 +1323,11 @@ function render(t) {
     ctx.save(); ctx.globalAlpha = 0.09; ctx.globalCompositeOperation = 'overlay';
     ctx.translate(-rx, -ry); ctx.fillStyle = grainPat; ctx.fillRect(rx, ry, W, H); ctx.restore();
   }
-  if (P === 'cine') {
-    const bar = 150 * (s.kind === 'intro' ? easeOut(clamp(lt / 0.8)) : 1);
-    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, bar); ctx.fillRect(0, H - bar, W, bar);
-  }
   if (flash > 0) { ctx.fillStyle = `rgba(255,255,255,${flash})`; ctx.fillRect(0, 0, W, H); }
 
   if (s.kind === 'intro') drawIntro(lt);
   else if (s.kind === 'outro') drawOutro(lt);
-  else if (!['stack', 'cards', 'film', 'vhs'].includes(P)) drawHud(s, t);
+  else if (!OWN_HUD.includes(P)) drawHud(s, t);
 
   if (S.safe && !recording) drawSafe();
   return s;
@@ -696,7 +1371,7 @@ function drawOutro(lt) {
   ctx.restore();
 }
 function drawHud(s, t) {
-  const top = S.preset === 'cine' ? 250 : 300, x = 72;
+  const top = 300, x = 72;
   ctx.save(); shadow(true);
   fitFont(S.model, 600, 46, 30, 620); ctx.fillStyle = '#fff'; ctx.fillText(S.model, x, top);
   ctx.font = `600 34px ${FM}`; ctx.textAlign = 'right'; ctx.fillStyle = 'rgba(255,255,255,.9)';
@@ -724,10 +1399,11 @@ let nowIdx = -1, recEnd = null;
 function fmt(x) { const m = Math.floor(x / 60), s = x - m * 60; return `${String(m).padStart(2, '0')}:${s.toFixed(1).padStart(4, '0')}`; }
 function tick(now) {
   if (playing && ready) {
-    tCur = (now - t0) / 1000;
+    if (B && AC.state === 'running') { tCur = Math.max(0, AC.currentTime - aOff); t0 = now - tCur * 1000; }
+    else tCur = (now - t0) / 1000;
     if (tCur >= TL.total) {
       if (recording) { tCur = TL.total; playing = false; render(tCur); if (recEnd) recEnd(); }
-      else { t0 = now; tCur = 0; }
+      else { t0 = now; tCur = 0; audioSync(); }
     }
     dirty = true;
   }
@@ -747,6 +1423,7 @@ function tick(now) {
 }
 function setPlaying(on) {
   playing = on; if (on) t0 = performance.now() - tCur * 1000;
+  if (on) audioSync(); else audioHalt();
   $('play').textContent = on ? '❚❚' : '▶'; dirty = true;
 }
 
@@ -804,44 +1481,53 @@ function readText() { for (const k of ['model', 'year', 'price', 'dealer']) S[k]
 $('fit').onchange = e => { S.fit = e.target.checked; dirty = true; };
 $('safe').onchange = e => { S.safe = e.target.checked; dirty = true; };
 $('grain').onchange = e => { S.grain = e.target.checked; dirty = true; };
-document.querySelectorAll('.preset').forEach(btn => btn.onclick = () => {
+document.querySelectorAll('.preset[data-p]').forEach(btn => btn.onclick = () => {
   if (recording) return;
   S.preset = btn.dataset.p;
-  document.querySelectorAll('.preset').forEach(b => b.setAttribute('aria-pressed', b === btn));
-  $('bpmRow').hidden = S.preset !== 'beat'; $('speedRow').hidden = S.preset === 'beat';
-  build(); tCur = 0; if (playing) t0 = performance.now();
+  document.querySelectorAll('.preset[data-p]').forEach(b => b.setAttribute('aria-pressed', b === btn));
+  syncBpmRow(); $('speedRow').hidden = S.preset === 'beat';
+  build(); tCur = 0; if (playing) { t0 = performance.now(); audioSync(); }
 });
 $('randBtn').onclick = () => {
   if (recording) return;
-  const btns = [...document.querySelectorAll('.preset')].filter(b => b.dataset.p !== S.preset);
+  const btns = [...document.querySelectorAll('.preset[data-p]')].filter(b => b.dataset.p !== S.preset);
   btns[Math.random() * btns.length | 0].click();
 };
-$('speed').oninput = e => { S.speed = +e.target.value; $('speedOut').textContent = S.speed.toFixed(2) + ' วิ'; build(); };
+$('speed').oninput = e => { S.speed = +e.target.value; build(); };
 $('bpm').oninput = e => { S.bpm = +e.target.value; $('bpmOut').textContent = S.bpm; build(); };
 $('play').onclick = () => { if (!recording && ready) setPlaying(!playing); };
-$('scrub').oninput = e => { if (recording) return; tCur = e.target.value / 1000 * TL.total; if (playing) t0 = performance.now() - tCur * 1000; dirty = true; };
+$('scrub').oninput = e => { if (recording) return; tCur = e.target.value / 1000 * TL.total; if (playing) { t0 = performance.now() - tCur * 1000; audioSync(); } dirty = true; };
 
 /* ---------- recording ---------- */
 let rec = null, chunks = [], cancelled = false, outUrl = null, outName = '', outBlob = null;
-function pickMime() {
-  const c = ['video/mp4;codecs=avc1.640028', 'video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm'];
+function pickMime(audio) {
+  const c = audio
+    ? ['video/mp4;codecs=avc1.640028,mp4a.40.2', 'video/mp4;codecs=avc1,mp4a.40.2', 'video/mp4', 'video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm']
+    : ['video/mp4;codecs=avc1.640028', 'video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm'];
   return c.find(m => MediaRecorder.isTypeSupported(m)) || '';
 }
 function lockUI(on) {
   recording = on;
   $('recBtn').disabled = on; $('cancelBtn').hidden = !on; $('recBadge').hidden = !on; $('recProg').hidden = !on;
-  document.querySelectorAll('.preset,#speed,#bpm,#shuffle,#sortBtn,#play,#scrub,#files,#fit,#randBtn').forEach(el => el.disabled = on);
+  document.querySelectorAll('.preset,#speed,#bpm,#shuffle,#sortBtn,#play,#scrub,#files,#fit,#randBtn,#sfx,#genre,#randSong').forEach(el => el.disabled = on);
 }
 function showErr(msg) { $('err').textContent = msg; $('err').hidden = !msg; }
-$('recBtn').onclick = () => {
+$('recBtn').onclick = async () => {
   showErr('');
-  if (!ready) return;
+  if (!ready || recording) return;
+  if (window.VideoEncoder && window.VideoFrame) {
+    try { await exportFast(); return; }
+    catch (e) { console.warn('[export]', e); showErr('Export แบบเร็วใช้ไม่ได้ (' + ((e && e.message) || e) + ') เลยอัดแบบเรียลไทม์แทน'); }
+  }
+  await audioReady();
   if (!window.MediaRecorder || !cv.captureStream) { showErr('เบราว์เซอร์นี้อัดวิดีโอจาก canvas ไม่ได้ ลองใช้ Chrome หรือ Edge รุ่นล่าสุด'); return; }
-  let stream;
+  let stream, withAudio = false;
   try {
     stream = cv.captureStream(30);
-    const mime = pickMime();
-    rec = new MediaRecorder(stream, Object.assign({ videoBitsPerSecond: 12000000 }, mime ? { mimeType: mime } : {}));
+    withAudio = M.genre !== 'off' && !!recDest && AC.state === 'running';
+    if (withAudio) stream.addTrack(recDest.stream.getAudioTracks()[0].clone());
+    const mime = pickMime(withAudio);
+    rec = new MediaRecorder(stream, Object.assign({ videoBitsPerSecond: 12000000, audioBitsPerSecond: 192000 }, mime ? { mimeType: mime } : {}));
   } catch (e) { showErr('เริ่มอัดไม่ได้: ' + e.message); return; }
   lockUI(true); playing = false; tCur = 0;
   chunks = []; cancelled = false;
@@ -856,16 +1542,87 @@ $('recBtn').onclick = () => {
     outUrl = URL.createObjectURL(blob); outBlob = blob;
     outName = `showroom-reel-${S.preset}.${ext}`;
     $('out').src = outUrl; $('out').play().catch(() => {});
-    $('outInfo').textContent = `${ext.toUpperCase()} · 1080×1920 · ${TL.total.toFixed(1)} วิ · ${(blob.size / 1048576).toFixed(1)} MB` + (ext === 'webm' ? ' · ต้องแปลงเป็น MP4 ก่อนลง TikTok' : '');
+    $('outInfo').textContent = `${ext.toUpperCase()} · 1080×1920 · ${TL.total.toFixed(1)} วิ · ${(blob.size / 1048576).toFixed(1)} MB` + (withAudio ? ' · มีเพลง' : ' · ไม่มีเสียง') + (ext === 'webm' ? ' · ต้องแปลงเป็น MP4 ก่อนลง TikTok' : '');
     $('dlNote').textContent = 'กดแล้วจะมีหน้าต่างให้ยืนยันก่อนบันทึก';
     $('result').hidden = false;
   };
   recEnd = () => { recEnd = null; setTimeout(() => rec && rec.state !== 'inactive' && rec.stop(), 120); };
   render(0);
   rec.start(250);
-  t0 = performance.now(); playing = true;
+  t0 = performance.now(); playing = true; audioSync();
 };
-$('cancelBtn').onclick = () => { if (!rec || rec.state === 'inactive') return; cancelled = true; playing = false; recEnd = null; rec.stop(); };
+$('cancelBtn').onclick = () => { if (exporting) { cancelled = true; return; } if (!rec || rec.state === 'inactive') return; cancelled = true; playing = false; audioHalt(); recEnd = null; rec.stop(); };
+
+/* ---------- fast export: frames rendered offline, WebCodecs H.264 + AAC, muxed to MP4 ----------
+   Faster than real time; the music is rendered with an OfflineAudioContext so it is sample-exact. */
+const MUXER_URL = 'https://cdn.jsdelivr.net/npm/mp4-muxer@5.1.3/build/mp4-muxer.mjs';
+let exporting = false;
+const yieldUI = () => new Promise(r => { const ch = new MessageChannel(); ch.port1.onmessage = () => r(); ch.port2.postMessage(0); });
+function showResult(blob, ext, withAudio) {
+  if (outUrl) URL.revokeObjectURL(outUrl);
+  outUrl = URL.createObjectURL(blob); outBlob = blob; outName = `showroom-reel-${S.preset}.${ext}`;
+  $('out').src = outUrl; $('out').play().catch(() => {});
+  $('outInfo').textContent = `${ext.toUpperCase()} · 1080×1920 · ${TL.total.toFixed(1)} วิ · ${(blob.size / 1048576).toFixed(1)} MB` + (withAudio ? ' · มีเพลง' : ' · ไม่มีเสียง');
+  $('dlNote').textContent = 'กดแล้วจะมีหน้าต่างให้ยืนยันก่อนบันทึก';
+  $('result').hidden = false;
+}
+async function pickVideoCodec(fps) {
+  for (const codec of ['avc1.640028', 'avc1.4d0028', 'avc1.42e028', 'avc1.640033']) {
+    try { if ((await VideoEncoder.isConfigSupported({ codec, width: W, height: H, bitrate: 12e6, framerate: fps })).supported) return codec; } catch (e) {}
+  }
+  return null;
+}
+async function exportFast() {
+  const fps = 30, codec = await pickVideoCodec(fps);
+  if (!codec) throw new Error('เบราว์เซอร์นี้เข้ารหัส H.264 ไม่ได้');
+  const { Muxer, ArrayBufferTarget } = await import(MUXER_URL);
+  exporting = true; cancelled = false; playing = false; audioHalt(); lockUI(true);
+  $('recBadge').textContent = 'EXPORT'; const prog = $('recProg').firstElementChild; prog.style.width = '0%';
+  try {
+    let ab = null;
+    if (M.genre !== 'off' && window.AudioEncoder && (window.OfflineAudioContext || window.webkitOfflineAudioContext)) {
+      const ok = await AudioEncoder.isConfigSupported({ codec: 'mp4a.40.2', numberOfChannels: 2, sampleRate: 48000, bitrate: 192000 }).then(r => r.supported).catch(() => false);
+      if (ok) ab = await renderAudio(TL.total);
+    }
+    if (cancelled) return;
+    const target = new ArrayBufferTarget();
+    const muxer = new Muxer({ target, fastStart: 'in-memory', video: { codec: 'avc', width: W, height: H, frameRate: fps },
+      audio: ab ? { codec: 'aac', numberOfChannels: 2, sampleRate: ab.sampleRate } : undefined });
+    let fail = null;
+    const venc = new VideoEncoder({ output: (c, m) => muxer.addVideoChunk(c, m), error: e => { fail = e; } });
+    venc.configure({ codec, width: W, height: H, bitrate: 12000000, framerate: fps, avc: { format: 'avc' } });
+    let aenc = null;
+    if (ab) {
+      aenc = new AudioEncoder({ output: (c, m) => muxer.addAudioChunk(c, m), error: e => { fail = e; } });
+      aenc.configure({ codec: 'mp4a.40.2', numberOfChannels: 2, sampleRate: ab.sampleRate, bitrate: 192000 });
+      const L = ab.getChannelData(0), R = ab.getChannelData(1), sr = ab.sampleRate, n = Math.min(ab.length, Math.ceil(TL.total * sr));
+      for (let i = 0; i < n; i += 4096) {
+        const k = Math.min(4096, n - i), data = new Float32Array(k * 2);
+        data.set(L.subarray(i, i + k), 0); data.set(R.subarray(i, i + k), k);
+        const ad = new AudioData({ format: 'f32-planar', sampleRate: sr, numberOfFrames: k, numberOfChannels: 2, timestamp: Math.round(i / sr * 1e6), data });
+        aenc.encode(ad); ad.close();
+      }
+    }
+    const nf = Math.ceil(TL.total * fps);
+    for (let f = 0; f < nf && !cancelled && !fail; f++) {
+      const t = f / fps; render(t);
+      const vf = new VideoFrame(cv, { timestamp: Math.round(t * 1e6), duration: Math.round(1e6 / fps) });
+      venc.encode(vf, { keyFrame: f % (fps * 2) === 0 }); vf.close();
+      while (venc.encodeQueueSize > 6 && !fail) await yieldUI();
+      if (f % 3 === 0) { prog.style.width = ((f + 1) / nf * 100).toFixed(1) + '%'; await yieldUI(); }
+    }
+    if (cancelled) { try { venc.close(); if (aenc) aenc.close(); } catch (e) {} return; }
+    if (fail) throw fail;
+    await venc.flush(); if (aenc) await aenc.flush();
+    if (fail) throw fail;
+    venc.close(); if (aenc) aenc.close();
+    muxer.finalize();
+    prog.style.width = '100%';
+    showResult(new Blob([target.buffer], { type: 'video/mp4' }), 'mp4', !!ab);
+  } finally {
+    exporting = false; lockUI(false); $('recBadge').textContent = '● REC'; setPlaying(false); dirty = true;
+  }
+}
 
 let downloads = null;
 if (window.claude && claude.use) claude.use('downloads').then(d => { downloads = d; }).catch(() => {});
@@ -884,6 +1641,691 @@ $('dlBtn').onclick = async () => {
   }
   const a = document.createElement('a'); a.href = outUrl; a.download = outName; document.body.append(a); a.click(); a.remove();
 };
+
+/* ---------- music: original score, synthesized live with Web Audio (no samples, no copyright) ---------- */
+const M = { genre: 'phonk', vol: 0.8, sfx: true };
+const mtof = m => 440 * Math.pow(2, (m - 69) / 12);
+let AC = null, master = null, recDest = null, REV = null, NOISE = null, B = null, aOff = 0, score = [], ei = 0, scoreDirty = true;
+const CURVES = {};
+function curve(k) {
+  if (CURVES[k]) return CURVES[k];
+  const n = 2048, c = new Float32Array(n);
+  for (let i = 0; i < n; i++) { const x = i / (n - 1) * 2 - 1; c[i] = Math.tanh(k * x) / Math.tanh(k); }
+  return (CURVES[k] = c);
+}
+function makeGraph() {   // master chain on the current AC; returns the limiter
+  master = AC.createGain(); master.gain.value = M.vol;
+  const glue = AC.createDynamicsCompressor();
+  glue.threshold.value = -16; glue.knee.value = 8; glue.ratio.value = 3.5; glue.attack.value = 0.004; glue.release.value = 0.18;
+  const lim = AC.createDynamicsCompressor();
+  lim.threshold.value = -3; lim.knee.value = 0; lim.ratio.value = 20; lim.attack.value = 0.001; lim.release.value = 0.06;
+  master.connect(glue); glue.connect(lim);
+  const len = AC.sampleRate * 2.6 | 0, ir = AC.createBuffer(2, len, AC.sampleRate);
+  for (let ch = 0; ch < 2; ch++) { const d = ir.getChannelData(ch); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3.2); }
+  REV = AC.createConvolver(); REV.buffer = ir;
+  const rg = AC.createGain(); rg.gain.value = 0.5; REV.connect(rg); rg.connect(master);
+  NOISE = AC.createBuffer(1, AC.sampleRate * 2, AC.sampleRate);
+  const nd = NOISE.getChannelData(0); for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1;
+  return lim;
+}
+function audioInit() {
+  if (AC) return;
+  const Ctx = window.AudioContext || window.webkitAudioContext; if (!Ctx) return;
+  const live = AC = new Ctx({ latencyHint: 'interactive' });
+  const lim = makeGraph(); lim.connect(AC.destination);
+  recDest = AC.createMediaStreamDestination(); lim.connect(recDest);
+  live.onstatechange = () => { if (AC === live && live.state === 'running' && playing && !B) audioSync(); };
+}
+async function renderAudio(total) {   // whole score, offline and sample-exact, for export
+  audioInit();
+  const Off = window.OfflineAudioContext || window.webkitOfflineAudioContext, sr = 48000, saved = [AC, master, REV, NOISE, B];
+  const off = new Off(2, Math.ceil(sr * (total + 0.2)), sr);
+  try {
+    AC = off; makeGraph().connect(off.destination); B = newBus();
+    for (const [tt, fn] of makeScore()) { try { fn(tt); } catch (e) { console.warn('[music]', e); } }
+    return await off.startRendering();
+  } finally { [AC, master, REV, NOISE, B] = saved; scoreDirty = true; }
+}
+async function audioReady() {
+  audioInit();
+  if (AC && AC.state !== 'running') { try { await AC.resume(); } catch (e) {} }
+}
+['pointerdown', 'keydown'].forEach(ev => document.addEventListener(ev, () => {
+  audioInit(); if (AC && AC.state !== 'running') AC.resume().catch(() => {});
+}, true));
+
+/* one bus per playback run, so a seek or restart can fade the old one out cleanly */
+function newBus() {
+  const out = AC.createGain(), duck = AC.createGain(), rev = AC.createGain(), dly = AC.createGain();
+  duck.connect(out); out.connect(master); rev.connect(REV);
+  const d = AC.createDelay(2), fb = AC.createGain(), lp = AC.createBiquadFilter();
+  d.delayTime.value = 60 / S.bpm * 0.75; fb.gain.value = 0.32; lp.type = 'lowpass'; lp.frequency.value = 3200;
+  dly.connect(d); d.connect(lp); lp.connect(fb); fb.connect(d); lp.connect(out);
+  return { out, duck, rev, dly, fb };
+}
+function audioHalt() {
+  if (!B) return;
+  const old = B, t = AC.currentTime; B = null;
+  for (const p of [old.out.gain, old.rev.gain, old.fb.gain]) {
+    if (p.cancelAndHoldAtTime) p.cancelAndHoldAtTime(t); else p.cancelScheduledValues(t);
+    p.setTargetAtTime(0, t, 0.03);
+  }
+  setTimeout(() => { old.out.disconnect(); old.rev.disconnect(); old.fb.disconnect(); }, 500);
+}
+function busFade(t, end) {
+  if (!B) return;
+  for (const p of [B.out.gain, B.rev.gain]) { p.setValueAtTime(1, t); p.linearRampToValueAtTime(0.0001, end); }
+}
+
+/* building blocks */
+function wire(node, o = {}) {
+  node.connect(o.duck ? B.duck : B.out);
+  if (o.rev) { const g = AC.createGain(); g.gain.value = o.rev; node.connect(g); g.connect(B.rev); }
+  if (o.dly) { const g = AC.createGain(); g.gain.value = o.dly; node.connect(g); g.connect(B.dly); }
+}
+function vca(t, peak, a, d) {
+  const g = AC.createGain();
+  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(0.0001, t + a + d);
+  return g;
+}
+function osc(type, f, t, end) { const o = AC.createOscillator(); o.type = type; o.frequency.setValueAtTime(f, t); o.start(t); o.stop(end); return o; }
+function noiseSrc(t, end) { const s = AC.createBufferSource(); s.buffer = NOISE; s.loop = true; s.start(t, Math.random() * 1.8); s.stop(end); return s; }
+function filt(type, f, q = 0.7) { const b = AC.createBiquadFilter(); b.type = type; b.frequency.value = f; b.Q.value = q; return b; }
+function shaper(k) { const s = AC.createWaveShaper(); s.curve = curve(k); s.oversample = '2x'; return s; }
+function duckAt(t, depth = 0.3) { const g = B.duck.gain; g.setValueAtTime(depth, t); g.setTargetAtTime(1, t + 0.03, 0.07); }
+function swell(g, t, v, a, dur, rel) {
+  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(v, t + a);
+  g.gain.setValueAtTime(v, t + Math.max(a, dur)); g.gain.exponentialRampToValueAtTime(0.0001, t + Math.max(a, dur) + rel);
+}
+
+/* instruments */
+const V = {
+  kick(t, v = 1, k = 0) {
+    const o = osc('sine', 165, t, t + 0.5); o.frequency.exponentialRampToValueAtTime(44, t + 0.13);
+    const g = vca(t, v, 0.003, 0.4); o.connect(g);
+    if (k) { const s = shaper(k), lv = AC.createGain(); lv.gain.value = 0.75; g.connect(s); s.connect(lv); wire(lv); } else wire(g);
+    const n = noiseSrc(t, t + 0.03), hp = filt('highpass', 2500), ng = vca(t, v * 0.35, 0.001, 0.015);
+    n.connect(hp); hp.connect(ng); wire(ng);
+    duckAt(t);
+  },
+  snare(t, v = 0.6, rev = 0.25) {
+    const n = noiseSrc(t, t + 0.3), bp = filt('bandpass', 1900, 0.8), g = vca(t, v, 0.002, 0.2);
+    n.connect(bp); bp.connect(g); wire(g, { rev });
+    const o = osc('triangle', 190, t, t + 0.15); o.frequency.exponentialRampToValueAtTime(150, t + 0.1);
+    const og = vca(t, v * 0.6, 0.002, 0.1); o.connect(og); wire(og);
+  },
+  clap(t, v = 0.6, rev = 0.3) {
+    const n = noiseSrc(t, t + 0.4), bp = filt('bandpass', 1300, 1.1), g = AC.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    for (const d of [0, 0.011, 0.023]) { g.gain.setValueAtTime(v, t + d); g.gain.exponentialRampToValueAtTime(v * 0.15, t + d + 0.009); }
+    g.gain.setValueAtTime(v * 0.8, t + 0.033); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.26);
+    n.connect(bp); bp.connect(g); wire(g, { rev });
+  },
+  hat(t, v = 0.2, open = false) {
+    const n = noiseSrc(t, t + 0.4), hp = filt('highpass', 7800), g = vca(t, v, 0.001, open ? 0.26 : 0.04);
+    n.connect(hp); hp.connect(g); wire(g);
+  },
+  crash(t, v = 0.3) {
+    const n = noiseSrc(t, t + 2), hp = filt('highpass', 4500), g = vca(t, v, 0.002, 1.6);
+    n.connect(hp); hp.connect(g); wire(g, { rev: 0.4 });
+  },
+  cowbell(t, m, v = 0.45) {   // pitched 808-style cowbell: two detuned squares through a band-pass, lightly driven
+    const f = mtof(m), bp = filt('bandpass', f * 1.7, 0.9), g = vca(t, v, 0.002, 0.42), s = shaper(3);
+    for (const r of [1, 1.4836]) osc('square', f * r, t, t + 0.6).connect(bp);
+    bp.connect(g); g.connect(s); wire(s, { rev: 0.35, dly: 0.22 });
+  },
+  b808(t, m, dur, v = 0.9, glide = null, k = 4) {
+    const f = mtof(m), end = t + dur + 0.06, o = osc('sine', f * 2.2, t, end);
+    o.frequency.exponentialRampToValueAtTime(f, t + 0.035);
+    if (glide != null) { o.frequency.setValueAtTime(f, t + dur * 0.55); o.frequency.exponentialRampToValueAtTime(mtof(glide), t + dur * 0.9); }
+    const g = AC.createGain();
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(v, t + 0.006);
+    g.gain.linearRampToValueAtTime(v * 0.55, t + Math.max(0.02, dur * 0.8)); g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.05);
+    const s = shaper(k), lp = filt('lowpass', 1700);
+    o.connect(g); g.connect(s); s.connect(lp); wire(lp);
+  },
+  sawBass(t, m, dur, v = 0.3) {
+    const f = mtof(m), end = t + dur + 0.05, lp = filt('lowpass', 2400, 4), g = vca(t, v, 0.003, dur);
+    lp.frequency.setValueAtTime(2400, t); lp.frequency.exponentialRampToValueAtTime(260, t + dur);
+    for (const dt of [-9, 9]) { const o = osc('sawtooth', f, t, end); o.detune.value = dt; o.connect(lp); }
+    lp.connect(g); wire(g, { duck: true });
+  },
+  lead(t, m, dur, v = 0.14, rev = 0.3, dly = 0.3) {
+    const f = mtof(m), lp = filt('lowpass', 3600, 2), g = AC.createGain();
+    swell(g, t, v, 0.01, dur, 0.25);
+    for (const [type, dt] of [['sawtooth', 6], ['square', -6]]) { const o = osc(type, f, t, t + dur + 0.3); o.detune.value = dt; o.connect(lp); }
+    lp.connect(g); wire(g, { rev, dly });
+  },
+  pad(t, ms, dur, v = 0.06) {
+    if (dur < 0.2) return;
+    const lp = filt('lowpass', 1100, 0.5), g = AC.createGain();
+    swell(g, t, v, Math.min(0.6, dur * 0.4), dur, 0.5);
+    for (const m of ms) for (const dt of [-12, 12]) { const o = osc('sawtooth', mtof(m), t, t + dur + 0.6); o.detune.value = dt; o.connect(lp); }
+    lp.connect(g); wire(g, { duck: true, rev: 0.5 });
+  },
+  bell(t, m, v = 0.25) {   // two-operator FM bell
+    const f = mtof(m), end = t + 1.6, c = osc('sine', f, t, end), mo = osc('sine', f * 3.5, t, end), mg = AC.createGain();
+    mg.gain.setValueAtTime(f * 2.2, t); mg.gain.exponentialRampToValueAtTime(f * 0.05, t + 0.8);
+    mo.connect(mg); mg.connect(c.frequency);
+    const g = vca(t, v, 0.002, 1.4); c.connect(g); wire(g, { rev: 0.45, dly: 0.3 });
+  },
+  riser(t, dur, v = 0.22) {
+    if (dur < 0.3) return;
+    const end = t + dur, n = noiseSrc(t, end), bp = filt('bandpass', 300, 3), g = AC.createGain();
+    bp.frequency.setValueAtTime(300, t); bp.frequency.exponentialRampToValueAtTime(7000, end);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(v, end);
+    n.connect(bp); bp.connect(g); wire(g, { rev: 0.3 });
+    const o = osc('sawtooth', 90, t, end), lp = filt('lowpass', 1800), og = AC.createGain();
+    o.frequency.exponentialRampToValueAtTime(720, end);
+    og.gain.setValueAtTime(0.0001, t); og.gain.exponentialRampToValueAtTime(v * 0.25, end);
+    o.connect(lp); lp.connect(og); wire(og);
+  },
+  impact(t, v = 0.9) {
+    const o = osc('sine', 75, t, t + 1.8), g = vca(t, v, 0.004, 1.6), s = shaper(2);
+    o.frequency.exponentialRampToValueAtTime(28, t + 1.5); o.connect(g); g.connect(s); wire(s);
+    const n = noiseSrc(t, t + 2.4), lp = filt('lowpass', 1400), ng = vca(t, v * 0.5, 0.002, 2.2);
+    n.connect(lp); lp.connect(ng); wire(ng, { rev: 0.7 });
+    duckAt(t, 0.15);
+  },
+  whoosh(t, dur, v = 0.12) {
+    const end = t + dur, n = noiseSrc(t, end + 0.06), bp = filt('bandpass', 500, 1.4), g = AC.createGain();
+    bp.frequency.setValueAtTime(500, t); bp.frequency.exponentialRampToValueAtTime(5000, end);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(v, end - 0.02); g.gain.exponentialRampToValueAtTime(0.0001, end + 0.05);
+    n.connect(bp); bp.connect(g); wire(g, { rev: 0.2 });
+  },
+  revCrash(t, dur, v = 0.22) {   // reverse cymbal into the final hit
+    const end = t + dur, n = noiseSrc(t, end), hp = filt('highpass', 3000), g = AC.createGain();
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(v, end - 0.01); g.gain.linearRampToValueAtTime(0.0001, end);
+    n.connect(hp); hp.connect(g); wire(g, { rev: 0.3 });
+  },
+  piano(t, m, v = 0.2, dur = 0.8) {
+    const f = mtof(m), lp = filt('lowpass', 2600), g = vca(t, v, 0.003, dur), g2 = AC.createGain(); g2.gain.value = 0.3;
+    osc('triangle', f, t, t + dur + 0.1).connect(lp); osc('sine', f * 2, t, t + dur + 0.1).connect(g2); g2.connect(lp);
+    lp.connect(g); wire(g, { rev: 0.35, dly: 0.15 });
+  },
+  chop(t, m, v = 0.45, dur = 0.12) {   // vocal-like chop: saws through vowel formants
+    const f = mtof(m), g = AC.createGain(), src = AC.createGain(); swell(g, t, v, 0.006, dur, 0.05);
+    for (const dt of [-8, 8]) { const o = osc('sawtooth', f, t, t + dur + 0.1); o.detune.value = dt; o.connect(src); }
+    for (const [fq, q] of [[800, 5], [1200, 6], [2600, 8]]) { const bp = filt('bandpass', fq, q); src.connect(bp); bp.connect(g); }
+    wire(g, { rev: 0.2, dly: 0.2 });
+  },
+  squeak(t, v = 0.1) {   // the Jersey "bed squeak"
+    const o = osc('sine', 1700, t, t + 0.16); o.frequency.exponentialRampToValueAtTime(2600, t + 0.05); o.frequency.exponentialRampToValueAtTime(2000, t + 0.12);
+    const g = vca(t, v, 0.004, 0.11); o.connect(g); wire(g, { rev: 0.2 });
+  },
+  pluck(t, m, dur, v = 0.2) {
+    const f = mtof(m), lp = filt('lowpass', 4200, 3), g = vca(t, v, 0.002, Math.max(0.12, Math.min(dur, 0.5)));
+    lp.frequency.setValueAtTime(4200, t); lp.frequency.exponentialRampToValueAtTime(380, t + 0.25);
+    for (const [ty, dt] of [['sawtooth', 7], ['square', -7]]) { const o = osc(ty, f, t, t + 0.7); o.detune.value = dt; o.connect(lp); }
+    lp.connect(g); wire(g, { rev: 0.3, dly: 0.25 });
+  },
+  supersaw(t, m, dur, v = 0.07) {
+    const f = mtof(m), lp = filt('lowpass', 5200, 0.8), g = AC.createGain(); swell(g, t, v, 0.008, Math.max(0.05, dur), 0.18);
+    for (const dt of [-24, -11, 0, 11, 24]) { const o = osc('sawtooth', f, t, t + dur + 0.3); o.detune.value = dt; o.connect(lp); }
+    lp.connect(g); wire(g, { duck: true, rev: 0.35, dly: 0.18 });
+  },
+  organ(t, m, dur, v = 0.08) {
+    const f = mtof(m), g = AC.createGain(); swell(g, t, v, 0.005, Math.max(0.05, dur), 0.08);
+    for (const [h, a] of [[1, 1], [2, 0.6], [3, 0.35], [4, 0.2]]) { const o = osc('sine', f * h, t, t + dur + 0.2), og = AC.createGain(); og.gain.value = a; o.connect(og); og.connect(g); }
+    wire(g, { rev: 0.25, dly: 0.1 });
+  },
+  khaen(t, m, dur, v = 0.1) {   // khaen (Isan mouth organ): buzzy free reeds with slow vibrato
+    const f = mtof(m), end = t + dur + 0.2, bp = filt('bandpass', 1300, 0.6), lp = filt('lowpass', 3200), g = AC.createGain(), lfo = osc('sine', 5.5, t, end), lg = AC.createGain();
+    lg.gain.value = 7; lfo.connect(lg); swell(g, t, v, 0.04, Math.max(0.05, dur), 0.12);
+    for (const [ty, dt] of [['square', -5], ['sawtooth', 5], ['square', 1203]]) { const o = osc(ty, f, t, end); o.detune.value = dt; lg.connect(o.detune); o.connect(bp); }
+    bp.connect(lp); lp.connect(g); wire(g, { rev: 0.3 });
+  },
+  pong(t, m, v = 0.35) {   // pong lang: hollow wooden log xylophone
+    const f = mtof(m), g = vca(t, v, 0.002, 0.28), g2 = vca(t, v * 0.25, 0.001, 0.06);
+    osc('sine', f, t, t + 0.4).connect(g); osc('sine', f * 3.98, t, t + 0.1).connect(g2); g2.connect(g);
+    const n = noiseSrc(t, t + 0.02), bp = filt('bandpass', f * 2, 2), ng = vca(t, v * 0.4, 0.001, 0.015);
+    n.connect(bp); bp.connect(ng); wire(ng); wire(g, { rev: 0.3, dly: 0.15 });
+  },
+  ranat(t, m, v = 0.3) {   // ranat ek: bright bars with an inharmonic overtone
+    const f = mtof(m), g = vca(t, v, 0.002, 0.42);
+    for (const [r, a] of [[1, 1], [2, 0.5], [2.76, 0.25]]) { const o = osc(r === 1 ? 'triangle' : 'sine', f * r, t, t + 0.5), og = AC.createGain(); og.gain.value = a; o.connect(og); og.connect(g); }
+    wire(g, { rev: 0.35, dly: 0.2 });
+  },
+  phin(t, m, v = 0.3) {   // phin lute: bright pluck, pitch settles from slightly below
+    const f = mtof(m), lp = filt('lowpass', 3800, 2), g = vca(t, v, 0.002, 0.55), s = shaper(1.5);
+    lp.frequency.setValueAtTime(3800, t); lp.frequency.exponentialRampToValueAtTime(700, t + 0.3);
+    for (const dt of [-4, 4]) { const o = osc('sawtooth', f, t, t + 0.7); o.detune.setValueAtTime(dt - 40, t); o.detune.linearRampToValueAtTime(dt, t + 0.04); o.connect(lp); }
+    lp.connect(g); g.connect(s); wire(s, { rev: 0.25, dly: 0.2 });
+  },
+  ching(t, v = 0.15) {   // ching: small Thai hand cymbals, open
+    const hp = filt('highpass', 3000), g = vca(t, v * 0.4, 0.001, 0.5);
+    for (const f of [2860, 4130, 5570]) osc('square', f, t, t + 0.6).connect(hp);
+    hp.connect(g); wire(g, { rev: 0.25 });
+  },
+  chap(t, v = 0.15) {   // chap: the damped stroke
+    const hp = filt('highpass', 2500), g = vca(t, v * 0.5, 0.001, 0.05);
+    for (const f of [2860, 4130]) osc('square', f, t, t + 0.1).connect(hp);
+    noiseSrc(t, t + 0.08).connect(hp); hp.connect(g); wire(g);
+  },
+  tom(t, m, v = 0.5) {   // klong / tom
+    const f = mtof(m), o = osc('sine', f * 1.6, t, t + 0.5); o.frequency.exponentialRampToValueAtTime(f, t + 0.08);
+    const g = vca(t, v, 0.002, 0.35); o.connect(g); wire(g, { rev: 0.2 });
+    const n = noiseSrc(t, t + 0.03), bp = filt('bandpass', 1200, 1), ng = vca(t, v * 0.2, 0.001, 0.02); n.connect(bp); bp.connect(ng); wire(ng);
+  },
+  rim(t, v = 0.2) {
+    const o = osc('triangle', 1750, t, t + 0.06), g = vca(t, v, 0.001, 0.035); o.connect(g); wire(g, { rev: 0.15 });
+    const n = noiseSrc(t, t + 0.03), bp = filt('bandpass', 3200, 2), ng = vca(t, v * 0.6, 0.001, 0.02); n.connect(bp); bp.connect(ng); wire(ng);
+  },
+  sub(t, m, dur, v = 0.6) {
+    const o = osc('sine', mtof(m), t, t + dur + 0.05), g = AC.createGain(); swell(g, t, v, 0.005, Math.max(0.03, dur - 0.03), 0.04); o.connect(g); wire(g, { duck: true });
+  },
+  reese(t, m, dur, v = 0.3) {
+    const f = mtof(m), lp = filt('lowpass', 700, 2), g = AC.createGain(); swell(g, t, v, 0.01, Math.max(0.03, dur - 0.05), 0.06);
+    lp.frequency.setValueAtTime(400, t); lp.frequency.linearRampToValueAtTime(1100, t + dur * 0.5); lp.frequency.linearRampToValueAtTime(500, t + dur);
+    for (const dt of [-18, 18]) { const o = osc('sawtooth', f, t, t + dur + 0.1); o.detune.value = dt; o.connect(lp); }
+    const so = osc('sine', f / 2, t, t + dur + 0.1), sg = AC.createGain(); sg.gain.value = 0.8; so.connect(sg); sg.connect(g);
+    lp.connect(g); wire(g, { duck: true });
+  },
+  logd(t, m, dur, v = 0.7) {   // amapiano log drum
+    const f = mtof(m), o = osc('sine', f * 2, t, t + dur + 0.1); o.frequency.exponentialRampToValueAtTime(f, t + 0.05);
+    const g = AC.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(v, t + 0.005); g.gain.exponentialRampToValueAtTime(0.0001, t + Math.max(0.12, dur));
+    const s = shaper(2); o.connect(g); g.connect(s); wire(s, { rev: 0.1 });
+  },
+  wob(t, m, dur, v = 0.35, rate = 2) {   // LFO-swept bass for dubstep / riddim
+    const f = mtof(m), lp = filt('lowpass', 300, 8), g = AC.createGain(), s = shaper(3); swell(g, t, v, 0.008, Math.max(0.03, dur - 0.05), 0.05);
+    const per = 60 / S.bpm / rate;
+    for (let x = 0; x < dur; x += per) { lp.frequency.setValueAtTime(220, t + x); lp.frequency.exponentialRampToValueAtTime(2600, t + x + per * 0.5); lp.frequency.exponentialRampToValueAtTime(220, t + x + per * 0.98); }
+    for (const [ty, dt] of [['sawtooth', -10], ['square', 10]]) { const o = osc(ty, f, t, t + dur + 0.1); o.detune.value = dt; o.connect(lp); }
+    lp.connect(g); g.connect(s); wire(s, { duck: true });
+  },
+  ep(t, m, dur, v = 0.1) {   // electric piano: sine body + short bell tine
+    const f = mtof(m), g = vca(t, v, 0.003, Math.max(0.4, dur)), tg = vca(t, v * 0.5, 0.001, 0.15);
+    osc('sine', f, t, t + dur + 0.6).connect(g); osc('sine', f * 4, t, t + 0.2).connect(tg); tg.connect(g);
+    wire(g, { rev: 0.3, dly: 0.15 });
+  },
+  gtr(t, m, dur, v = 0.08) {   // overdriven power-chord guitar
+    const f = mtof(m), g = AC.createGain(), sh = shaper(12), lp = filt('lowpass', 2800, 1), lv = AC.createGain(); lv.gain.value = v * 1.4;
+    swell(g, t, 0.6, 0.004, Math.max(0.05, dur), 0.12);
+    for (const dt of [-8, 8]) { const o = osc('sawtooth', f, t, t + dur + 0.2); o.detune.value = dt; o.connect(g); }
+    g.connect(sh); sh.connect(lp); lp.connect(lv); wire(lv, { rev: 0.15 });
+  },
+  engine(t, dur, v = 0.3) {   // engine rev: firing-rate saw + sub square, driven and low-passed
+    const end = t + dur, lp = filt('lowpass', 500, 3), g = AC.createGain(), s = shaper(5);
+    const rpm = [[0, 38], [0.32, 128], [0.46, 86], [0.72, 146], [1, 42]];
+    for (const [type, mul] of [['sawtooth', 1], ['square', 0.5]]) {
+      const o = osc(type, 38 * mul, t, end + 0.1);
+      rpm.forEach(([p, f]) => o.frequency.exponentialRampToValueAtTime(f * mul, t + 0.001 + p * dur));
+      o.connect(lp);
+    }
+    rpm.forEach(([p, f]) => lp.frequency.exponentialRampToValueAtTime(f * 16, t + 0.001 + p * dur));
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(v, t + 0.08);
+    g.gain.setValueAtTime(v, t + dur * 0.8); g.gain.exponentialRampToValueAtTime(0.0001, end);
+    lp.connect(g); g.connect(s); wire(s, { rev: 0.15 });
+  }
+};
+
+/* genres: original patterns. Steps are 16ths; n counts from the drop. */
+const GENRES = {
+  phonk: {   // C# minor / Phrygian, cowbell hook + distorted 808
+    bpm: 130, chords: [[61, 64, 68], [61, 64, 68], [57, 61, 64], [59, 63, 66]], roots: [37, 37, 33, 35],
+    rA: { 0: 73, 3: 73, 6: 76, 8: 74, 10: 73, 12: 68, 14: 69, 16: 73, 19: 73, 22: 76, 24: 78, 26: 76, 28: 74, 30: 73 },
+    rB: { 0: 80, 3: 78, 6: 76, 8: 74, 10: 73, 11: 74, 12: 76, 14: 73, 16: 69, 19: 73, 22: 74, 24: 73, 26: 68, 28: 69, 30: 68 },
+    step(t, n, st) {
+      const s = n % 16, bar = n / 16 | 0, sec = (bar >> 2) & 1, fill = (bar & 3) === 3 && s >= 12, R = this.roots[bar & 3];
+      const K = bar & 1 ? [0, 6, 10, 14] : [0, 6, 10];
+      if (K.includes(s)) {
+        const nx = K.find(x => x > s), next = this.roots[(bar + 1) & 3];
+        V.kick(t, 1, 4); V.b808(t, R, ((nx ?? 16) - s) * st * 0.95, 0.85, nx == null && next !== R ? next : null, 5);
+      }
+      if (fill) V.snare(t, 0.22 + (s - 12) * 0.12);
+      else if (s === 4 || s === 12) { V.clap(t, 0.6); V.snare(t, 0.3, 0.15); }
+      V.hat(t, s % 2 ? 0.07 : 0.2, s % 8 === 6 && sec === 1);
+      const m = (sec ? this.rB : this.rA)[n % 32]; if (m) V.cowbell(t, m, 0.42);
+    },
+    outro(t, d) { V.cowbell(t, 73, 0.5); V.b808(t, 37, Math.min(d, 2.4), 0.9, 25, 5); V.pad(t, this.chords[0], d, 0.05); }
+  },
+  cyber: {   // F minor darksynth: four-on-the-floor, rolling sidechained saw bass, arp
+    bpm: 118, chords: [[65, 68, 72], [61, 65, 68], [68, 72, 75], [63, 67, 70]], roots: [41, 37, 44, 39],
+    step(t, n, st) {
+      const s = n % 16, bar = n / 16 | 0, sec = (bar >> 2) & 1, fill = (bar & 3) === 3 && s >= 12, ch = this.chords[bar & 3], R = this.roots[bar & 3];
+      if (s % 4 === 0) V.kick(t, 0.95, 1.5);
+      if (fill) V.snare(t, 0.2 + (s - 12) * 0.12, 0.3); else if (s === 4 || s === 12) V.snare(t, 0.65, 0.55);
+      if (s % 4 === 2) V.hat(t, 0.15, true); else V.hat(t, 0.06);
+      V.sawBass(t, R - 12 + (s % 8 === 6 ? 12 : 0), st * 0.85, s % 4 === 0 ? 0.3 : 0.22);
+      if (s === 0) V.pad(t, ch, st * 16, 0.045);
+      const arp = [0, 1, 2, 1, 0, 2, 1, 2];
+      V.lead(t, ch[arp[s % 8]] + (sec ? 12 : 0), st * 0.7, sec ? 0.09 : 0.06, 0.25, 0.25);
+      if (sec && (s === 0 || s === 8)) V.lead(t, ch[s ? 1 : 2] + 12, st * 7, 0.07, 0.5, 0.35);
+    },
+    outro(t, d) { V.pad(t, this.chords[0], d, 0.06); V.lead(t, 77, Math.min(d * 0.7, 2), 0.11, 0.6, 0.4); V.sawBass(t, 29, Math.min(d, 2), 0.28); }
+  },
+  trap: {   // G minor half-time: long gliding 808, rolling hats, FM bell hook
+    bpm: 145, chords: [[67, 70, 74], [67, 70, 74], [63, 67, 70], [65, 69, 72]], roots: [31, 31, 27, 29],
+    mA: { 0: 79, 3: 82, 6: 81, 8: 79, 11: 74, 14: 75, 16: 74, 19: 75, 22: 77, 24: 74, 28: 70 },
+    mB: { 0: 86, 2: 84, 3: 82, 6: 81, 8: 82, 11: 79, 16: 77, 19: 79, 22: 81, 24: 79, 26: 77, 28: 74 },
+    step(t, n, st) {
+      const s = n % 16, bar = n / 16 | 0, sec = (bar >> 2) & 1, R = this.roots[bar & 3];
+      const K = bar & 1 ? [0, 3, 10] : [0, 7, 10, 11];
+      if (K.includes(s)) {
+        const nx = K.find(x => x > s), next = this.roots[(bar + 1) & 3];
+        V.kick(t, 0.9, 2); V.b808(t, R, ((nx ?? 16) - s) * st * 0.95, 0.95, nx == null && next !== R ? next : null, 3);
+      }
+      if (s === 8) { V.clap(t, 0.65, 0.35); V.snare(t, 0.35, 0.2); }
+      if ((bar & 3) === 3 && s === 14) V.snare(t, 0.35);
+      if ((bar & 1) && s >= 12) { for (let r = 0; r < 2; r++) V.hat(t + r * st / 2, 0.08 + (s - 12) * 0.03); }
+      else if ((bar & 3) === 2 && s >= 4 && s < 8) { if (s === 4) for (let r = 0; r < 6; r++) V.hat(t + r * st * 4 / 6, 0.12); }
+      else if (s % 2 === 0) V.hat(t, s % 4 ? 0.1 : 0.18);
+      const m = (sec ? this.mB : this.mA)[n % 32]; if (m) V.bell(t, m, 0.22);
+      if (sec && s === 0) V.pad(t, this.chords[bar & 3], st * 16, 0.035);
+    },
+    outro(t, d) { V.bell(t, 79, 0.3); V.b808(t, 31, Math.min(d, 2.6), 0.95, 19, 3); V.pad(t, this.chords[0], d, 0.045); }
+  },
+  drill: {   // A minor drill: sliding 808s, shifted snares, triplet-feel hats, dark piano
+    bpm: 142, chords: [[57, 60, 64], [57, 60, 64], [53, 57, 60], [55, 59, 62]], roots: [33, 33, 29, 31],
+    mA: { 0: 69, 3: 72, 6: 71, 8: 76, 11: 75, 14: 71, 16: 69, 19: 72, 22: 74, 24: 72, 27: 71, 30: 68 },
+    step(t, n, st) {
+      const s = n % 16, bar = n / 16 | 0, sec = (bar >> 2) & 1, R = this.roots[bar & 3], K = [0, 6, 10];
+      if (s === 0 || ((bar & 1) && s === 10)) V.kick(t, 0.85, 2);
+      if (K.includes(s)) { const nx = K.find(x => x > s); V.b808(t, R, ((nx ?? 16) - s) * st * 0.95, 0.95, s === 6 ? R + 7 : (s === 10 && (bar & 1)) ? R + 12 : null, 4); }
+      if (s === 8) { V.clap(t, 0.55, 0.3); V.snare(t, 0.45, 0.2); }
+      if ((bar & 1) && s === 14) V.snare(t, 0.35, 0.15);
+      if ((bar & 3) === 3 && s === 11) V.snare(t, 0.3, 0.15);
+      if ((bar & 1) && s === 12) { for (let r = 0; r < 3; r++) V.hat(t + r * st * 2 / 3, 0.1); }
+      else if ([0, 3, 6, 8, 11, 14].includes(s)) V.hat(t, s % 8 === 0 ? 0.2 : 0.12);
+      const m = this.mA[n % 32]; if (m) V.piano(t, m + (sec ? 12 : 0), 0.22, 0.9);
+      if (s === 0) V.pad(t, this.chords[bar & 3].map(x => x - 12), st * 16, sec ? 0.04 : 0.025);
+    },
+    outro(t, d) { V.piano(t, 69, 0.3, 2); V.piano(t, 57, 0.25, 2); V.b808(t, 33, Math.min(d, 2.6), 0.95, 21, 4); V.pad(t, this.chords[0], d, 0.04); }
+  },
+  jersey: {   // D minor Jersey club: five-kick bounce, bed squeaks, formant vocal chops
+    bpm: 140, chords: [[62, 65, 69], [58, 62, 65], [60, 64, 67], [57, 61, 64]], roots: [38, 34, 36, 33],
+    step(t, n, st) {
+      const s = n % 16, bar = n / 16 | 0, sec = (bar >> 2) & 1, ch = this.chords[bar & 3], R = this.roots[bar & 3];
+      const K = bar & 1 ? [0, 4, 8, 10, 12] : [0, 4, 8, 11, 14];
+      if (K.includes(s)) { V.kick(t, 0.95, 3); V.b808(t, R, st * 1.6, 0.6, null, 3); }
+      if (s === 4 || s === 12) V.clap(t, 0.55, 0.25);
+      if (s % 4 === 2) V.hat(t, 0.16, true); else if (s % 2 === 0) V.hat(t, 0.08);
+      if (s === 6 || s === 14) V.squeak(t, 0.1);
+      const CH = { 2: 0, 3: 1, 10: 2, 13: 1 }; if (s in CH) V.chop(t, ch[CH[s]] + (sec ? 12 : 0), 0.45, st * 0.8);
+      if (sec && s % 4 === 0) V.bell(t, ch[(s / 4) % 3] + 12, 0.12);
+      if (s === 0) V.pad(t, ch, st * 16, 0.03);
+    },
+    outro(t, d) { V.chop(t, 74, 0.5, 0.3); V.b808(t, 38, Math.min(d, 2.2), 0.9, 26, 3); V.pad(t, this.chords[0], d, 0.05); }
+  }
+};
+
+/* ---------- song library: data-driven arrangements (16/32-step patterns) for 45 more original tracks ----------
+   pattern chars: X accent, x hit, o ghost (bass: octave up), r 32nd roll, t triplet, f 64th roll; toms l/m/h */
+const C_HH = 'Hip-Hop ระดับโลก', C_PH = 'Phonk / Drift', C_ED = 'EDM / House', C_TE = 'Techno / Trance', C_BA = 'Bass / DnB / Dubstep', C_LA = 'Latin / Afro', C_RE = 'Retro / Synth';
+const C_TI = 'ไทยฮิปฮอป / อินดี้', C_KP = 'K-Pop / Pop';
+const CATS = [C_HH, C_TI, C_KP, C_PH, C_ED, C_TE, C_BA, C_LA, C_RE];
+Object.assign(GENRES.phonk, { name: 'Drift Phonk', cat: C_PH, desc: 'คาวเบลล์ 808 แตก ดุ สายดริฟท์' });
+Object.assign(GENRES.cyber, { name: 'Cyber Drive', cat: C_RE, desc: 'ซินธ์มืด เบสวิ่ง ไซเบอร์พังก์' });
+Object.assign(GENRES.trap, { name: 'Night Trap', cat: C_HH, desc: '808 ยาว ไฮแฮตรัว เบลล์มืด' });
+Object.assign(GENRES.drill, { name: 'Hip-Hop Drill', cat: C_HH, desc: '808 สไลด์ สแนร์ขยับ เปียโนมืด' });
+Object.assign(GENRES.jersey, { name: 'Jersey Club', cat: C_HH, desc: 'คิกเด้ง 5 ลูก เสียงร้องสับ ฮิปฮอปปาร์ตี้' });
+
+const SCALES = { min: [0, 2, 3, 5, 7, 8, 10], maj: [0, 2, 4, 5, 7, 9, 11], phr: [0, 1, 3, 5, 7, 8, 10], harm: [0, 2, 3, 5, 7, 8, 11], dor: [0, 2, 3, 5, 7, 9, 10], mixo: [0, 2, 4, 5, 7, 9, 10] };
+const PENT = { maj: [0, 2, 4, 7, 9], min: [0, 3, 5, 7, 10] };
+const strHash = str => { let h = 2166136261; for (const c of str) h = Math.imul(h ^ c.codePointAt(0), 16777619); return h >>> 0; };
+const pat = (p, n) => (p ? p[p.length > 16 ? n % 32 : n % 16] || '.' : '.');
+function gapAfter(p, n) { for (let k = 1; k <= 16; k++) if (pat(p, n + k) !== '.') return k; return 4; }
+function playInst(i, t, m, dur, v) {
+  switch (i) {
+    case 'pluck': return V.pluck(t, m, dur, v);
+    case 'bell': return V.bell(t, m, v);
+    case 'cowbell': return V.cowbell(t, m, v);
+    case 'piano': return V.piano(t, m, v, Math.max(dur, 0.4));
+    case 'chop': return V.chop(t, m, v, Math.max(0.06, dur));
+    case 'khaen': return V.khaen(t, m, dur, v);
+    case 'pong': return V.pong(t, m, v);
+    case 'ranat': return V.ranat(t, m, v);
+    case 'phin': return V.phin(t, m, v);
+    case 'saw': return V.supersaw(t, m, dur, v);
+    case 'ep': return V.ep(t, m, dur, v);
+    case 'gtr': return V.gtr(t, m, dur, v);
+    case 'organ': return V.organ(t, m, dur, v);
+    default: return V.lead(t, m, dur, v, 0.3, 0.3);
+  }
+}
+function playBass(b, t, m, dur, glide) {
+  switch (b.t) {
+    case '808': return V.b808(t, m, dur, b.v ?? 0.9, glide, b.d ?? 4);
+    case 'sub': return V.sub(t, m, dur, b.v ?? 0.6);
+    case 'reese': return V.reese(t, m, dur, b.v ?? 0.3);
+    case 'log': return V.logd(t, m, dur, b.v ?? 0.7);
+    case 'wob': return V.wob(t, m, dur, b.v ?? 0.35, b.r ?? 2);
+    default: return V.sawBass(t, m, dur, b.v ?? 0.28);
+  }
+}
+function drumHit(kind, c, t, st, g) {
+  const one = (tt, vv) => kind === 'snare' ? V.snare(tt, 0.6 * vv, g.sr ?? 0.25) : kind === 'clap' ? V.clap(tt, 0.6 * vv, g.sr ?? 0.3) : V.hat(tt, 0.2 * vv);
+  if (c === 'r') { one(t, 0.6); one(t + st / 2, 0.6); }
+  else if (c === 't') { for (let i = 0; i < 3; i++) one(t + i * st * 2 / 3, 0.6); }
+  else if (c === 'f') { for (let i = 0; i < 4; i++) one(t + i * st / 4, 0.5); }
+  else one(t, c === 'X' ? 1 : c === 'o' ? 0.35 : 0.7);
+}
+function genStep(t, n, st) {
+  const s = n % 16, bar = n / 16 | 0, sec = (bar >> 2) & 1, D = this.dr || {}, R = this.roots[bar & 3], ch = this.chords[bar & 3];
+  let c;
+  if ((c = pat(D.k, n)) !== '.') V.kick(t, c === 'X' ? 1 : 0.85, this.kd ?? 2);
+  if (this.fill !== false && (bar & 3) === 3 && s >= 12) V.snare(t, 0.2 + (s - 12) * 0.1, 0.2);
+  else {
+    if ((c = pat(D.s, n)) !== '.') drumHit('snare', c, t, st, this);
+    if ((c = pat(D.c, n)) !== '.') drumHit('clap', c, t, st, this);
+  }
+  if ((c = pat(D.h, n)) !== '.') drumHit('hat', c, t, st, this);
+  if (pat(D.o, n) !== '.') V.hat(t, 0.15, true);
+  if ((c = pat(D.p, n)) !== '.') V.rim(t, c === 'X' ? 0.32 : 0.2);
+  if ((c = pat(D.cb, n)) !== '.') V.cowbell(t, this.key + 36 + (c === 'X' ? 7 : 0), 0.28);
+  if ((c = pat(D.ch, n)) !== '.') V.ching(t, c === 'X' ? 0.2 : 0.14);
+  if (pat(D.cp, n) !== '.') V.chap(t, 0.16);
+  if ((c = pat(D.tm, n)) !== '.') V.tom(t, this.key + 24 + (c === 'h' ? 7 : c === 'm' ? 3 : 0), c === 'h' ? 0.4 : 0.5);
+  const b = this.bass;
+  if (b) {
+    const bp = b.p === 'k' ? D.k : b.p;
+    if ((c = pat(bp, n)) !== '.') {
+      const gap = gapAfter(bp, n), nextR = this.roots[(bar + 1) & 3], o = 12 * (b.o || 0);
+      playBass(b, t, R + o + (c === 'o' ? 12 : 0), (b.len || gap * 0.95) * st, b.g && s + gap >= 16 && nextR !== R ? nextR + o : null);
+    }
+  }
+  if (this.pad && s === 0) V.pad(t, ch, st * 16, this.pad);
+  if (this.drone && s === 0) { V.khaen(t, this.key + 24, st * 16, this.drone); V.khaen(t, this.key + 31, st * 16, this.drone * 0.7); }
+  const SB = this.stab; if (SB && (sec || !SB.b) && pat(SB.p, n) !== '.') for (const m of ch) playInst(SB.i, t, m + 12 * (SB.o || 0), st * (SB.len || 1), SB.v || 0.05);
+  const A = this.arp; if (A && (sec || !A.b) && pat(A.p, n) !== '.') playInst(A.i, t, ch[[0, 1, 2, 1][s % 4]] + 12 * (A.o ?? 1), st * 0.8, A.v || 0.08);
+  const L = this.ld;
+  if (L && (sec || !L.b)) { const ph = sec, m = this.mel[ph][n % 32]; if (m) playInst(L.i, t, m, this.mdur[ph][n % 32] * st * 0.9, L.v || 0.2); }
+}
+function genOutro(t, d) {
+  V.pad(t, this.chords[0], d, 0.05);
+  const b = this.bass; if (b) playBass(b, t, this.roots[0] + 12 * (b.o || 0), Math.min(d, 2.4), b.t === '808' ? this.roots[0] - 12 : null);
+  if (this.ld) playInst(this.ld.i, t, this.mel[0][0] || this.chords[0][0] + 12, 1.6, (this.ld.v || 0.2) * 1.1);
+  if (this.drone) V.khaen(t, this.key + 24, Math.min(d, 2.4), this.drone);
+}
+function song(id, d) {
+  const sc = SCALES[d.scale || 'min'], ms = d.pent ? PENT[d.scale === 'maj' || d.scale === 'mixo' ? 'maj' : 'min'] : sc;
+  const deg = i => sc[((i % 7) + 7) % 7] + 12 * Math.floor(i / 7);
+  const prog = d.prog || [0, 5, 3, 4];
+  d.chords = prog.map(g => [g, g + 2, g + 4].map(i => d.key + 24 + deg(i)));
+  d.roots = prog.map(g => { const r = deg(g); return d.key + (r > 7 ? r - 12 : r); });
+  const dbl = r => (r.length === 16 ? r + r : r);
+  const rh = [dbl(d.rh || 'x..x..x.x.x.x...'), dbl(d.rhB || d.rh || 'x.x..x..x.x..x..')];
+  const lo = d.key + 24 + 12 * ((d.ld && d.ld.o) || 0);
+  d.mel = rh.map((r, ph) => {
+    const R = rng(strHash(id) + ph * 977), out = {}; let i = ms.length;
+    for (let n = 0; n < 32; n++) if (r[n] !== '.') {
+      i = n % 16 === 0 ? ms.length + (ph && n ? 2 : 0) : clamp(i + [-2, -1, -1, 0, 1, 1, 2, -3, 3][R() * 9 | 0], 0, ms.length * 2);
+      out[n] = lo + ms[i % ms.length] + 12 * Math.floor(i / ms.length);
+    }
+    return out;
+  });
+  d.mdur = rh.map(r => { const o = {}; for (let n = 0; n < 32; n++) if (r[n] !== '.') { let k = 1; while (k < 4 && r[(n + k) % 32] === '.') k++; o[n] = k; } return o; });
+  d.step = genStep; d.outro = genOutro;
+  GENRES[id] = d;
+}
+const F4 = 'x...x...x...x...', OFF = '..x...x...x...x.', CL = '....x.......x...', H16 = 'oxoxoxoxoxoxoxox', H8 = 'x.x.x.x.x.x.x.x.';
+
+/* Hip-hop heavyweights, Thai hip-hop / indie, K-pop: original arrangements written in those styles (no melodies copied) */
+song('detroit', { name: 'Detroit Battle Rap', cat: C_HH, desc: 'เปียโนไมเนอร์หม่น กลองหนัก สตริงแทง ฟีลแร็ปดีทรอยต์ยุค 2000 (แนวเดียวกับ Eminem)', bpm: 88, key: 33, scale: 'harm', prog: [0, 5, 3, 4], kd: 2, sr: 0.2,
+  dr: { k: 'x.......x.x.....', s: CL, h: H8 }, bass: { t: '808', p: 'k', d: 3 }, ld: { i: 'piano', v: 0.24 }, stab: { i: 'saw', p: 'x.......x.......', len: 2, v: 0.03, b: 1 }, pad: 0.04, rh: 'x..x..x.x..x..x.', rhB: 'x..x..x.x..x.xx.' });
+song('speedrap', { name: 'Speed Rap', cat: C_HH, desc: 'บีตเร็ว 148 ไฮแฮตยิงรัว สตริงมืด สำหรับแร็ปรัวสไตล์ Eminem', bpm: 148, key: 31, scale: 'min', prog: [0, 5, 6, 4],
+  dr: { k: 'x.....x...x.....', s: '........x.......', h: 'xxxxxxxxxxxxxxxx' }, bass: { t: '808', p: 'k', d: 4, g: 1 }, ld: { i: 'pluck', v: 0.16 }, pad: 0.04, rh: 'x...x...x.x.x...', rhB: 'x.x.x...x.x.x.x.' });
+song('raprock', { name: 'Arena Rap Rock', cat: C_HH, desc: 'กีตาร์พาวเวอร์คอร์ด กลองสนามกีฬา แร็ปร็อกยุค 2000', bpm: 100, key: 28, scale: 'min', prog: [0, 5, 3, 6],
+  dr: { k: 'x.....x.x.......', s: CL, h: H8, o: '..............x.' }, bass: { t: 'saw', p: H8, len: 1, o: 1, v: 0.26 }, stab: { i: 'gtr', p: 'x.....x.....x...', len: 2, v: 0.09 }, ld: { i: 'lead', v: 0.1, b: 1 }, rh: 'x.......x...x...' });
+song('bkkbounce', { name: 'Bangkok Bounce', cat: C_TI, desc: 'ฮิปฮอปไทยยุค 2000 เบสเด้ง ซินธ์หวีด (แนวเดียวกับ Thaitanium)', bpm: 95, key: 36, scale: 'min', prog: [0, 3, 5, 4],
+  dr: { k: 'x.....x...x..x..', c: CL, h: OFF, p: '.......x.......x' }, bass: { t: 'saw', p: 'x..x..x...x.x...', len: 1.5, v: 0.3 }, ld: { i: 'lead', v: 0.1, o: 1 }, stab: { i: 'ep', p: 'x.......x.......', len: 4, v: 0.08 }, rh: 'x...x.......x.x.', rhB: 'x.x.x.......x...' });
+song('bkktrap', { name: 'Bangkok Trap', cat: C_TI, desc: 'แทร็ปไทยยุคใหม่ 808 หนัก ไฮแฮตรัว ระฆังมืด', bpm: 140, key: 35, scale: 'min', prog: [0, 0, 5, 6],
+  dr: { k: 'x......x..x.....', s: '........x.......', h: 'x.xtx.x.x.xrx.x.' }, bass: { t: '808', p: 'k', d: 5, g: 1 }, ld: { i: 'bell', v: 0.2 }, arp: { i: 'chop', p: '..x...x...x...x.', v: 0.35, b: 1, o: 0 }, rh: 'x..x..x...x.....', rhB: 'x..x..x.x.x.....' });
+song('indiesynth', { name: 'Synth Indie Pop', cat: C_TI, desc: 'ซินธ์ยุค 80 เบสเดินนุ่ม ชิลแบบไทยอินดี้ (แนวเดียวกับ WIM / HYBS)', bpm: 112, key: 38, scale: 'maj', prog: [0, 5, 3, 4], sr: 0.4,
+  dr: { k: 'x.......x.x.....', s: CL, h: H8 }, bass: { t: 'saw', p: H8, len: 1, v: 0.2 }, stab: { i: 'ep', p: 'x.....x.....x...', len: 2, v: 0.08 }, ld: { i: 'pluck', v: 0.16 }, pad: 0.04, rh: 'x.x...x...x.x...', rhB: 'x...x.x.x...x...' });
+song('nightindie', { name: 'Night Drive Indie', cat: C_TI, desc: 'กรูฟอินดี้ยามค่ำ อีเลคทริกเปียโน ลีดฝันๆ', bpm: 104, key: 33, scale: 'dor', prog: [0, 3, 6, 4], sr: 0.4,
+  dr: { k: 'x......x..x.....', s: CL, h: 'x.xxx.xxx.xxx.xx' }, bass: { t: 'sub', p: 'x......x..x.....', len: 2 }, arp: { i: 'ep', p: H8, v: 0.06 }, ld: { i: 'lead', v: 0.09 }, pad: 0.04, rh: 'x.......x...x...' });
+song('kgirl', { name: 'K-Pop Girl Crush', cat: C_KP, desc: 'ทราปผสม EDM แตรซินธ์ ดรอปแรง ท่าเต้นจัด', bpm: 130, key: 37, scale: 'min', prog: [0, 0, 5, 6], kd: 4,
+  dr: { k: 'x..x..x...x..x..', c: CL, h: H16 }, bass: { t: '808', p: 'k', d: 5 }, stab: { i: 'saw', p: 'x..x..x...x.....', len: 1, v: 0.05 }, ld: { i: 'lead', v: 0.12 }, rh: 'x.x.x..x..x.x...', rhB: 'xx.x.x..x.x.x...' });
+song('kdance', { name: 'K-Pop Dance', cat: C_KP, desc: 'แดนซ์ป๊อปเกาหลีสดใส เฮาส์ 4/4 ฮุกติดหู', bpm: 122, key: 38, scale: 'maj', prog: [0, 4, 5, 3],
+  dr: { k: F4, c: CL, h: OFF }, bass: { t: 'saw', p: OFF, len: 1.5, o: 1 }, ld: { i: 'pluck', v: 0.18 }, stab: { i: 'saw', p: 'x.......x.......', len: 3, v: 0.03 }, pad: 0.03, rh: 'x.x.x...x.x.x...', rhB: 'x..x..x.x.x.x...' });
+song('khiphop', { name: 'K-Hip-Hop Swag', cat: C_KP, desc: 'ฮิปฮอปเกาหลี 808 สไลด์ เสียงร้องสับ สแวกจัด', bpm: 145, key: 34, scale: 'phr', prog: [0, 1, 0, 6],
+  dr: { k: 'x.....x...x.....', s: '........x.......', h: 'x.x.x.xtx.x.x.xr' }, bass: { t: '808', p: 'k', d: 6, g: 1 }, ld: { i: 'chop', v: 0.45 }, rh: 'x..x..x...x..x..', rhB: 'x.x..x..x.x..x..' });
+
+/* Hip-Hop / Phonk */
+song('boombap', { name: 'Boom Bap', cat: C_HH, desc: 'กลองแน่นยุค 90 เปียโนแซมเปิล เบสหนัก', bpm: 92, key: 33, scale: 'min', kd: 1, sr: 0.15,
+  dr: { k: 'x.......x.x.....', s: CL, h: 'x.x.x.x.x.x.x.xo' }, bass: { t: 'sub', p: 'x.......x.x.....', len: 3 }, ld: { i: 'piano', v: 0.22 }, rh: 'x..x....x.x.....', rhB: 'x...x.x...x.x...' });
+song('gfunk', { name: 'G-Funk Bounce', cat: C_HH, desc: 'ซินธ์หวีดเวสต์โคสต์ เบสเด้ง ขับเลียบหาด', bpm: 98, key: 36, scale: 'dor', prog: [0, 3, 0, 4],
+  dr: { k: 'x......x..x.....', c: CL, h: OFF, p: '.......x.......x' }, bass: { t: 'saw', p: 'x..x...xx..x....', len: 1.5, v: 0.3 }, ld: { i: 'lead', v: 0.1, o: 1 }, pad: 0.03, rh: 'x.......x...x...', rhB: 'x...x.......x.x.' });
+song('rage', { name: 'Rage Trap', cat: C_HH, desc: 'ซินธ์แรงแตก 808 ดุ จังหวะเรจ', bpm: 150, key: 37, scale: 'min', prog: [0, 0, 5, 6],
+  dr: { k: 'x.....x...x.....', s: '........x.......', h: 'x.xxx.xtx.xxx.xr' }, bass: { t: '808', p: 'k', d: 6, g: 1 }, ld: { i: 'saw', v: 0.08, o: 1 }, rh: H8, rhB: 'xxx.x.xxx.x.x.x.' });
+song('plugg', { name: 'Pluggnb', cat: C_HH, desc: 'คอร์ดหวานนุ่ม เบลล์ใส 808 นิ่ม', bpm: 145, key: 38, scale: 'maj', prog: [0, 5, 1, 4],
+  dr: { k: 'x.......x.x.....', s: '........x.......', h: H8 }, bass: { t: '808', p: 'k', d: 2, g: 1 }, ld: { i: 'bell', v: 0.2 }, arp: { i: 'pluck', p: H8, v: 0.05, b: 1 }, pad: 0.04, rh: 'x..x..x...x.....', rhB: 'x.x..x..x...x...' });
+song('nydrill', { name: 'NY Drill', cat: C_HH, desc: 'คอรัสสับ 808 สไลด์ยาว สแนร์หลบ', bpm: 144, key: 32, scale: 'harm',
+  dr: { k: 'x......x..x.....', s: '........x.....x.', h: 'x..x..x.x..x..t.' }, bass: { t: '808', p: 'x.....x...x.....', d: 4, g: 1 }, ld: { i: 'chop', v: 0.45 }, pad: 0.03, rh: 'x.....x.x.......', rhB: 'x..x..x...x..x..' });
+song('grime', { name: 'Grime', cat: C_HH, desc: 'สแควร์เบสลอนดอน พลัคเย็นเยียบ', bpm: 140, key: 33, scale: 'phr', prog: [0, 1, 0, 6],
+  dr: { k: 'x.....x...x.....', s: '........x.......', h: OFF }, bass: { t: 'saw', p: 'x...x.x...x..x..', len: 1, o: 1 }, ld: { i: 'pluck', v: 0.2 }, rh: 'x.x...x.x...x.x.', rhB: 'x...x.x.x.x.....' });
+song('memphis', { name: 'Memphis Rap', cat: C_PH, desc: 'คาวเบลล์เก่า เทปหม่น 808 ต่ำ', bpm: 140, key: 31, scale: 'min', prog: [0, 0, 5, 4],
+  dr: { k: 'x.....x...x.....', s: CL, h: OFF, p: '..x.......x.....' }, bass: { t: '808', p: 'k', d: 3, g: 1 }, ld: { i: 'cowbell', v: 0.35 }, pad: 0.02, rh: 'x..x..x.x.......', rhB: 'x..x..x.x..x.x..' });
+song('brphonk', { name: 'Brazil Phonk', cat: C_PH, desc: 'ตัมบอเซาบราซิล คาวเบลล์ดุ 808 แตก', bpm: 130, key: 37, scale: 'phr', prog: [0, 0, 1, 6], kd: 5,
+  dr: { k: 'x..x..x...x..x..', c: CL, h: H8 }, bass: { t: '808', p: 'k', d: 7 }, ld: { i: 'cowbell', v: 0.4 }, rh: 'x.xx.x.xx.x.x.x.', rhB: 'xx.x.xx.x.xx.x..' });
+
+/* EDM / House */
+song('techhouse', { name: 'Tech House', cat: C_ED, desc: 'กรูฟเบสหนึบ ริมช็อตเด้ง เสียงร้องสับ', bpm: 126, key: 33, scale: 'min', prog: [0, 0, 5, 4],
+  dr: { k: F4, c: CL, h: H16, o: OFF, p: '...x..x....x.x..' }, bass: { t: 'saw', p: '..x...x...x..x.x', len: 1.5, o: 1 }, ld: { i: 'chop', v: 0.4 }, pad: 0.02, rh: '..x...x...x.....', rhB: '..x.x.x...x..x..' });
+song('basshouse', { name: 'Bass House', cat: C_ED, desc: 'รีสเบสคำราม คิก 4/4 สะเทือนโชว์รูม', bpm: 128, key: 31, scale: 'min', prog: [0, 0, 6, 5],
+  dr: { k: F4, c: CL, h: OFF, p: '.x.....x.x......' }, bass: { t: 'reese', p: 'x.x..x.x.x..x.x.', len: 1.5, o: 1 }, ld: { i: 'pluck', v: 0.18 }, rh: 'x...x...x.x.....', rhB: 'x.x.x...x.x.x...' });
+song('futurerave', { name: 'Future Rave', cat: C_ED, desc: 'ซินธ์ลีดยาวมืด อลังการ สเตจใหญ่', bpm: 128, key: 33, scale: 'min', prog: [0, 5, 6, 4],
+  dr: { k: F4, c: CL, h: H16, o: OFF }, bass: { t: 'sub', p: OFF, len: 1.5 }, ld: { i: 'saw', v: 0.07 }, pad: 0.04, rh: 'x.......x.......x.......x...x...', rhB: 'x...x...x.......x...x...x.x.....' });
+song('bigroom', { name: 'Big Room', cat: C_ED, desc: 'ลีดโหดเทศกาล คิกกระแทก ดรอปใหญ่', bpm: 128, key: 34, scale: 'min', prog: [0, 0, 5, 6], kd: 3,
+  dr: { k: 'X...X...X...X...', c: CL, o: OFF }, bass: { t: 'sub', p: OFF, len: 1.6 }, ld: { i: 'saw', v: 0.09 }, rh: 'x.x.x.xxx.x.x.x.', rhB: 'x.x.x.x.xxx.x...' });
+song('electro', { name: 'Electro House', cat: C_ED, desc: 'เบสวอบสั้น คมจัด ยุค blog house', bpm: 128, key: 36, scale: 'min', prog: [0, 0, 3, 4],
+  dr: { k: F4, c: CL, h: OFF }, bass: { t: 'wob', p: 'x.xxx.xxx.xx.xx.', len: 1, r: 1, o: 1 }, ld: { i: 'saw', v: 0.06, b: 1 }, rh: 'x...x...x...x...', rhB: 'x.x.x...x.x.x...' });
+song('futurebass', { name: 'Future Bass', cat: C_ED, desc: 'คอร์ดซอว์สับ หวานแต่แรง ฮาล์ฟไทม์', bpm: 150, key: 38, scale: 'maj', prog: [0, 4, 5, 3],
+  dr: { k: 'x.........x.....', s: '........x.......', h: 'x.x.x.x.x.x.x.xr' }, bass: { t: 'sub', p: 'k', len: 3 }, stab: { i: 'saw', p: 'x..x..x...x.x...', len: 1.5, v: 0.04 }, ld: { i: 'bell', v: 0.18 }, pad: 0.03, rh: 'x..x..x.....x...', rhB: 'x.x..x..x.x.....' });
+song('ukg', { name: 'UK Garage', cat: C_ED, desc: 'ทูสเต็ปสวิง ออร์แกนสแตบ ซับเบสลื่น', bpm: 132, key: 37, scale: 'dor', prog: [0, 3, 4, 3],
+  dr: { k: 'x.........x.....x......x..x.....', s: CL, h: '..x...x...x..xx.' }, bass: { t: 'sub', p: 'x..x......x..x..', len: 2 }, stab: { i: 'organ', p: '...x..x.....x...', len: 1, v: 0.07 }, ld: { i: 'chop', v: 0.4 }, rh: '..x.....x...x...', rhB: '..x.x...x.....x.' });
+song('speedgarage', { name: 'Speed Garage', cat: C_ED, desc: 'รีสเบสโยก ออร์แกนเก่า ปาร์ตี้ใต้ดิน', bpm: 136, key: 33, scale: 'min', prog: [0, 0, 5, 4],
+  dr: { k: F4, c: CL, h: OFF, p: '.x...x...x...x..' }, bass: { t: 'reese', p: 'x..x..x...x..x..', len: 1.5, o: 1 }, stab: { i: 'organ', p: 'x.....x.....x...', len: 1, v: 0.06 }, ld: { i: 'pluck', v: 0.15, b: 1 }, rh: 'x...x.x.....x...' });
+song('hyperpop', { name: 'Hyperpop', cat: C_ED, desc: 'สดใสเกินจริง 808 แตก ลีดสูงปรี๊ด', bpm: 160, key: 38, scale: 'maj', prog: [0, 4, 5, 3], kd: 4,
+  dr: { k: 'x...x.x...x.x...', s: CL, h: H16 }, bass: { t: '808', p: 'k', d: 8 }, ld: { i: 'saw', v: 0.07, o: 1 }, arp: { i: 'bell', p: H8, v: 0.1 }, rh: H8, rhB: 'xx.xx.x.xx.xx...' });
+
+/* Techno / Trance */
+song('melotechno', { name: 'Melodic Techno', cat: C_TE, desc: 'อาร์เปจโจหม่น เบสวิ่ง บรรยากาศกว้าง', bpm: 124, key: 33, scale: 'dor', prog: [0, 0, 5, 3],
+  dr: { k: F4, h: OFF, p: '...x..x....x..x.', c: '............x...' }, bass: { t: 'saw', p: '.xxx.xxx.xxx.xxx', len: 0.8, o: 1, v: 0.22 }, arp: { i: 'pluck', p: 'xxxxxxxxxxxxxxxx', v: 0.05 }, ld: { i: 'lead', v: 0.08, b: 1 }, pad: 0.04, rh: 'x.......x...x...' });
+song('hardtechno', { name: 'Hard Techno', cat: C_TE, desc: 'คิกแตกโหด ไฮแฮตถี่ ดุดันสุด', bpm: 150, key: 33, scale: 'phr', prog: [0, 0, 1, 0], kd: 8,
+  dr: { k: 'X...X...X...X...', h: H16, o: OFF, c: CL }, bass: { t: 'sub', p: '.x.x.x.x.x.x.x.x', len: 0.8, v: 0.4 }, arp: { i: 'lead', p: 'x..x..x..x..x.x.', v: 0.06, o: 0 } });
+song('trance', { name: 'Trance', cat: C_TE, desc: 'ซูเปอร์ซอว์ยกมือ เบสวิ่ง ออฟบีตเปิด', bpm: 138, key: 33, scale: 'min', prog: [0, 5, 2, 6],
+  dr: { k: F4, c: CL, o: OFF, h: H16 }, bass: { t: 'saw', p: '.xxx.xxx.xxx.xxx', len: 0.8, o: 1, v: 0.22 }, arp: { i: 'saw', p: 'xxxxxxxxxxxxxxxx', v: 0.03, b: 1 }, ld: { i: 'saw', v: 0.07 }, pad: 0.05, rh: 'x..x..x.x..x..x.', rhB: 'x.x.x.x.x..x..x.' });
+song('psy', { name: 'Psytrance', cat: C_TE, desc: 'เบสกลิ้ง 16 ส่วน ลีดแอซิด บินไกล', bpm: 145, key: 33, scale: 'phr', prog: [0, 0, 0, 1], kd: 3,
+  dr: { k: F4, h: H16, o: OFF, c: '............x...' }, bass: { t: 'saw', p: '.xxx.xxx.xxx.xxx', len: 0.7, o: 1, v: 0.25 }, ld: { i: 'lead', v: 0.09, o: 1 }, rh: '..x.x..x..x.x..x', rhB: 'x.x..x.x..xx.x..' });
+
+/* Bass / DnB / Dubstep */
+song('dnb', { name: 'Drum & Bass', cat: C_BA, desc: 'เบรกเร็ว 174 รีสเบสหนา วิ่งเต็มสปีด', bpm: 174, key: 33, scale: 'min',
+  dr: { k: 'x.........x.....', s: CL, h: 'x.xox.xox.xox.xo' }, bass: { t: 'reese', p: 'x.....x...x.....', len: 3, o: 1 }, ld: { i: 'pluck', v: 0.16 }, pad: 0.04, rh: 'x.......x.x.....', rhB: 'x...x...x.x...x.' });
+song('dubstep', { name: 'Dubstep', cat: C_BA, desc: 'วอบเบสฮาล์ฟไทม์ สแนร์ใหญ่ หนักแน่น', bpm: 140, key: 31, scale: 'min', prog: [0, 0, 5, 6],
+  dr: { k: 'x.........x.....', s: '........x.......', h: H8 }, bass: { t: 'wob', p: 'x.x...x.x.x.....', len: 2, r: 2, o: 1 }, ld: { i: 'bell', v: 0.15, b: 1 }, pad: 0.03, rh: 'x.......x.......' });
+song('riddim', { name: 'Riddim', cat: C_BA, desc: 'วอบสั้นซ้ำๆ กระแทกหน้าอก มินิมอล', bpm: 150, key: 33, scale: 'min', prog: [0, 0, 0, 1],
+  dr: { k: 'x.....x...x.....', s: '........x.......', h: OFF }, bass: { t: 'wob', p: 'x..x..x.x..x..x.', len: 1.5, r: 4, o: 1 }, ld: { i: 'chop', v: 0.35 }, rh: 'x...............', rhB: 'x.......x.......' });
+song('breakbeat', { name: 'Breakbeat', cat: C_BA, desc: 'เบรกบีตสับ รีสเบส พลัคเร็ว', bpm: 135, key: 36, scale: 'min', prog: [0, 3, 5, 4],
+  dr: { k: 'x.........x.x...', s: '....x..x.x..x...', h: H16 }, bass: { t: 'reese', p: 'x.........x.x...', len: 2, o: 1 }, ld: { i: 'pluck', v: 0.17 }, rh: 'x.x...x.x.x...x.' });
+song('hardstyle', { name: 'Hardstyle', cat: C_BA, desc: 'คิกบิดแตกฮาร์ดสไตล์ ลีดเทศกาล', bpm: 150, key: 33, scale: 'min', prog: [0, 5, 6, 4], kd: 10,
+  dr: { k: 'X...X...X...X...', c: CL, o: OFF }, ld: { i: 'saw', v: 0.08 }, pad: 0.03, rh: 'x.x.x...x.x.x...', rhB: 'x.x.xxx.x.x.x...' });
+
+/* Latin / Afro */
+song('mandelao', { name: 'Funk Mandelão', cat: C_LA, desc: 'ฟังก์บราซิลหนักๆ เสียงร้องสับ 808 กระแทก', bpm: 130, key: 34, scale: 'phr', prog: [0, 0, 6, 1], kd: 6,
+  dr: { k: 'x..x..x...x..x..', s: '....x..x....x...', p: 'x.x..x.x..x..x.x' }, bass: { t: '808', p: 'k', d: 8 }, ld: { i: 'chop', v: 0.5 }, rh: 'x..x..x.x..x..x.', rhB: 'x.xx..x.x.xx..x.' });
+song('moombah', { name: 'Moombahton', cat: C_LA, desc: 'เดมโบว์หนัก ซินธ์ลีดทรอปิคอลมืด', bpm: 108, key: 36, scale: 'min', prog: [0, 5, 6, 4],
+  dr: { k: F4, s: '...x..x....x..x.', h: OFF }, bass: { t: 'saw', p: 'x..x..x.x..x..x.', len: 1.5, o: 1 }, ld: { i: 'saw', v: 0.07 }, rh: 'x..x..x...x.....', rhB: 'x.x..x..x.x.....' });
+song('dembow', { name: 'Dembow', cat: C_LA, desc: 'จังหวะเร็กเกตอน พลัคละติน 808 โยก', bpm: 100, key: 38, scale: 'min', prog: [0, 5, 2, 6],
+  dr: { k: F4, s: '...x..x....x..x.', p: OFF, h: H8 }, bass: { t: '808', p: 'k', d: 2 }, ld: { i: 'pluck', v: 0.2 }, rh: 'x..x..x.x..x..x.', rhB: 'x.x..x..x.x..x..' });
+song('amapiano', { name: 'Amapiano', cat: C_LA, desc: 'ล็อกดรัมเด้ง เปียโนแจ๊ส เชคเกอร์ถี่', bpm: 113, key: 33, scale: 'dor', prog: [0, 3, 1, 4],
+  dr: { k: 'x.......x.......', h: 'oxooxoxooxooxoxo', p: '...x..x....x..x.' }, bass: { t: 'log', p: '..x..x....x.x...x..x..x...x..x..', len: 2, o: 1 }, stab: { i: 'piano', p: 'x.......x.......', len: 3, v: 0.1 }, ld: { i: 'bell', v: 0.12, b: 1 }, rh: 'x.....x...x.....' });
+song('afrobeats', { name: 'Afrobeats', cat: C_LA, desc: 'กรูฟแอฟริกันสดใส พลัคหวาน ซับนุ่ม', bpm: 108, key: 38, scale: 'maj',
+  dr: { k: 'x.....x.x.....x.', p: '..x..x....x..x..', c: CL, h: 'x.xxx.xxx.xxx.xx' }, bass: { t: 'sub', p: '..x.....x.x.....', len: 2 }, ld: { i: 'pluck', v: 0.18 }, pad: 0.03, rh: 'x.x..x..x.x.....', rhB: 'x..x.x..x..x.x..' });
+song('afrohouse', { name: 'Afro House', cat: C_LA, desc: 'กลองทอมชนเผ่า 4/4 ลึก เบลล์ลอย', bpm: 122, key: 33, scale: 'min', prog: [0, 0, 5, 4],
+  dr: { k: F4, h: H16, p: '..x..x..x..x.x..', tm: 'l..m..h...l..m..' }, bass: { t: 'sub', p: OFF, len: 1.5 }, ld: { i: 'bell', v: 0.16 }, pad: 0.03, rh: 'x...x.....x.....' });
+
+/* Retro / Synth */
+song('synthwave', { name: 'Synthwave', cat: C_RE, desc: 'ยุค 80 กลองก้อง เบสอ็อกเทฟ ขับยามค่ำ', bpm: 110, key: 33, scale: 'min', prog: [0, 5, 2, 6], sr: 0.5,
+  dr: { k: F4, s: CL, h: OFF }, bass: { t: 'saw', p: 'xoxoxoxoxoxoxoxo', len: 0.8, o: 0, v: 0.2 }, arp: { i: 'pluck', p: H8, v: 0.05 }, ld: { i: 'lead', v: 0.1, b: 1 }, pad: 0.05, rh: 'x.......x...x...' });
+song('darkwave', { name: 'Darkwave', cat: C_RE, desc: 'โพสต์พังก์มืด เบสซอวิ่ง กลองเย็น', bpm: 125, key: 33, scale: 'phr', prog: [0, 0, 6, 5], kd: 4,
+  dr: { k: F4, c: CL, h: H16 }, bass: { t: 'saw', p: H8, len: 1, o: 1 }, ld: { i: 'lead', v: 0.09 }, pad: 0.04, rh: 'x.......x.x.....' });
+song('electrofunk', { name: 'Electro Funk', cat: C_RE, desc: 'เบสฟังกี้ ทอล์กบ็อกซ์ฟีล 80s แดนซ์', bpm: 115, key: 33, scale: 'dor', prog: [0, 3, 0, 4],
+  dr: { k: 'x..x..x...x..x..', c: CL, h: H16 }, bass: { t: 'saw', p: 'x.xx.x.xx.x.xx.x', len: 0.8, o: 1, v: 0.26 }, ld: { i: 'chop', v: 0.4 }, pad: 0.03, rh: 'x.x...x.x...x...' });
+
+/* arrange the song onto the clip timeline: build-up over the cover shot, drop on the first cut,
+   a one-beat gap and final hit on the outro, fade to silence at the last frame */
+function makeScore() {
+  const G = GENRES[M.genre], ev = [], segs = TL.segs; if (!G || !segs.length) return ev;
+  const at = (tt, fn) => { if (tt >= 0 && tt < TL.total) ev.push([tt, fn]); };
+  const tOut = segs[segs.length - 1].start, tDrop = segs.length > 1 ? segs[1].start : tOut, beat = 60 / S.bpm, st = beat / 4;
+  at(0, t => { V.pad(t, G.chords[0], tDrop, 0.05); V.riser(t, tDrop, 0.22); if (M.sfx && tDrop > 1.1) V.engine(t + 0.05, Math.min(1.6, tDrop - 0.15), 0.3); });
+  for (let k = 1; k <= 8; k++) at(tDrop - k * st / 2, t => V.snare(t, 0.1 + 0.05 * (8 - k), 0.2));
+  at(tDrop, t => { V.impact(t, 0.8); V.crash(t, 0.25); });
+  const gap = tOut - tDrop > beat * 4 ? tOut - beat : tOut;
+  for (let n = 0; tDrop + n * st < gap - 1e-4; n++) at(tDrop + n * st, t => G.step(t, n, st));
+  if (gap < tOut) at(gap, t => V.revCrash(t, beat));
+  if (M.sfx) for (let i = 2; i < segs.length - 1; i++) at(segs[i].start - 0.2, t => V.whoosh(t, 0.2));
+  at(tOut, t => { V.impact(t, 1); V.crash(t, 0.3); G.outro(t, TL.total - tOut); });
+  const fs = Math.max(tOut + 0.3, TL.total - 0.8); at(fs, t => busFade(t, t + TL.total - fs));
+  return ev.sort((a, b) => a[0] - b[0]);
+}
+function audioSync() {
+  audioHalt();
+  if (!AC || AC.state !== 'running' || M.genre === 'off' || !playing || !TL.segs.length) return;
+  if (scoreDirty) { score = makeScore(); scoreDirty = false; }
+  B = newBus(); aOff = AC.currentTime - tCur; ei = 0;
+  while (ei < score.length && score[ei][0] < tCur - 0.03) ei++;
+  audioPump();
+}
+function audioPump() {
+  if (!B || !playing) return;
+  const now = AC.currentTime, until = now - aOff + 0.2;
+  while (ei < score.length && score[ei][0] < until) {
+    const [tt, fn] = score[ei++];
+    try { fn(Math.max(aOff + tt, now)); } catch (e) { console.warn('[music]', e); }
+  }
+}
+setInterval(audioPump, 25);
+
+/* music controls */
+function syncBpmRow() { $('bpmRow').hidden = false; }
+const genreSel = $('genre');
+for (const cat of CATS) {
+  const og = document.createElement('optgroup'); og.label = cat;
+  for (const [id, g] of Object.entries(GENRES)) if (g.cat === cat) { const o = document.createElement('option'); o.value = id; o.textContent = `${g.name} · ${g.bpm} BPM`; og.append(o); }
+  genreSel.append(og);
+}
+{ const o = document.createElement('option'); o.value = 'off'; o.textContent = 'ไม่มีเพลง (ใช้เพลงในคลัง TikTok)'; genreSel.append(o); }
+function genreInfo() { const G = GENRES[M.genre]; $('genreInfo').textContent = G ? `${G.cat} · ${G.desc}` : 'คลิปจะไม่มีเสียง เลือกเพลงจากคลัง TikTok ตอนโพสต์'; }
+function setGenre(id) {
+  if (recording) return;
+  M.genre = id; genreSel.value = id; genreInfo();
+  const G = GENRES[id]; if (G) { S.bpm = G.bpm; $('bpm').value = G.bpm; $('bpmOut').textContent = G.bpm; }
+  build(); if (playing) audioSync();
+}
+genreSel.value = M.genre; genreInfo();
+genreSel.onchange = () => setGenre(genreSel.value);
+$('randSong').onclick = () => { const ids = Object.keys(GENRES).filter(i => i !== M.genre); setGenre(ids[Math.random() * ids.length | 0]); };
+$('vol').oninput = e => {
+  M.vol = +e.target.value; $('volOut').textContent = Math.round(M.vol * 100) + '%';
+  if (master) master.gain.setTargetAtTime(M.vol, AC.currentTime, 0.02);
+};
+$('sfx').onchange = e => { M.sfx = e.target.checked; scoreDirty = true; if (playing) audioSync(); };
+syncBpmRow();
+
+S.bpm = GENRES[M.genre].bpm; $('bpm').value = S.bpm; $('bpmOut').textContent = S.bpm;
 
 /* ---------- boot ---------- */
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
