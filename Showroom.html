@@ -1,0 +1,898 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Showroom Reel</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: editing-suite split — phone-sized preview on the left, control rack on the right, photo strip underneath.
+   Deliberately single dark theme: a night-showroom edit bay. */
+:root{
+  --bg:#101215; --panel:#181b20; --raise:#20242b; --line:#2b313a;
+  --fg:#eceef1; --muted:#8f98a4; --accent:#ffb020; --accent-soft:rgba(255,176,32,.12); --accent-ink:#1c1300; --rec:#ff4d4d;
+  --f-display:"Chakra Petch","IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-block:24px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:20px}
+.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between}
+.brand{font-family:var(--f-display);font-weight:700;font-size:28px;letter-spacing:.06em;line-height:1}
+.brand span{color:var(--accent);margin-left:.3em}
+.sub{margin:6px 0 0;color:var(--muted);max-width:62ch}
+.chip{font-family:var(--f-display);font-size:13px;letter-spacing:.04em;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--muted);background:var(--panel)}
+.chip.user{color:var(--accent);border-color:var(--accent)}
+.studio{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:820px){.studio{grid-template-columns:minmax(0,1fr)}}
+.stage{display:grid;gap:12px;justify-items:center;min-width:0}
+.phone{position:relative;width:min(360px,100%);max-width:100%;aspect-ratio:9/16;border-radius:26px;border:1px solid var(--line);background:#000;overflow:hidden;box-shadow:0 0 0 6px var(--panel)}
+.phone canvas{display:block;width:100%;height:100%}
+.rec-badge{position:absolute;top:14px;left:14px;font-family:var(--f-mono);font-size:12px;font-weight:600;color:#fff;background:var(--rec);padding:2px 8px;border-radius:4px}
+.transport{display:flex;gap:10px;align-items:center;width:min(360px,100%)}
+.transport input{flex:1;min-width:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:13px}
+#time{color:var(--muted);white-space:nowrap}
+input[type=range]{accent-color:var(--accent)}
+.icon-btn{width:40px;height:40px;flex:0 0 auto;border-radius:50%;border:1px solid var(--line);background:var(--raise);color:var(--fg);font-size:15px;cursor:pointer}
+.rack{display:grid;gap:16px;min-width:0}
+.group{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:12px;min-width:0}
+.label{font-family:var(--f-display);font-weight:600;text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:var(--muted)}
+.presets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (max-width:520px){.presets{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.preset{display:grid;gap:2px;align-content:start;text-align:left;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--raise);color:var(--fg);cursor:pointer;font:inherit}
+.preset b{font-family:var(--f-display);font-weight:600;font-size:15.5px}
+.preset small{color:var(--muted);font-size:12.5px;line-height:1.4}
+.preset[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.preset[aria-pressed="true"] b{color:var(--accent)}
+.preset:disabled{opacity:.5;cursor:not-allowed}
+.row{display:grid;grid-template-columns:auto minmax(0,1fr) 64px;gap:12px;align-items:center}
+.row output{text-align:right;color:var(--accent)}
+.stats{color:var(--muted)}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:420px){.fields{grid-template-columns:minmax(0,1fr)}}
+.field{display:grid;gap:4px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{width:100%;font:inherit;color:var(--fg);background:var(--raise);border:1px solid var(--line);border-radius:6px;padding:7px 10px}
+.toggles{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px}
+.toggles label{display:flex;gap:8px;align-items:center;cursor:pointer}
+.toggles input{accent-color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-family:var(--f-display);font-weight:600;font-size:15px;letter-spacing:.02em;padding:8px 16px;border-radius:8px;border:1px solid var(--line);background:var(--raise);color:var(--fg);cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,label.btn:focus-within,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.note{margin:0;color:var(--muted);font-size:13px}
+.warn{color:var(--accent)}
+.err{margin:0;color:var(--rec);font-size:14px}
+.result{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;align-items:start}
+.result video{width:120px;max-width:100%;aspect-ratio:9/16;background:#000;border-radius:8px;border:1px solid var(--line)}
+.result > div{display:grid;gap:8px;min-width:0}
+.photos-head{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:flex-end}
+.photos.drag{border-color:var(--accent);background:var(--accent-soft)}
+.strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+.thumb{position:relative;aspect-ratio:3/2;padding:0;border-radius:6px;border:1px solid var(--line);background:var(--raise);overflow:hidden;cursor:pointer}
+.thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.thumb .n{position:absolute;left:4px;top:4px;font-family:var(--f-mono);font-size:10px;line-height:1;padding:3px 5px;border-radius:3px;color:#fff;background:rgba(0,0,0,.6)}
+.thumb.hero{border:2px solid var(--accent)}
+.thumb.hero .n{background:var(--accent);color:var(--accent-ink);font-weight:600}
+.thumb.now{outline:2px solid #fff;outline-offset:-2px}
+.how ul{margin:0;padding-left:1.2em;display:grid;gap:6px;max-width:75ch}
+.progress{height:4px;background:var(--raise);border-radius:2px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--accent)}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="brand">SHOWROOM<span>REEL</span></div>
+      <p class="sub">ตัวอย่างการแปลงรูปรถไม่เกิน 20 รูปเป็นคลิปแนวตั้ง 1080×1920 สำหรับ TikTok ทั้งหมดทำงานในเบราว์เซอร์ รูปไม่ถูกส่งออกไปที่ไหน</p>
+    </div>
+    <span class="chip" id="srcChip">ใช้รูปตัวอย่าง 20 รูป</span>
+  </header>
+
+  <main class="studio">
+    <section class="stage">
+      <div class="phone">
+        <canvas id="cv" width="1080" height="1920"></canvas>
+        <div class="rec-badge" id="recBadge" hidden>● REC</div>
+      </div>
+      <div class="transport">
+        <button id="play" class="icon-btn" aria-label="เล่น/หยุด">❚❚</button>
+        <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="ตำแหน่งในคลิป">
+        <span id="time" class="mono">00:00.0 / 00:00.0</span>
+      </div>
+    </section>
+
+    <section class="rack">
+      <div class="group">
+        <div class="label">สไตล์คลิป</div>
+        <div class="presets" role="group" aria-label="สไตล์คลิป">
+          <button class="preset" data-p="hype" aria-pressed="true"><b>Hype Cut</b><small>ซูมกระแทก แฟลชกับสั่นทุก 4 รูป</small></button>
+          <button class="preset" data-p="beat" aria-pressed="false"><b>Beat Sync</b><small>เด้งตามจังหวะเพลง BPM</small></button>
+          <button class="preset" data-p="cine" aria-pressed="false"><b>Cinematic</b><small>ช้า นุ่ม แถบดำแบบหนัง</small></button>
+          <button class="preset" data-p="swipe" aria-pressed="false"><b>Swipe</b><small>ปัดเปลี่ยนรูปซ้าย-ขวา</small></button>
+          <button class="preset" data-p="stack" aria-pressed="false"><b>Triple Stack</b><small>3 รูปเรียงในจอเดียว</small></button>
+          <button class="preset" data-p="glitch" aria-pressed="false"><b>Glitch</b><small>ภาพแตกสี RGB ตอนตัด</small></button>
+          <button class="preset" data-p="zoom" aria-pressed="false"><b>Zoom Through</b><small>พุ่งทะลุเข้ารูปถัดไป</small></button>
+          <button class="preset" data-p="sweep" aria-pressed="false"><b>Light Sweep</b><small>ไฟโชว์รูมกวาดผ่านตัวรถ</small></button>
+          <button class="preset" data-p="cards" aria-pressed="false"><b>Photo Drop</b><small>รูปแบบโพลารอยด์หล่นซ้อนกัน</small></button>
+          <button class="preset" data-p="doors" aria-pressed="false"><b>Split Doors</b><small>รูปเดิมแยกเป็นสองบานเปิดออก</small></button>
+          <button class="preset" data-p="diagonal" aria-pressed="false"><b>Diagonal Wipe</b><small>แถบเฉียงกวาดเปลี่ยนรูป</small></button>
+          <button class="preset" data-p="mosaic" aria-pressed="false"><b>Mosaic</b><small>รูปต่อขึ้นมาจากชิ้นเล็กๆ</small></button>
+          <button class="preset" data-p="flip" aria-pressed="false"><b>Flip</b><small>พลิกรูปแบบการ์ด</small></button>
+          <button class="preset" data-p="iris" aria-pressed="false"><b>Shutter</b><small>ม่านกล้องหุบแล้วเปิด</small></button>
+          <button class="preset" data-p="film" aria-pressed="false"><b>Film Strip</b><small>ฟิล์มเลื่อนทีละเฟรม</small></button>
+          <button class="preset" data-p="vhs" aria-pressed="false"><b>VHS</b><small>ภาพเทปเก่า เส้นสแกน วันที่มุมจอ</small></button>
+          <button class="preset" data-p="neon" aria-pressed="false"><b>Neon</b><small>กรอบไฟนีออน พื้นกริดแบบยุค 80</small></button>
+          <button class="preset" data-p="speed" aria-pressed="false"><b>Speed Lines</b><small>เส้นความเร็วแบบการ์ตูน</small></button>
+        </div>
+        <div class="actions"><button class="btn" id="randBtn">สุ่มสไตล์</button></div>
+        <div class="row" id="speedRow"><label for="speed">เวลาต่อรูป</label><input id="speed" type="range" min="0.4" max="2" step="0.05" value="0.8"><output id="speedOut" class="mono">0.80 วิ</output></div>
+        <div class="row" id="bpmRow" hidden><label for="bpm">BPM เพลง</label><input id="bpm" type="range" min="80" max="170" step="1" value="128"><output id="bpmOut" class="mono">128</output></div>
+        <div class="stats mono" id="stats"></div>
+      </div>
+
+      <div class="group">
+        <div class="label">ข้อความบนคลิป</div>
+        <div class="fields">
+          <div class="field"><label for="model">รุ่นรถ</label><input id="model" value="Honda Civic e:HEV RS"></div>
+          <div class="field"><label for="year">ปี</label><input id="year" value="2024"></div>
+          <div class="field"><label for="price">ราคา (บาท)</label><input id="price" value="1,059,000"></div>
+          <div class="field"><label for="dealer">ชื่อร้าน</label><input id="dealer" value="เต็นท์รถตัวอย่าง"></div>
+        </div>
+        <div class="toggles">
+          <label><input type="checkbox" id="fit" checked> เห็นรถเต็มคัน (ไม่ครอป)</label>
+          <label><input type="checkbox" id="safe" checked> แสดงโซนที่ UI ของ TikTok บัง</label>
+          <label><input type="checkbox" id="grain" checked> เกรนฟิล์ม</label>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="label">ส่งออกวิดีโอ</div>
+        <div class="actions">
+          <button class="btn primary" id="recBtn">อัดเป็นวิดีโอ</button>
+          <button class="btn" id="cancelBtn" hidden>ยกเลิก</button>
+        </div>
+        <div class="progress" id="recProg" hidden><i></i></div>
+        <p class="note">อัดแบบเรียลไทม์ ใช้เวลาเท่าความยาวคลิป อย่าสลับแท็บระหว่างอัด (โซน TikTok จะไม่ติดไปในไฟล์)</p>
+        <p class="err" id="err" hidden></p>
+        <div class="result" id="result" hidden>
+          <video id="out" controls playsinline muted loop></video>
+          <div>
+            <div class="mono" id="outInfo"></div>
+            <div><button class="btn" id="dlBtn">บันทึกไฟล์</button></div>
+            <p class="note" id="dlNote">กดแล้วจะมีหน้าต่างให้ยืนยันก่อนบันทึก</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="group photos" id="drop">
+    <div class="photos-head">
+      <div>
+        <div class="label">รูปในคลิป</div>
+        <p class="note" id="photoNote">กดที่รูปเพื่อตั้งเป็นปก (ใช้เปิดและปิดคลิป) ลากรูปมาวางตรงนี้ได้ สูงสุด 20 รูปต่อคัน</p>
+      </div>
+      <div class="actions">
+        <label class="btn primary" for="files">เลือกรูปรถ<input id="files" type="file" accept="image/*" multiple hidden></label>
+        <button class="btn" id="shuffle">สุ่มลำดับ</button>
+        <button class="btn" id="sortBtn">เรียงตามชื่อไฟล์</button>
+      </div>
+    </div>
+    <div class="strip" id="strip"></div>
+  </section>
+
+  <section class="group how">
+    <div class="label">ต่อเข้ากับ extension</div>
+    <ul>
+      <li>โค้ดเรนเดอร์ในหน้านี้ (canvas + MediaRecorder) ย้ายไปรันใน offscreen document ของ extension ได้ตรงๆ ไม่ต้องใช้ server</li>
+      <li>extension ส่งรูปของรถแต่ละคันพร้อมข้อมูลรุ่น ปี ราคา เข้ามา แล้วได้ไฟล์วิดีโอกลับไป จากนั้นส่งต่อให้ขั้นตอนโพสต์ TikTok</li>
+      <li>สุ่มสไตล์ให้แต่ละคันได้ คลิปในหน้าโปรไฟล์จะได้ไม่ซ้ำกันหมด</li>
+      <li>คลิปไม่มีเสียง ให้เลือกเพลงจากคลัง TikTok ตอนโพสต์ จะไม่ติดลิขสิทธิ์ ถ้าใช้ Beat Sync ให้ตั้ง BPM ให้ตรงกับเพลงที่จะใช้</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+(() => {
+const W = 1080, H = 1920, MAX_PHOTOS = 20, FIT_CY = 880;
+const FD = '"Chakra Petch","IBM Plex Sans Thai",sans-serif';
+const FM = '"JetBrains Mono",ui-monospace,monospace';
+const ACC = '#ffb020';
+const FULL = { x: 0, y: 0, w: W, h: H };
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+const buf = document.createElement('canvas'); buf.width = W; buf.height = H;
+const bctx = buf.getContext('2d');
+const $ = id => document.getElementById(id);
+
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const easeOut = x => 1 - Math.pow(1 - x, 3);
+const easeInOut = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const easeBack = x => { const c = 1.5; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+function rng(seed) { return () => { seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+/* ---------- state ---------- */
+let frames = [];          // {blob, name, e:{b,bg}, thumb}
+let order = [], hero = 0, ready = false, loaded = 0, gen = 0;
+let TL = { segs: [], total: 0, cuts: 0 };
+let tCur = 0, t0 = 0, playing = false, recording = false, dirty = true;
+const S = { preset: 'hype', speed: 0.8, bpm: 128, model: '', year: '', price: '', dealer: '', fit: true, safe: true, grain: true };
+const E = i => frames[i] && frames[i].e;
+const z = x => 1 + (x - 1) * (S.fit ? 0.6 : 1);   // softer zoom when showing the full car
+
+/* ---------- static overlays ---------- */
+const grain = document.createElement('canvas'); grain.width = grain.height = 256;
+{ const g = grain.getContext('2d'), d = g.createImageData(256, 256);
+  for (let i = 0; i < d.data.length; i += 4) { const v = Math.random() * 255; d.data[i] = d.data[i+1] = d.data[i+2] = v; d.data[i+3] = 255; }
+  g.putImageData(d, 0, 0); }
+const grainPat = ctx.createPattern(grain, 'repeat');
+const vig = document.createElement('canvas'); vig.width = W; vig.height = H;
+{ const g = vig.getContext('2d'), r = g.createRadialGradient(W/2, H/2, H*0.25, W/2, H/2, H*0.62);
+  r.addColorStop(0, 'rgba(0,0,0,0)'); r.addColorStop(1, 'rgba(0,0,0,.5)'); g.fillStyle = r; g.fillRect(0, 0, W, H); }
+const scan = document.createElement('canvas'); scan.width = 4; scan.height = 6;
+{ const g = scan.getContext('2d'); g.fillStyle = 'rgba(0,0,0,.32)'; g.fillRect(0, 0, 4, 2); }
+const scanPat = ctx.createPattern(scan, 'repeat');
+const vhsDate = (() => { const d = new Date(), M = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']; return `${M[d.getMonth()]} ${String(d.getDate()).padStart(2, '0')} ${d.getFullYear()}`; })();
+
+/* ---------- sample photos (landscape, whole car in frame) ---------- */
+const CAR = ['#c8102e','#f2f2f0','#17181b','#2364aa','#f5a623','#2f8f5b','#6d3fa0','#b8bfc7'];
+const SCENE = [['#0a1626','#1f3a5f','#2a2f38'],['#141414','#3b3b3b','#262626'],['#ffb37a','#ff6f59','#3b2f2f'],['#7fb0d6','#d8ebf7','#5c636b']];
+function drawCar(g, col) {
+  g.fillStyle = 'rgba(0,0,0,.5)'; g.beginPath(); g.ellipse(0, 122, 340, 24, 0, 0, Math.PI*2); g.fill();
+  const body = new Path2D();
+  body.moveTo(-310, 60); body.lineTo(-300, -10); body.quadraticCurveTo(-290, -45, -230, -55); body.lineTo(-150, -62);
+  body.quadraticCurveTo(-90, -140, 10, -145); body.lineTo(80, -143); body.quadraticCurveTo(160, -135, 215, -65);
+  body.lineTo(285, -50); body.quadraticCurveTo(315, -40, 315, 0); body.lineTo(312, 60); body.closePath();
+  g.fillStyle = col; g.fill(body);
+  const sh = g.createLinearGradient(0, -145, 0, 60);
+  sh.addColorStop(0, 'rgba(255,255,255,.4)'); sh.addColorStop(.45, 'rgba(255,255,255,0)'); sh.addColorStop(1, 'rgba(0,0,0,.4)');
+  g.fillStyle = sh; g.fill(body);
+  const win = new Path2D();
+  win.moveTo(-130, -62); win.quadraticCurveTo(-80, -128, 10, -131); win.lineTo(75, -130); win.quadraticCurveTo(140, -122, 185, -64); win.closePath();
+  g.fillStyle = 'rgba(14,18,26,.9)'; g.fill(win);
+  g.fillStyle = col; g.fillRect(22, -133, 10, 72);
+  g.fillStyle = '#fff4c8'; g.beginPath(); g.ellipse(298, -22, 16, 8, 0, 0, Math.PI*2); g.fill();
+  g.fillStyle = '#ff3030'; g.fillRect(-307, -26, 14, 16);
+  for (const wx of [-190, 195]) {
+    g.fillStyle = '#0c0c0c'; g.beginPath(); g.arc(wx, 60, 62, 0, Math.PI*2); g.fill();
+    g.fillStyle = '#9aa3ad'; g.beginPath(); g.arc(wx, 60, 37, 0, Math.PI*2); g.fill();
+    g.strokeStyle = '#454b53'; g.lineWidth = 7;
+    for (let a = 0; a < 5; a++) { const r = a / 5 * Math.PI * 2; g.beginPath(); g.moveTo(wx, 60); g.lineTo(wx + Math.cos(r)*35, 60 + Math.sin(r)*35); g.stroke(); }
+    g.fillStyle = '#222'; g.beginPath(); g.arc(wx, 60, 9, 0, Math.PI*2); g.fill();
+  }
+}
+function makeSample(i) {
+  const c = document.createElement('canvas'); c.width = 1600; c.height = 1067;
+  const g = c.getContext('2d'), sc = SCENE[i % 4];
+  const bg = g.createLinearGradient(0, 0, 0, 1067);
+  bg.addColorStop(0, sc[0]); bg.addColorStop(.56, sc[1]); bg.addColorStop(.57, sc[2]); bg.addColorStop(1, '#0d0d0d');
+  g.fillStyle = bg; g.fillRect(0, 0, 1600, 1067);
+  g.strokeStyle = 'rgba(255,255,255,.07)'; g.lineWidth = 3;
+  for (let k = -8; k <= 8; k++) { g.beginPath(); g.moveTo(800, 608); g.lineTo(800 + k * 260, 1067); g.stroke(); }
+  const zoom = [1.85, 1.7, 1.95, 1.6, 1.8][i % 5], dx = [0, 60, -50, 30, -20][i % 5];
+  const flip = (i >> 1) % 2 ? -1 : 1;
+  g.save(); g.translate(800 + dx, 660); g.scale(zoom * flip, zoom); drawCar(g, CAR[(i * 3) % CAR.length]); g.restore();
+  g.fillStyle = 'rgba(255,255,255,.75)'; g.font = '600 34px ' + FM; g.fillText('ตัวอย่าง ' + String(i + 1).padStart(2, '0'), 40, 70);
+  return c;
+}
+async function loadSamples() {
+  const list = [];
+  for (let i = 0; i < MAX_PHOTOS; i++) {
+    const blob = await new Promise(r => makeSample(i).toBlob(r, 'image/jpeg', 0.88));
+    list.push({ blob, name: `sample-${String(i + 1).padStart(2, '0')}.jpg` });
+  }
+  setFrames(list, true);
+}
+
+/* ---------- decoding (all photos kept in memory: max 20) ---------- */
+async function prep(blob) {
+  const raw = await createImageBitmap(blob);
+  const k = Math.min(1, 1600 / Math.max(raw.width, raw.height));
+  let b = raw;
+  if (k < 1) { b = await createImageBitmap(raw, { resizeWidth: Math.round(raw.width * k), resizeHeight: Math.round(raw.height * k), resizeQuality: 'high' }); raw.close(); }
+  const bg = document.createElement('canvas'); bg.width = 32; bg.height = Math.max(1, Math.round(32 * b.height / b.width));
+  bg.getContext('2d').drawImage(b, 0, 0, bg.width, bg.height);
+  const t = document.createElement('canvas'); t.width = 168; t.height = 112;
+  const s = Math.max(168 / b.width, 112 / b.height);
+  t.getContext('2d').drawImage(b, (168 - b.width * s) / 2, (112 - b.height * s) / 2, b.width * s, b.height * s);
+  return { e: { b, bg }, thumb: t.toDataURL('image/jpeg', 0.75) };
+}
+async function loadAll(g) {
+  for (let i = 0; i < frames.length; i++) {
+    try {
+      const r = await prep(frames[i].blob);
+      if (g !== gen) { r.e.b.close(); return; }
+      frames[i].e = r.e; frames[i].thumb = r.thumb;
+      const img = $('strip').querySelector(`[data-idx="${i}"] img`); if (img) img.src = r.thumb;
+    } catch (e) { if (g !== gen) return; frames[i].bad = true; }
+    loaded = i + 1; dirty = true;
+  }
+  if (g !== gen) return;
+  const bad = frames.filter(f => f.bad).length;
+  if (bad) {
+    frames = frames.filter(f => !f.bad); order = frames.map((_, i) => i); hero = 0; buildStrip();
+    $('photoNote').textContent = `เปิดรูปไม่ได้ ${bad} ไฟล์ จึงตัดออกจากคลิป`; $('photoNote').classList.add('warn');
+  }
+  ready = true; $('recBtn').disabled = false; build(); setPlaying(!reduce);
+}
+
+/* ---------- timeline ---------- */
+function build() {
+  const cuts = order.filter(i => i !== hero), segs = [], D = S.speed; let t = 0;
+  const push = (idx, dur, kind, k, extra) => { segs.push(Object.assign({ idx, start: t, dur, kind, k }, extra)); t += dur; };
+  const beat = 60 / S.bpm;
+  push(hero, S.preset === 'beat' ? beat * 4 : 1.8, 'intro', 0);
+  const per = { hype: D * 0.9, beat: beat * 2, cine: D * 1.6, swipe: D, glitch: D, zoom: D, sweep: D * 1.4, cards: D,
+    doors: D, diagonal: D, mosaic: D * 1.2, flip: D, iris: D, film: D * 1.1, vhs: D, neon: D * 1.1, speed: D * 0.9 }[S.preset];
+  if (S.preset === 'stack') {
+    for (let k = 0; k < cuts.length; k += 3) { const idxs = cuts.slice(k, k + 3); push(idxs[0], D * (0.9 + idxs.length * 0.55), 'cut', k, { idxs }); }
+  } else cuts.forEach((idx, k) => push(idx, per, 'cut', k));
+  push(hero, S.preset === 'beat' ? beat * 8 : 2.8, 'outro', 0);
+  TL = { segs, total: t, cuts: cuts.length, cutIdx: cuts };
+  tCur = Math.min(tCur, t);
+  $('stats').textContent = `ยาว ${t.toFixed(1)} วิ · ${frames.length} รูป (ปก 1 + ${cuts.length} ช็อต)`;
+  dirty = true;
+}
+function segIndex(t) {
+  const s = TL.segs; let lo = 0, hi = s.length - 1;
+  while (lo < hi) { const m = (lo + hi + 1) >> 1; if (s[m].start <= t) lo = m; else hi = m - 1; }
+  return lo;
+}
+
+/* ---------- drawing primitives ---------- */
+function rrect(c, x, y, w, h, r) { c.beginPath(); if (c.roundRect) c.roundRect(x, y, w, h, r); else c.rect(x, y, w, h); }
+// Draw photo e into rect r: blurred backdrop (fit mode) + photo fitted (whole car) or cropped to fill.
+function place(e, r, o = {}) {
+  if (!e) return;
+  const b = e.b;
+  ctx.save();
+  if (r.radius) { rrect(ctx, r.x, r.y, r.w, r.h, r.radius); ctx.clip(); } else { ctx.beginPath(); ctx.rect(r.x, r.y, r.w, r.h); ctx.clip(); }
+  if (o.alpha != null) ctx.globalAlpha = o.alpha;
+  if (S.fit) {
+    const s = Math.max(r.w / e.bg.width, r.h / e.bg.height) * 1.15, w = e.bg.width * s, h = e.bg.height * s;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(e.bg, r.x + (r.w - w) / 2, r.y + (r.h - h) / 2, w, h);
+    ctx.fillStyle = 'rgba(0,0,0,.38)'; ctx.fillRect(r.x, r.y, r.w, r.h);
+  }
+  const base = S.fit ? Math.min(r.w / b.width, r.h / b.height) : Math.max(r.w / b.width, r.h / b.height);
+  const s = base * (o.scale || 1), w = b.width * s, h = b.height * s;
+  const cy = (o.cy != null ? o.cy : r.y + r.h / 2) + (o.oy || 0);
+  ctx.translate(r.x + r.w / 2 + (o.ox || 0), cy);
+  if (o.rot) ctx.rotate(o.rot);
+  if (o.filter) ctx.filter = o.filter;
+  ctx.drawImage(b, -w / 2, -h / 2, w, h);
+  ctx.restore();
+}
+const full = (e, o = {}) => place(e, FULL, Object.assign({ cy: S.fit ? FIT_CY : undefined }, o));
+function fitFont(text, weight, max, min, maxW, fam = FD) {
+  let s = max; ctx.font = `${weight} ${s}px ${fam}`;
+  while (s > min && ctx.measureText(text).width > maxW) { s -= 4; ctx.font = `${weight} ${s}px ${fam}`; }
+  return s;
+}
+function shadow(on) { ctx.shadowColor = on ? 'rgba(0,0,0,.65)' : 'transparent'; ctx.shadowBlur = on ? 20 : 0; }
+
+/* ---------- styles: each draws the photo layer for one cut, returns flash amount ---------- */
+const STYLE = {
+  hype(s, lt, p) {
+    const e = easeOut(clamp(lt / 0.16)), big = s.k % 4 === 0;
+    let ox = (s.k % 2 ? 1 : -1) * 30 * (p - 0.5), oy = 0;
+    if (big) { const a = clamp(1 - lt / 0.25); ox += Math.sin(lt * 95) * 26 * a; oy += Math.cos(lt * 83) * 26 * a; }
+    full(E(s.idx), { scale: z(1.2 - 0.15 * e + 0.04 * p), ox, oy, filter: lt < 0.06 ? 'blur(10px)' : undefined });
+    return big ? clamp(1 - lt / 0.14) * 0.8 : 0;
+  },
+  beat(s, lt, p) {
+    const bl = 60 / S.bpm, bi = Math.floor(lt / bl), ph = lt - bi * bl, pulse = easeOut(clamp(ph / 0.12)), first = bi === 0;
+    full(E(s.idx), { scale: z((first ? 1.2 : 1.1) - (first ? 0.15 : 0.07) * pulse + 0.03 * p), rot: first ? (s.k % 2 ? 1 : -1) * 0.012 * (1 - pulse) : 0 });
+    return first ? clamp(1 - ph / 0.1) * 0.6 : clamp(1 - ph / 0.08) * 0.2;
+  },
+  cine(s, lt, p, si) {
+    const o = { scale: z(1.03 + 0.07 * p), ox: (s.k % 2 ? 1 : -1) * 50 * (p - 0.5) };
+    if (lt < 0.4) { full(E(TL.segs[si - 1].idx), { scale: z(1.1) }); o.alpha = easeInOut(lt / 0.4); }
+    full(E(s.idx), o); return 0;
+  },
+  swipe(s, lt, p, si) {
+    const T = Math.min(0.3, s.dur * 0.6), dir = s.k % 2 ? -1 : 1;
+    if (lt < T) {
+      const e = easeInOut(lt / T), blur = e > 0.1 && e < 0.9 ? 'blur(6px)' : undefined;
+      place(E(TL.segs[si - 1].idx), { x: -dir * W * e, y: 0, w: W, h: H }, { cy: S.fit ? FIT_CY : undefined, filter: blur });
+      place(E(s.idx), { x: dir * W * (1 - e), y: 0, w: W, h: H }, { cy: S.fit ? FIT_CY : undefined, filter: blur });
+    } else full(E(s.idx), { scale: z(1 + 0.05 * clamp((lt - T) / (s.dur - T))) });
+    return 0;
+  },
+  stack(s, lt) {
+    full(E(s.idx), { scale: 1, filter: 'blur(2px) brightness(.35)' });
+    const ph = 520, gap = 18, y0 = 150, step = S.speed * 0.55;
+    s.idxs.forEach((idx, i) => {
+      const a = clamp((lt - i * step) / 0.32); if (a <= 0) return;
+      const e = easeOut(a), dir = i % 2 ? 1 : -1;
+      place(E(idx), { x: 40 + dir * (1 - e) * W, y: y0 + i * (ph + gap), w: W - 80, h: ph, radius: 18 }, { alpha: e, scale: 1.08 - 0.08 * e });
+    });
+    return 0;
+  },
+  glitch(s, lt, p) {
+    full(E(s.idx), { scale: z(1.05 + 0.04 * p) });
+    if (lt < 0.24) glitchFx(1 - lt / 0.24, s.k * 131 + Math.floor(lt * 30));
+    return 0;
+  },
+  zoom(s, lt, p, si) {
+    const Tin = 0.2, Tout = 0.2, rem = s.dur - lt;
+    let sc = 1 + 0.04 * p, ghost = 0;
+    if (lt < Tin) { const e = easeOut(lt / Tin); sc *= 1.5 - 0.5 * e; ghost = 1 - e; }
+    if (rem < Tout) { const q = 1 - rem / Tout; sc *= 1 + 0.6 * q * q; ghost = Math.max(ghost, q); }
+    full(E(s.idx), { scale: sc });
+    if (ghost > 0.02) { full(E(s.idx), { scale: sc * 1.08, alpha: 0.28 * ghost }); full(E(s.idx), { scale: sc * 1.18, alpha: 0.18 * ghost }); }
+    return rem < 0.06 ? 0.35 * (1 - rem / 0.06) : 0;
+  },
+  sweep(s, lt, p) {
+    full(E(s.idx), { scale: z(1.02 + 0.05 * p) });
+    ctx.fillStyle = 'rgba(0,0,0,.32)'; ctx.fillRect(0, 0, W, H);
+    const x = -450 + (W + 900) * easeInOut(clamp((lt - 0.1) / (s.dur - 0.2)));
+    ctx.save(); ctx.translate(x, FIT_CY); ctx.rotate(-0.38);
+    const g = ctx.createLinearGradient(-200, 0, 200, 0);
+    g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.5, 'rgba(255,255,255,.85)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.globalCompositeOperation = 'overlay'; ctx.fillStyle = g; ctx.fillRect(-200, -H, 400, 2 * H);
+    ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = 0.22; ctx.fillRect(-200, -H, 400, 2 * H);
+    ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 0.9; ctx.fillStyle = ACC; ctx.fillRect(-2, -H, 4, 2 * H);
+    ctx.restore();
+    if (lt < 0.15) { ctx.fillStyle = `rgba(0,0,0,${1 - lt / 0.15})`; ctx.fillRect(0, 0, W, H); }
+    return 0;
+  },
+  cards(s, lt, p, si) {
+    full(E(s.idx), { scale: 1, filter: 'blur(3px) brightness(.4)' });
+    for (const j of [si - 2, si - 1]) if (j >= 0 && TL.segs[j].kind !== 'outro') card(E(TL.segs[j].idx), j, 0);
+    const e = clamp(lt / 0.38);
+    card(E(s.idx), si, 1 - easeBack(e), s.k + 1);
+    return 0;
+  },
+  doors(s, lt, p, si) {
+    const T = Math.min(0.38, s.dur * 0.6);
+    full(E(s.idx), { scale: z(1.06 - 0.04 * clamp(lt / T) + 0.03 * p) });
+    if (lt < T) {
+      const e = easeInOut(lt / T), prev = E(TL.segs[si - 1].idx), off = e * W / 2;
+      for (const side of [-1, 1]) {
+        ctx.save(); ctx.beginPath(); ctx.rect(side < 0 ? 0 : W / 2, 0, W / 2, H); ctx.clip();
+        ctx.translate(side * off, 0); full(prev); ctx.restore();
+      }
+      ctx.fillStyle = ACC; ctx.fillRect(W / 2 - off - 6, 0, 6, H); ctx.fillRect(W / 2 + off, 0, 6, H);
+    }
+    return 0;
+  },
+  diagonal(s, lt, p, si) {
+    const T = Math.min(0.36, s.dur * 0.6);
+    if (lt >= T) { full(E(s.idx), { scale: z(1.08 - 0.04 * clamp((lt - T) / 0.3) + 0.02 * p) }); return 0; }
+    const e = easeInOut(lt / T), sl = 0.6 * H, m = (W + sl + 40) * e;
+    full(E(TL.segs[si - 1].idx));
+    ctx.save(); ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(m - sl, 0); ctx.lineTo(m, H); ctx.lineTo(0, H); ctx.closePath(); ctx.clip();
+    full(E(s.idx), { scale: z(1.08) }); ctx.restore();
+    ctx.beginPath(); ctx.moveTo(m - sl, 0); ctx.lineTo(m - sl + 28, 0); ctx.lineTo(m + 28, H); ctx.lineTo(m, H); ctx.closePath();
+    ctx.fillStyle = ACC; ctx.fill();
+    return 0;
+  },
+  mosaic(s, lt, p, si) {
+    const cols = 4, rows = 7, tw = W / cols, th = H / rows, span = Math.min(0.45, s.dur * 0.45), td = 0.22;
+    full(E(s.idx), { scale: z(1 + 0.03 * p) });
+    if (lt >= span + td) return 0;
+    bctx.clearRect(0, 0, W, H); bctx.drawImage(cv, 0, 0);
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+    full(E(TL.segs[si - 1].idx));
+    ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.fillRect(0, 0, W, H);
+    const r = rng(s.k * 977 + 3);
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      const d = r() * span, a = clamp((lt - d) / td); if (a <= 0) continue;
+      const e = easeBack(a);
+      ctx.save(); ctx.translate(x * tw + tw / 2, y * th + th / 2); ctx.scale(e, e);
+      ctx.drawImage(buf, x * tw, y * th, tw, th, -tw / 2, -th / 2, tw, th); ctx.restore();
+    }
+    return 0;
+  },
+  flip(s, lt, p, si) {
+    const T = Math.min(0.42, s.dur * 0.6);
+    if (lt >= T) { full(E(s.idx), { scale: 0.92 + 0.08 * easeOut(clamp((lt - T) / 0.2)) + 0.03 * p }); return 0; }
+    full(E(s.idx), { filter: 'blur(4px) brightness(.25)' });
+    const half = lt < T / 2, e = easeInOut(half ? lt / (T / 2) : (lt - T / 2) / (T / 2)), sx = Math.max(0.001, half ? 1 - e : e);
+    ctx.save(); ctx.translate(W / 2, 0); ctx.scale(sx, 1); ctx.translate(-W / 2, 0);
+    full(half ? E(TL.segs[si - 1].idx) : E(s.idx), { scale: 0.92 });
+    ctx.fillStyle = `rgba(0,0,0,${0.5 * (1 - sx)})`; ctx.fillRect(0, 0, W, H);
+    ctx.restore();
+    return 0;
+  },
+  iris(s, lt, p, si) {
+    const T = Math.min(0.42, s.dur * 0.6), R = Math.hypot(W, H) / 2;
+    if (lt >= T) { full(E(s.idx), { scale: z(1 + 0.04 * p) }); return 0; }
+    const half = lt < T / 2, e = easeInOut(half ? lt / (T / 2) : (lt - T / 2) / (T / 2)), r = Math.max(1, half ? R * (1 - e) : R * e);
+    full(half ? E(TL.segs[si - 1].idx) : E(s.idx));
+    ctx.beginPath(); ctx.rect(0, 0, W, H); ctx.moveTo(W / 2 + r, FIT_CY); ctx.arc(W / 2, FIT_CY, r, 0, Math.PI * 2, true);
+    ctx.fillStyle = '#000'; ctx.fill('evenodd');
+    ctx.beginPath(); ctx.arc(W / 2, FIT_CY, r, 0, Math.PI * 2); ctx.lineWidth = 10; ctx.strokeStyle = ACC; ctx.stroke();
+    return 0;
+  },
+  film(s, lt) {
+    const list = TL.cutIdx, pitch = 640, fw = 820, fh = 547, mv = 0.32;
+    const pos = s.k + (s.k < list.length - 1 ? easeInOut(clamp((lt - (s.dur - mv)) / mv)) : 0);
+    ctx.fillStyle = '#16120d'; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#050505'; ctx.fillRect(70, 0, 940, H);
+    const off = ((pos * pitch) % 80 + 80) % 80;
+    ctx.fillStyle = '#d9d2c3';
+    for (let y = -80; y < H + 80; y += 80) { rrect(ctx, 82, y - off, 34, 46, 6); ctx.fill(); rrect(ctx, 964, y - off, 34, 46, 6); ctx.fill(); }
+    const f = Math.floor(pos);
+    for (let i = f - 2; i <= f + 3; i++) {
+      if (i < 0 || i >= list.length) continue;
+      const cy = FIT_CY + (i - pos) * pitch;
+      place(E(list[i]), { x: 130, y: cy - fh / 2, w: fw, h: fh, radius: 6 });
+      ctx.fillStyle = 'rgba(255,176,32,.85)'; ctx.font = `600 24px ${FM}`;
+      ctx.fillText(`SR-400  ${String(i + 1).padStart(2, '0')}A`, 140, cy + fh / 2 + 40);
+    }
+    return 0;
+  },
+  vhs(s, lt, p) {
+    full(E(s.idx), { scale: z(1.04 + 0.03 * p), filter: 'saturate(1.35) contrast(1.1)' });
+    bctx.clearRect(0, 0, W, H); bctx.drawImage(cv, 0, 0);
+    ctx.save(); ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = 0.28;
+    ctx.filter = 'sepia(1) saturate(8) hue-rotate(-50deg)'; ctx.drawImage(buf, -7, 0);
+    ctx.filter = 'sepia(1) saturate(8) hue-rotate(150deg)'; ctx.drawImage(buf, 7, 0);
+    ctx.restore();
+    const tt = s.start + lt, by = (tt * 260) % (H + 200) - 100;
+    ctx.drawImage(buf, 0, Math.max(0, by), W, 70, 18, Math.max(0, by), W, 70);
+    ctx.fillStyle = 'rgba(255,255,255,.08)'; ctx.fillRect(0, by, W, 70);
+    if (lt < 0.12) glitchFx(0.5 * (1 - lt / 0.12), s.k * 71 + Math.floor(lt * 30));
+    ctx.fillStyle = scanPat; ctx.fillRect(0, 0, W, H);
+    ctx.save(); ctx.fillStyle = '#fff'; ctx.shadowColor = 'rgba(0,0,0,.8)'; ctx.shadowBlur = 6;
+    ctx.font = `600 46px ${FM}`; ctx.fillText('▶ PLAY', 72, 300);
+    ctx.textAlign = 'right'; ctx.fillText('SP', 880, 300); ctx.textAlign = 'left';
+    fitFont(S.model.toUpperCase(), 600, 40, 26, 800, FM); ctx.fillText(S.model.toUpperCase(), 72, 1380);
+    ctx.font = `600 40px ${FM}`; ctx.fillText(vhsDate + '  ' + fmt(tt), 72, 1440);
+    ctx.restore();
+    return 0;
+  },
+  neon(s, lt, p) {
+    ctx.fillStyle = '#07060d'; ctx.fillRect(0, 0, W, H);
+    const hz = 1420, tt = s.start + lt;
+    ctx.save(); ctx.strokeStyle = 'rgba(255,60,200,.45)'; ctx.lineWidth = 3;
+    for (let k = -10; k <= 10; k++) { ctx.beginPath(); ctx.moveTo(W / 2, hz); ctx.lineTo(W / 2 + k * 220, H); ctx.stroke(); }
+    const sc = (tt * 0.8) % 1;
+    for (let k = 0; k < 8; k++) { const f = (k + sc) / 8, y = hz + (H - hz) * f * f; ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+    const g = ctx.createLinearGradient(0, hz - 220, 0, hz);
+    g.addColorStop(0, 'rgba(255,60,200,0)'); g.addColorStop(1, 'rgba(255,60,200,.35)');
+    ctx.fillStyle = g; ctx.fillRect(0, hz - 220, W, 220);
+    ctx.restore();
+    const e = E(s.idx); if (!e) return 0;
+    const a = e.b.width / e.b.height; let pw = 900, ph = 900 / a; if (ph > 1000) { ph = 1000; pw = ph * a; }
+    const ent = easeOut(clamp(lt / 0.25)), col = s.k % 2 ? '#22e6ff' : '#ff3cc8';
+    const flick = lt < 0.25 ? (rng(s.k * 13 + Math.floor(lt * 40))() > 0.4 ? 1 : 0.15) : 0.75 + 0.25 * Math.sin(tt * Math.PI * 4);
+    ctx.save(); ctx.translate(W / 2, FIT_CY - 60); const k2 = 0.9 + 0.1 * ent + 0.02 * p; ctx.scale(k2, k2);
+    ctx.globalAlpha = ent; ctx.drawImage(e.b, -pw / 2, -ph / 2, pw, ph);
+    ctx.globalAlpha = ent * flick; ctx.shadowColor = col; ctx.shadowBlur = 50; ctx.strokeStyle = col; ctx.lineWidth = 10;
+    ctx.strokeRect(-pw / 2 - 16, -ph / 2 - 16, pw + 32, ph + 32);
+    ctx.shadowBlur = 18; ctx.lineWidth = 3; ctx.strokeStyle = '#fff'; ctx.strokeRect(-pw / 2 - 16, -ph / 2 - 16, pw + 32, ph + 32);
+    ctx.restore();
+    return 0;
+  },
+  speed(s, lt, p) {
+    const e = easeOut(clamp(lt / 0.14));
+    full(E(s.idx), { scale: z(1.25 - 0.18 * e + 0.04 * p) });
+    const inten = 0.35 + 0.65 * clamp(1 - lt / 0.3), r = rng(s.k * 31 + Math.floor((s.start + lt) * 24));
+    ctx.save(); ctx.translate(W / 2, FIT_CY); ctx.fillStyle = `rgba(255,255,255,${0.55 * inten})`;
+    for (let i = 0; i < 80; i++) {
+      const a = r() * Math.PI * 2, r0 = 560 + r() * 200, len = 600 + r() * 900, w = 0.004 + r() * 0.01;
+      ctx.beginPath(); ctx.moveTo(Math.cos(a) * r0, Math.sin(a) * r0);
+      ctx.lineTo(Math.cos(a - w) * (r0 + len), Math.sin(a - w) * (r0 + len));
+      ctx.lineTo(Math.cos(a + w) * (r0 + len), Math.sin(a + w) * (r0 + len)); ctx.closePath(); ctx.fill();
+    }
+    ctx.restore();
+    return s.k % 4 === 0 ? clamp(1 - lt / 0.1) * 0.6 : 0;
+  },
+};
+function card(e, j, drop, num) {
+  if (!e) return;
+  const b = e.b, a = b.width / b.height;
+  let pw = 900, ph = 900 / a; if (ph > 1050) { ph = 1050; pw = ph * a; }
+  const pad = 22, cw = pw + pad * 2, ch = ph + pad + 110;
+  const rot = ((j * 37) % 9 - 4) * 0.014, ox = ((j * 53) % 7 - 3) * 12;
+  ctx.save();
+  ctx.translate(W / 2 + ox, FIT_CY - drop * 1500); ctx.rotate(rot + drop * 0.25);
+  ctx.shadowColor = 'rgba(0,0,0,.55)'; ctx.shadowBlur = 40; ctx.shadowOffsetY = 16;
+  ctx.fillStyle = '#f7f5f0'; ctx.fillRect(-cw / 2, -ch / 2, cw, ch);
+  ctx.shadowColor = 'transparent';
+  ctx.drawImage(b, -pw / 2, -ch / 2 + pad, pw, ph);
+  if (num) {
+    ctx.fillStyle = '#1b1b1b'; fitFont(S.model, 600, 40, 26, pw - 140); ctx.fillText(S.model, -pw / 2, ch / 2 - 42);
+    ctx.font = `600 34px ${FM}`; ctx.textAlign = 'right'; ctx.fillStyle = '#b07400';
+    ctx.fillText(`#${String(num).padStart(2, '0')}`, pw / 2, ch / 2 - 42); ctx.textAlign = 'left';
+  }
+  ctx.restore();
+}
+function glitchFx(g, seed) {
+  const r = rng(seed);
+  bctx.clearRect(0, 0, W, H); bctx.drawImage(cv, 0, 0);
+  ctx.save(); ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = 0.5 * g;
+  ctx.filter = 'sepia(1) saturate(8) hue-rotate(-50deg)'; ctx.drawImage(buf, -20 * g, 0);
+  ctx.filter = 'sepia(1) saturate(8) hue-rotate(150deg)'; ctx.drawImage(buf, 20 * g, 0);
+  ctx.restore();
+  for (let i = 0; i < 9; i++) { const y = r() * H | 0, h = 20 + r() * 170 | 0, dx = (r() - 0.5) * 240 * g; ctx.drawImage(buf, 0, y, W, h, dx, y, W, h); }
+  ctx.fillStyle = `rgba(255,176,32,${0.55 * g})`;
+  for (let i = 0; i < 3; i++) ctx.fillRect(0, r() * H, W, 6 + r() * 14);
+}
+
+/* ---------- frame render ---------- */
+function render(t) {
+  ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; ctx.filter = 'none';
+  ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+  if (!ready) {
+    ctx.fillStyle = '#8f98a4'; ctx.font = `600 48px ${FD}`; ctx.textAlign = 'center';
+    ctx.fillText(`กำลังเตรียมรูป ${loaded}/${frames.length || '-'}`, W / 2, H / 2); ctx.textAlign = 'left';
+    return null;
+  }
+  const segs = TL.segs; if (!segs.length) return null;
+  t = clamp(t, 0, TL.total - 1e-4);
+  const si = segIndex(t), s = segs[si], lt = t - s.start, p = lt / s.dur, P = S.preset;
+  let flash = 0;
+  if (s.kind === 'intro') {
+    full(E(s.idx), { scale: z(1.25 - 0.22 * easeOut(clamp(lt / 1.2))) });
+    const f = clamp(lt / 0.3); if (f < 1) { ctx.fillStyle = `rgba(0,0,0,${1 - f})`; ctx.fillRect(0, 0, W, H); }
+  } else if (s.kind === 'outro') {
+    full(E(s.idx), { scale: z(1 + 0.06 * p) });
+    if (P !== 'cine') flash = clamp(1 - lt / 0.15) * 0.8;
+  } else flash = STYLE[P](s, lt, p, si) || 0;
+
+  ctx.drawImage(vig, 0, 0);
+  if (S.grain) {
+    const rx = Math.random() * 256 | 0, ry = Math.random() * 256 | 0;
+    ctx.save(); ctx.globalAlpha = 0.09; ctx.globalCompositeOperation = 'overlay';
+    ctx.translate(-rx, -ry); ctx.fillStyle = grainPat; ctx.fillRect(rx, ry, W, H); ctx.restore();
+  }
+  if (P === 'cine') {
+    const bar = 150 * (s.kind === 'intro' ? easeOut(clamp(lt / 0.8)) : 1);
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, bar); ctx.fillRect(0, H - bar, W, bar);
+  }
+  if (flash > 0) { ctx.fillStyle = `rgba(255,255,255,${flash})`; ctx.fillRect(0, 0, W, H); }
+
+  if (s.kind === 'intro') drawIntro(lt);
+  else if (s.kind === 'outro') drawOutro(lt);
+  else if (!['stack', 'cards', 'film', 'vhs'].includes(P)) drawHud(s, t);
+
+  if (S.safe && !recording) drawSafe();
+  return s;
+}
+
+function drawIntro(lt) {
+  const a = clamp((lt - 0.3) / 0.35); if (a <= 0) return;
+  const e = easeOut(a), x = 72 + (1 - e) * -90;
+  ctx.save(); ctx.globalAlpha = e;
+  const g = ctx.createLinearGradient(0, 1050, 0, 1500);
+  g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,.8)');
+  ctx.fillStyle = g; ctx.fillRect(0, 1050, W, H - 1050);
+  shadow(true);
+  ctx.fillStyle = ACC; ctx.font = `600 38px ${FD}`; ctx.fillText('เข้าใหม่ · พร้อมขับ', x, 1272);
+  const model = S.model || 'รุ่นรถ';
+  fitFont(model, 700, 110, 56, 880); ctx.fillStyle = '#fff'; ctx.fillText(model, x, 1380);
+  shadow(false);
+  if (S.year) {
+    ctx.font = `600 38px ${FM}`; const w = ctx.measureText(S.year).width + 40;
+    rrect(ctx, x, 1404, w, 62, 10); ctx.lineWidth = 3; ctx.strokeStyle = ACC; ctx.stroke();
+    ctx.fillStyle = ACC; ctx.fillText(S.year, x + 20, 1448);
+  }
+  ctx.restore();
+}
+function drawOutro(lt) {
+  const e = easeOut(clamp(lt / 0.45)), dy = (1 - e) * 40;
+  ctx.save();
+  ctx.fillStyle = `rgba(0,0,0,${0.58 * e})`; ctx.fillRect(0, 0, W, H);
+  ctx.globalAlpha = e; shadow(true);
+  ctx.fillStyle = 'rgba(255,255,255,.75)'; ctx.font = `600 42px ${FD}`; ctx.fillText('ราคา', 72, 860 + dy);
+  const price = S.price || '-';
+  fitFont(price, 700, 196, 80, 880); ctx.fillStyle = ACC; ctx.fillText(price, 72, 1040 + dy);
+  ctx.fillStyle = '#fff'; ctx.font = `600 54px ${FD}`; ctx.fillText('บาท', 72, 1120 + dy);
+  const line = [S.model, S.year].filter(Boolean).join(' · ');
+  fitFont(line, 500, 46, 30, 880); ctx.fillText(line, 72, 1210 + dy);
+  shadow(false);
+  ctx.font = `600 44px ${FD}`; const cta = 'ทักแชท นัดดูคันจริง', w = ctx.measureText(cta).width + 72;
+  rrect(ctx, 72, 1270 + dy, w, 96, 48); ctx.fillStyle = ACC; ctx.fill();
+  ctx.fillStyle = '#1c1300'; ctx.fillText(cta, 108, 1334 + dy);
+  if (S.dealer) { ctx.fillStyle = 'rgba(255,255,255,.85)'; fitFont(S.dealer, 500, 38, 26, 880); ctx.fillText(S.dealer, 72, 1440 + dy); }
+  ctx.restore();
+}
+function drawHud(s, t) {
+  const top = S.preset === 'cine' ? 250 : 300, x = 72;
+  ctx.save(); shadow(true);
+  fitFont(S.model, 600, 46, 30, 620); ctx.fillStyle = '#fff'; ctx.fillText(S.model, x, top);
+  ctx.font = `600 34px ${FM}`; ctx.textAlign = 'right'; ctx.fillStyle = 'rgba(255,255,255,.9)';
+  ctx.fillText(`${String(s.k + 1).padStart(2, '0')}/${String(TL.cuts).padStart(2, '0')}`, 880, top);
+  ctx.textAlign = 'left'; shadow(false);
+  ctx.fillStyle = 'rgba(255,255,255,.25)'; ctx.fillRect(x, top + 30, 808, 5);
+  ctx.fillStyle = ACC; ctx.fillRect(x, top + 30, 808 * clamp(t / TL.total), 5);
+  ctx.restore();
+}
+function drawSafe() {
+  ctx.save();
+  const zones = [[0, 0, W, 210, 'แถบเมนู TikTok', 24, 140], [910, 720, 170, 930, '', 0, 0], [0, 1500, W, 420, 'แคปชัน + ชื่อเพลง', 24, 1580]];
+  for (const [x, y, w, h, label, lx, ly] of zones) {
+    ctx.fillStyle = 'rgba(255,77,77,.2)'; ctx.fillRect(x, y, w, h);
+    ctx.setLineDash([18, 12]); ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,77,77,.85)'; ctx.strokeRect(x + 1.5, y + 1.5, w - 3, h - 3);
+    if (label) { ctx.fillStyle = '#fff'; ctx.font = `600 34px ${FD}`; ctx.fillText(label, lx, ly); }
+  }
+  ctx.translate(1010, 1185); ctx.rotate(-Math.PI / 2); ctx.textAlign = 'center';
+  ctx.fillStyle = '#fff'; ctx.font = `600 32px ${FD}`; ctx.fillText('ปุ่มไลก์ / แชร์', 0, 12);
+  ctx.restore();
+}
+
+/* ---------- loop ---------- */
+let nowIdx = -1, recEnd = null;
+function fmt(x) { const m = Math.floor(x / 60), s = x - m * 60; return `${String(m).padStart(2, '0')}:${s.toFixed(1).padStart(4, '0')}`; }
+function tick(now) {
+  if (playing && ready) {
+    tCur = (now - t0) / 1000;
+    if (tCur >= TL.total) {
+      if (recording) { tCur = TL.total; playing = false; render(tCur); if (recEnd) recEnd(); }
+      else { t0 = now; tCur = 0; }
+    }
+    dirty = true;
+  }
+  if (dirty) {
+    dirty = false;
+    const s = render(tCur);
+    $('time').textContent = `${fmt(tCur)} / ${fmt(TL.total)}`;
+    $('scrub').value = TL.total ? Math.round(tCur / TL.total * 1000) : 0;
+    if (recording) $('recProg').firstElementChild.style.width = (tCur / TL.total * 100) + '%';
+    if (s && s.idx !== nowIdx) {
+      const old = $('strip').querySelector('.now'); if (old) old.classList.remove('now');
+      const el = $('strip').querySelector(`[data-idx="${s.idx}"]`); if (el) el.classList.add('now');
+      nowIdx = s.idx;
+    }
+  }
+  requestAnimationFrame(tick);
+}
+function setPlaying(on) {
+  playing = on; if (on) t0 = performance.now() - tCur * 1000;
+  $('play').textContent = on ? '❚❚' : '▶'; dirty = true;
+}
+
+/* ---------- frames + strip ---------- */
+function setFrames(list, sample) {
+  gen++;
+  frames.forEach(f => f.e && f.e.b.close());
+  frames = list.map(f => ({ blob: f.blob, name: f.name, e: null, thumb: null }));
+  order = frames.map((_, i) => i); hero = 0; ready = false; loaded = 0; tCur = 0;
+  setPlaying(false); $('recBtn').disabled = true;
+  const chip = $('srcChip');
+  chip.textContent = sample ? `ใช้รูปตัวอย่าง ${frames.length} รูป` : `ใช้รูปของคุณ ${frames.length} รูป`;
+  chip.classList.toggle('user', !sample);
+  buildStrip(); build(); loadAll(gen);
+}
+function buildStrip() {
+  const strip = $('strip'); strip.textContent = '';
+  order.forEach((idx, pos) => {
+    const b = document.createElement('button');
+    b.className = 'thumb' + (idx === hero ? ' hero' : ''); b.dataset.idx = idx; b.title = frames[idx].name;
+    b.setAttribute('aria-label', `ตั้ง ${frames[idx].name} เป็นปก`);
+    const img = document.createElement('img'); img.alt = ''; if (frames[idx].thumb) img.src = frames[idx].thumb;
+    const n = document.createElement('span'); n.className = 'n'; n.textContent = idx === hero ? 'ปก' : String(pos + 1).padStart(2, '0');
+    b.append(img, n); strip.append(b);
+  });
+  nowIdx = -1;
+}
+$('strip').addEventListener('click', e => {
+  const b = e.target.closest('.thumb'); if (!b || recording) return;
+  hero = +b.dataset.idx; build(); buildStrip();
+});
+$('shuffle').onclick = () => {
+  for (let i = order.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [order[i], order[j]] = [order[j], order[i]]; }
+  build(); buildStrip();
+};
+$('sortBtn').onclick = () => { order = frames.map((_, i) => i); build(); buildStrip(); };
+function takeFiles(list) {
+  const files = [...list].filter(f => f.type.startsWith('image/'));
+  if (!files.length) return;
+  files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+  const note = $('photoNote');
+  if (files.length > MAX_PHOTOS) { note.textContent = `เลือกมา ${files.length} รูป ใช้แค่ ${MAX_PHOTOS} รูปแรกตามชื่อไฟล์`; note.classList.add('warn'); }
+  else { note.textContent = 'กดที่รูปเพื่อตั้งเป็นปก (ใช้เปิดและปิดคลิป) ลากรูปมาวางตรงนี้ได้ สูงสุด 20 รูปต่อคัน'; note.classList.remove('warn'); }
+  setFrames(files.slice(0, MAX_PHOTOS).map(f => ({ blob: f, name: f.name })), false);
+}
+$('files').addEventListener('change', e => { takeFiles(e.target.files); e.target.value = ''; });
+const drop = $('drop');
+drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('drag'); });
+drop.addEventListener('dragleave', () => drop.classList.remove('drag'));
+drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('drag'); if (!recording) takeFiles(e.dataTransfer.files); });
+
+/* ---------- controls ---------- */
+function readText() { for (const k of ['model', 'year', 'price', 'dealer']) S[k] = $(k).value.trim(); dirty = true; }
+['model', 'year', 'price', 'dealer'].forEach(k => $(k).addEventListener('input', readText));
+$('fit').onchange = e => { S.fit = e.target.checked; dirty = true; };
+$('safe').onchange = e => { S.safe = e.target.checked; dirty = true; };
+$('grain').onchange = e => { S.grain = e.target.checked; dirty = true; };
+document.querySelectorAll('.preset').forEach(btn => btn.onclick = () => {
+  if (recording) return;
+  S.preset = btn.dataset.p;
+  document.querySelectorAll('.preset').forEach(b => b.setAttribute('aria-pressed', b === btn));
+  $('bpmRow').hidden = S.preset !== 'beat'; $('speedRow').hidden = S.preset === 'beat';
+  build(); tCur = 0; if (playing) t0 = performance.now();
+});
+$('randBtn').onclick = () => {
+  if (recording) return;
+  const btns = [...document.querySelectorAll('.preset')].filter(b => b.dataset.p !== S.preset);
+  btns[Math.random() * btns.length | 0].click();
+};
+$('speed').oninput = e => { S.speed = +e.target.value; $('speedOut').textContent = S.speed.toFixed(2) + ' วิ'; build(); };
+$('bpm').oninput = e => { S.bpm = +e.target.value; $('bpmOut').textContent = S.bpm; build(); };
+$('play').onclick = () => { if (!recording && ready) setPlaying(!playing); };
+$('scrub').oninput = e => { if (recording) return; tCur = e.target.value / 1000 * TL.total; if (playing) t0 = performance.now() - tCur * 1000; dirty = true; };
+
+/* ---------- recording ---------- */
+let rec = null, chunks = [], cancelled = false, outUrl = null, outName = '', outBlob = null;
+function pickMime() {
+  const c = ['video/mp4;codecs=avc1.640028', 'video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm'];
+  return c.find(m => MediaRecorder.isTypeSupported(m)) || '';
+}
+function lockUI(on) {
+  recording = on;
+  $('recBtn').disabled = on; $('cancelBtn').hidden = !on; $('recBadge').hidden = !on; $('recProg').hidden = !on;
+  document.querySelectorAll('.preset,#speed,#bpm,#shuffle,#sortBtn,#play,#scrub,#files,#fit,#randBtn').forEach(el => el.disabled = on);
+}
+function showErr(msg) { $('err').textContent = msg; $('err').hidden = !msg; }
+$('recBtn').onclick = () => {
+  showErr('');
+  if (!ready) return;
+  if (!window.MediaRecorder || !cv.captureStream) { showErr('เบราว์เซอร์นี้อัดวิดีโอจาก canvas ไม่ได้ ลองใช้ Chrome หรือ Edge รุ่นล่าสุด'); return; }
+  let stream;
+  try {
+    stream = cv.captureStream(30);
+    const mime = pickMime();
+    rec = new MediaRecorder(stream, Object.assign({ videoBitsPerSecond: 12000000 }, mime ? { mimeType: mime } : {}));
+  } catch (e) { showErr('เริ่มอัดไม่ได้: ' + e.message); return; }
+  lockUI(true); playing = false; tCur = 0;
+  chunks = []; cancelled = false;
+  rec.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+  rec.onstop = () => {
+    stream.getTracks().forEach(t => t.stop());
+    lockUI(false); setPlaying(false); dirty = true;
+    if (cancelled) return;
+    const type = rec.mimeType || 'video/webm', ext = type.includes('mp4') ? 'mp4' : 'webm';
+    const blob = new Blob(chunks, { type });
+    if (outUrl) URL.revokeObjectURL(outUrl);
+    outUrl = URL.createObjectURL(blob); outBlob = blob;
+    outName = `showroom-reel-${S.preset}.${ext}`;
+    $('out').src = outUrl; $('out').play().catch(() => {});
+    $('outInfo').textContent = `${ext.toUpperCase()} · 1080×1920 · ${TL.total.toFixed(1)} วิ · ${(blob.size / 1048576).toFixed(1)} MB` + (ext === 'webm' ? ' · ต้องแปลงเป็น MP4 ก่อนลง TikTok' : '');
+    $('dlNote').textContent = 'กดแล้วจะมีหน้าต่างให้ยืนยันก่อนบันทึก';
+    $('result').hidden = false;
+  };
+  recEnd = () => { recEnd = null; setTimeout(() => rec && rec.state !== 'inactive' && rec.stop(), 120); };
+  render(0);
+  rec.start(250);
+  t0 = performance.now(); playing = true;
+};
+$('cancelBtn').onclick = () => { if (!rec || rec.state === 'inactive') return; cancelled = true; playing = false; recEnd = null; rec.stop(); };
+
+let downloads = null;
+if (window.claude && claude.use) claude.use('downloads').then(d => { downloads = d; }).catch(() => {});
+$('dlBtn').onclick = async () => {
+  if (!outBlob) return;
+  const note = $('dlNote');
+  if (downloads) {
+    try { await downloads.save({ filename: outName, data: outBlob }); note.textContent = 'บันทึกแล้ว: ' + outName; }
+    catch (e) {
+      const c = e && e.code;
+      note.textContent = c === 'declined' ? 'ยกเลิกการบันทึกแล้ว กดอีกครั้งเมื่อต้องการบันทึก'
+        : c === 'rate_limited' ? 'มีหน้าต่างยืนยันเปิดค้างอยู่ รอสักครู่แล้วลองอีกครั้ง'
+        : 'บันทึกจากหน้านี้ไม่ได้ ให้คลิกขวาที่วิดีโอแล้วเลือก "บันทึกวิดีโอเป็น"';
+    }
+    return;
+  }
+  const a = document.createElement('a'); a.href = outUrl; a.download = outName; document.body.append(a); a.click(); a.remove();
+};
+
+/* ---------- boot ---------- */
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+readText();
+$('recBtn').disabled = true;
+loadSamples();
+if (document.fonts) document.fonts.load(`700 80px ${FD}`).then(() => document.fonts.load(`600 30px ${FM}`)).finally(() => { dirty = true; });
+requestAnimationFrame(tick);
+})();
+</script>
+
+</body></html>
